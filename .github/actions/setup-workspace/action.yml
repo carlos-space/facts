@@ -1,0 +1,31 @@
+name: setup-workspace
+description: >
+  Node and pnpm via setup actions, then a frozen install. Self-hosted runners keep a persistent pnpm
+  store, so the pnpm cache is only used on GitHub-hosted runners.
+inputs:
+  registry-url:
+    description: passed to setup-node for publish jobs
+    default: ''
+  cache:
+    description: >
+      restore the pnpm store cache on GitHub-hosted runners. The publish job turns it off so a release
+      build never reads a cache another run could have written.
+    default: 'true'
+runs:
+  using: composite
+  steps:
+    # GitHub-hosted: pnpm first, because setup-node's pnpm cache needs the pnpm binary on PATH.
+    # Self-hosted: Node first, because pnpm/action-setup runs its installer with whatever node is on PATH.
+    - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.1.0
+      if: runner.environment == 'github-hosted'
+    - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      with:
+        node-version: 24
+        cache: ${{ inputs.cache == 'true' && runner.environment == 'github-hosted' && 'pnpm' || '' }}
+        package-manager-cache: ${{ inputs.cache == 'true' && runner.environment == 'github-hosted' }}
+        registry-url: ${{ inputs.registry-url }}
+    - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.1.0
+      if: runner.environment != 'github-hosted'
+    - name: pnpm install
+      shell: bash
+      run: pnpm install --frozen-lockfile

@@ -1,0 +1,943 @@
+{
+  "app-store.app-store-short-version": {
+    "fetched": "2026-10-02",
+    "id": "app-store-short-version",
+    "table": "version-control",
+    "tool": "App Store"
+  },
+  "claude-code.agent-call-model": {
+    "fetched": "2026-10-02",
+    "id": "agent-call-model",
+    "table": "collaboration"
+  },
+  "claude-code.agent-frontmatter-effort": {
+    "fetched": "2026-10-02",
+    "id": "agent-frontmatter-effort",
+    "table": "collaboration"
+  },
+  "claude-code.agent-tool-restriction": {
+    "fetched": "2026-10-02",
+    "id": "agent-tool-restriction",
+    "table": "prompt-governance"
+  },
+  "claude-code.attribution-setting": {
+    "fetched": "2026-10-01",
+    "id": "attribution-setting",
+    "table": "version-control",
+    "tool": "Claude Code"
+  },
+  "claude-code.autocompact-env-runtime": {
+    "fetched": "2026-10-21",
+    "id": "autocompact-env-runtime",
+    "sourceText": "本機 headless stream-json 會話，CLAUDE_CONFIG_DIR 指向隔離的設定目錄。第一組、第二組的 \"auto\" 與不設、第三組、第四組都用 Claude Code 2.1.304，第二組的 null 用 2.1.292，各情境 n=1",
+    "table": "collaboration"
+  },
+  "claude-code.autocompact-window-scope": {
+    "fetched": "2026-10-03",
+    "id": "autocompact-window-scope",
+    "table": "collaboration"
+  },
+  "claude-code.background-command-time-limit": {
+    "fetched": "2026-10-03",
+    "id": "background-command-time-limit",
+    "table": "collaboration"
+  },
+  "claude-code.background-subagent-stall": {
+    "fetched": "2026-10-03",
+    "id": "background-subagent-stall",
+    "table": "collaboration"
+  },
+  "claude-code.bash-rule-mixed-wildcard": {
+    "fetched": "2026-10-22",
+    "id": "bash-rule-mixed-wildcard",
+    "sourceText": "本機 headless，Claude Code 2.1.292，三個臨時目錄各放一條 deny，各跑一輪；同版本對混用的規則印出「will likely never match」警告。空字串另以 --settings 帶入 `Bash(node:*)` allow 與 `Bash(node *consistency.mjs *)` ask 跑一輪，`node consistency.mjs --dry-run` 要求核准，`node other.mjs --dry-run` 直接執行",
+    "table": "prompt-governance"
+  },
+  "claude-code.bg-session-cli": {
+    "fetched": "2026-10-17",
+    "id": "bg-session-cli",
+    "sourceText": "本機 headless 會話（claude -p，haiku）用 Bash 執行 `claude --bg --model sonnet`，Claude Code 2.1.285，背景會話是 Sonnet、effort high、auto mode，n=1",
+    "table": "collaboration"
+  },
+  "claude-code.bg-session-needs-approval": {
+    "fetched": "2026-10-17",
+    "id": "bg-session-needs-approval",
+    "sourceText": "本機 headless 會話（claude -p，haiku，預設權限）用 Bash 執行 `claude --bg --model sonnet`，Claude Code 2.1.285，結果列在 permission_denials，n=1",
+    "table": "collaboration"
+  },
+  "claude-code.builtin-subagents": {
+    "fetched": "2026-10-02",
+    "id": "builtin-subagents",
+    "table": "collaboration"
+  },
+  "claude-code.claude-code-transcript-internal-format": {
+    "fetched": "2026-10-02",
+    "id": "claude-code-transcript-internal-format",
+    "table": "mainline"
+  },
+  "claude-code.claude-md-session-load": {
+    "fetched": "2026-10-20",
+    "id": "claude-md-session-load",
+    "table": "prompt-governance"
+  },
+  "claude-code.cloud-session-clone-branch": {
+    "fetched": "2026-10-16",
+    "id": "cloud-session-clone-branch",
+    "table": "collaboration"
+  },
+  "claude-code.cloud-session-github-access": {
+    "fetched": "2026-10-18",
+    "id": "cloud-session-github-access",
+    "table": "collaboration"
+  },
+  "claude-code.cloud-session-infra": {
+    "fetched": "2026-10-16",
+    "id": "cloud-session-infra",
+    "table": "collaboration"
+  },
+  "claude-code.cloud-session-parallel": {
+    "fetched": "2026-10-16",
+    "id": "cloud-session-parallel",
+    "table": "collaboration"
+  },
+  "claude-code.cloud-skips-user-hooks": {
+    "fetched": "2026-10-05",
+    "id": "cloud-skips-user-hooks",
+    "table": "measurement"
+  },
+  "claude-code.cross-session-delivery-turn": {
+    "fetched": "2026-10-02",
+    "id": "cross-session-delivery-turn",
+    "sourceText": "協調端在 VS Code 擴充功能（Claude Code 2.1.286），受測會話是 headless stream-json 會話（Claude Code 2.1.285）",
+    "table": "collaboration"
+  },
+  "claude-code.cross-session-discovery": {
+    "fetched": "2026-10-02",
+    "id": "cross-session-discovery",
+    "table": "collaboration"
+  },
+  "claude-code.cross-session-idle-notice": {
+    "fetched": "2026-10-02",
+    "id": "cross-session-idle-notice",
+    "table": "collaboration"
+  },
+  "claude-code.cross-session-plain-text": {
+    "fetched": "2026-10-02",
+    "id": "cross-session-plain-text",
+    "table": "collaboration"
+  },
+  "claude-code.delegation-layer-cost": {
+    "fetched": "2026-10-02",
+    "id": "delegation-layer-cost",
+    "sourceText": "本機。較早一次沒記版本，同日的 spike 用 Claude Code 2.1.283。較新一次是 headless，Claude Code 2.1.285",
+    "table": "collaboration"
+  },
+  "claude-code.detailed-tracing-content-fields": {
+    "fetched": "2026-10-07",
+    "id": "detailed-tracing-content-fields",
+    "table": "measurement"
+  },
+  "claude-code.detailed-tracing-enable-vars": {
+    "fetched": "2026-10-08",
+    "id": "detailed-tracing-enable-vars",
+    "table": "measurement"
+  },
+  "claude-code.detailed-tracing-hook-span": {
+    "fetched": "2026-10-07",
+    "id": "detailed-tracing-hook-span",
+    "table": "measurement"
+  },
+  "claude-code.detailed-tracing-query-source": {
+    "fetched": "2026-10-07",
+    "id": "detailed-tracing-query-source",
+    "table": "measurement"
+  },
+  "claude-code.detailed-tracing-reroutes-export": {
+    "fetched": "2026-10-07",
+    "id": "detailed-tracing-reroutes-export",
+    "table": "measurement"
+  },
+  "claude-code.edit-missing-file-skips-pretooluse": {
+    "fetched": "2026-10-12",
+    "id": "edit-missing-file-skips-pretooluse",
+    "sourceText": "本機 Claude Code 2.1.285，n=1",
+    "table": "mainline"
+  },
+  "claude-code.hook-blocking-events": {
+    "fetched": "2026-10-02",
+    "id": "hook-blocking-events",
+    "table": "prompt-governance"
+  },
+  "claude-code.hook-command-shell": {
+    "fetched": "2026-10-06",
+    "id": "hook-command-shell",
+    "table": "measurement"
+  },
+  "claude-code.hook-env-session-trace": {
+    "fetched": "2026-10-05",
+    "id": "hook-env-session-trace",
+    "sourceText": "本機 headless（`-p`），Claude Code 2.1.285，開著 detailed beta tracing，探針 hook 印出自己的環境變數，主會話與子代理共三輪",
+    "table": "measurement"
+  },
+  "claude-code.hook-env-traceparent-without-detailed": {
+    "fetched": "2026-10-08",
+    "id": "hook-env-traceparent-without-detailed",
+    "sourceText": "本機 headless（`-p`），Claude Code 2.1.285，一場主會話，n=1",
+    "table": "measurement"
+  },
+  "claude-code.hook-event-cadence": {
+    "fetched": "2026-10-02",
+    "id": "hook-event-cadence",
+    "table": "prompt-governance"
+  },
+  "claude-code.hook-matcher-omitted": {
+    "fetched": "2026-10-02",
+    "id": "hook-matcher-omitted",
+    "table": "prompt-governance"
+  },
+  "claude-code.hook-stdout-context": {
+    "fetched": "2026-10-19",
+    "id": "hook-stdout-context",
+    "table": "prompt-governance"
+  },
+  "claude-code.include-co-authored-by-deprecated": {
+    "fetched": "2026-10-01",
+    "id": "include-co-authored-by-deprecated",
+    "table": "version-control",
+    "tool": "Claude Code"
+  },
+  "claude-code.list-agents-status": {
+    "fetched": "2026-10-02",
+    "id": "list-agents-status",
+    "sourceText": "本機 headless 會話，Claude Code 2.1.285",
+    "table": "collaboration"
+  },
+  "claude-code.list-agents-waiting": {
+    "fetched": "2026-10-02",
+    "id": "list-agents-waiting",
+    "sourceText": "協調端在 VS Code 擴充功能（Claude Code 2.1.286），受測會話是 headless stream-json 會話（Claude Code 2.1.285）",
+    "table": "collaboration"
+  },
+  "claude-code.messagedisplay-hook-behavior": {
+    "fetched": "2026-10-21",
+    "id": "messagedisplay-hook-behavior",
+    "table": "prompt-governance"
+  },
+  "claude-code.mod-element-limits": {
+    "fetched": "2026-10-21",
+    "id": "mod-element-limits",
+    "sourceText": "Input 的 rows、mobile 沒有的元素與終端機沒有 Svg 取自文件，出處是 plugin-authoring skill 2.1.304 的型別檔 `ButtonProps`、`InputProps` 與 `Elements`，以及更新紀錄 2.1.295 與 2.1.301 的條目。Button 的子元素是實測：本機，桌面 app 內建的 Claude Code 2.1.304 的 `claude plugin test` 掛載 Button 帶 Text 子元素的 mod 通過",
+    "table": "prompt-governance"
+  },
+  "claude-code.mod-reload-at-turn-end": {
+    "fetched": "2026-10-21",
+    "id": "mod-reload-at-turn-end",
+    "sourceText": "Claude Code 內建 plugin-authoring skill 的 SKILL.md 與 reference.md（2.1.304）的「Developing one」節",
+    "table": "prompt-governance"
+  },
+  "claude-code.mod-space-scale": {
+    "fetched": "2026-10-21",
+    "id": "mod-space-scale",
+    "sourceText": "本機，終端機的 Claude Code 2.1.292 與桌面 app 內建的 2.1.299 對同一個 mod 跑 `claude plugin test`，2.1.292 拒絕 `gap=\"md\"`、2.1.299 通過；型別檔 `Space` 的說明",
+    "table": "prompt-governance"
+  },
+  "claude-code.mod-terminal-only-sites": {
+    "fetched": "2026-10-21",
+    "id": "mod-terminal-only-sites",
+    "sourceText": "Claude Code 內建 plugin-authoring skill 的型別檔 `claude-code.d.ts`（2.1.304）中這兩個元件的 Raised on 說明",
+    "table": "prompt-governance"
+  },
+  "claude-code.mod-tool-call-args": {
+    "fetched": "2026-10-20",
+    "id": "mod-tool-call-args",
+    "sourceText": "Claude Code 內建 plugin-authoring skill 的型別檔 `claude-code.d.ts`（2.1.299）的 `ToolCallInput`、`ToolCheckInput` 與 `tool.check` 說明",
+    "table": "prompt-governance"
+  },
+  "claude-code.mod-tool-check-bypass": {
+    "fetched": "2026-10-19",
+    "id": "mod-tool-check-bypass",
+    "sourceText": "評測 sandbox 內的終端機 Claude Code 2.1.292，macos-lite 模式、eval 用途，headless，放行與擋下各 1 輪",
+    "table": "prompt-governance"
+  },
+  "claude-code.mod-types-written-on-load": {
+    "fetched": "2026-10-19",
+    "id": "mod-types-written-on-load",
+    "table": "prompt-governance"
+  },
+  "claude-code.monitor-deadline": {
+    "fetched": "2026-10-03",
+    "id": "monitor-deadline",
+    "table": "collaboration"
+  },
+  "claude-code.omit-claude-md-savings": {
+    "fetched": "2026-10-02",
+    "id": "omit-claude-md-savings",
+    "sourceText": "本機 headless，Claude Code 2.1.283（2026-09-28）與 2.1.285（2026-10-02）兩次量測",
+    "table": "collaboration"
+  },
+  "claude-code.otel-env-not-passed-to-subprocesses": {
+    "fetched": "2026-10-05",
+    "id": "otel-env-not-passed-to-subprocesses",
+    "table": "measurement"
+  },
+  "claude-code.otel-export-interval": {
+    "fetched": "2026-10-07",
+    "id": "otel-export-interval",
+    "table": "measurement"
+  },
+  "claude-code.otel-headers-helper-refresh": {
+    "fetched": "2026-10-05",
+    "id": "otel-headers-helper-refresh",
+    "table": "measurement"
+  },
+  "claude-code.otel-user-email-always": {
+    "fetched": "2026-10-05",
+    "id": "otel-user-email-always",
+    "table": "measurement"
+  },
+  "claude-code.otlp-compression-batch-size": {
+    "fetched": "2026-10-07",
+    "id": "otlp-compression-batch-size",
+    "sourceText": "本機 headless（`-p`），Claude Code 2.1.285，開著 detailed beta tracing 對本機接收端匯出。同時設 `OTEL_EXPORTER_OTLP_COMPRESSION=gzip`、`OTEL_EXPORTER_OTLP_LOGS_COMPRESSION=gzip` 與批次上限 5 時，26 個 logs 與 11 個 traces 請求都壓縮且不超過 5 筆。同樣約 125 筆 logs，gzip 後 50,435 B、不壓縮 229,133 B。不設批次上限時單一請求 79 筆、160,737 B",
+    "table": "measurement"
+  },
+  "claude-code.otlp-gzip-without-detailed": {
+    "fetched": "2026-10-09",
+    "id": "otlp-gzip-without-detailed",
+    "sourceText": "本機 headless（`-p`），Claude Code 2.1.285，對已部署的接收端，一輪，logs 與 traces 各 1 個請求（各 n=1）",
+    "table": "measurement"
+  },
+  "claude-code.permission-mode-names": {
+    "fetched": "2026-10-19",
+    "id": "permission-mode-names",
+    "table": "prompt-governance"
+  },
+  "claude-code.permission-rule-syntax": {
+    "fetched": "2026-10-21",
+    "id": "permission-rule-syntax",
+    "table": "prompt-governance"
+  },
+  "claude-code.plugin-default-enabled": {
+    "fetched": "2026-10-19",
+    "id": "plugin-default-enabled",
+    "table": "prompt-governance"
+  },
+  "claude-code.plugin-project-skills-dir-trust": {
+    "fetched": "2026-10-19",
+    "id": "plugin-project-skills-dir-trust",
+    "table": "prompt-governance"
+  },
+  "claude-code.plugin-skills-dir-load": {
+    "fetched": "2026-10-19",
+    "id": "plugin-skills-dir-load",
+    "table": "prompt-governance"
+  },
+  "claude-code.plugin-test-command": {
+    "fetched": "2026-10-19",
+    "id": "plugin-test-command",
+    "table": "prompt-governance"
+  },
+  "claude-code.plugin-validate-strict": {
+    "fetched": "2026-10-19",
+    "id": "plugin-validate-strict",
+    "table": "prompt-governance"
+  },
+  "claude-code.posttooluse-hook-behavior": {
+    "fetched": "2026-10-02",
+    "id": "posttooluse-hook-behavior",
+    "table": "prompt-governance"
+  },
+  "claude-code.pre-write-check-mechanisms": {
+    "fetched": "2026-10-02",
+    "id": "pre-write-check-mechanisms",
+    "sourceText": "https://code.claude.com/docs/en/hooks-guide.md、https://code.claude.com/docs/en/permissions.md、https://code.claude.com/docs/en/plugins.md",
+    "table": "prompt-governance"
+  },
+  "claude-code.precompact-stdout-summary": {
+    "fetched": "2026-10-03",
+    "id": "precompact-stdout-summary",
+    "sourceText": "本機 headless，Claude Code 2.1.285，一輪試跑，兩個 hook 各印一個標記，另讀 Claude Code 程式包的壓縮流程確認 stdout 併入摘要指示",
+    "table": "prompt-governance"
+  },
+  "claude-code.pretooluse-hook-behavior": {
+    "fetched": "2026-10-18",
+    "id": "pretooluse-hook-behavior",
+    "table": "prompt-governance"
+  },
+  "claude-code.prompt-cache-lifetime": {
+    "fetched": "2026-10-03",
+    "id": "prompt-cache-lifetime",
+    "table": "collaboration"
+  },
+  "claude-code.prompt-cache-ttl": {
+    "fetched": "2026-10-03",
+    "id": "prompt-cache-ttl",
+    "table": "collaboration"
+  },
+  "claude-code.remote-control-runs-local": {
+    "fetched": "2026-10-16",
+    "id": "remote-control-runs-local",
+    "table": "collaboration"
+  },
+  "claude-code.remote-control-start-command": {
+    "fetched": "2026-10-16",
+    "id": "remote-control-start-command",
+    "table": "collaboration"
+  },
+  "claude-code.rule-scoped-loading": {
+    "fetched": "2026-10-20",
+    "id": "rule-scoped-loading",
+    "table": "prompt-governance"
+  },
+  "claude-code.session-id-env": {
+    "fetched": "2026-10-03",
+    "id": "session-id-env",
+    "sourceText": "本機桌面版互動會話，Claude Code 2.1.285，前景與背景的 Bash 子行程各實跑一次，變數值對得到紀錄檔（背景 n=1）",
+    "table": "collaboration"
+  },
+  "claude-code.settings-env-overrides-shell": {
+    "fetched": "2026-10-06",
+    "id": "settings-env-overrides-shell",
+    "table": "measurement"
+  },
+  "claude-code.setup-token-oauth-env": {
+    "fetched": "2026-10-21",
+    "id": "setup-token-oauth-env",
+    "table": "prompt-governance"
+  },
+  "claude-code.skill-content-injected": {
+    "fetched": "2026-10-02",
+    "id": "skill-content-injected",
+    "sourceText": "本機 headless，Claude Code 2.1.285",
+    "table": "prompt-governance"
+  },
+  "claude-code.skill-tool-restriction": {
+    "fetched": "2026-10-02",
+    "id": "skill-tool-restriction",
+    "table": "prompt-governance"
+  },
+  "claude-code.stop-block-second-reply": {
+    "fetched": "2026-10-21",
+    "id": "stop-block-second-reply",
+    "sourceText": "本機 headless，Claude Code 2.1.285",
+    "table": "prompt-governance"
+  },
+  "claude-code.stop-hook-behavior": {
+    "fetched": "2026-10-21",
+    "id": "stop-hook-behavior",
+    "table": "prompt-governance"
+  },
+  "claude-code.stream-json-hook-response-event": {
+    "fetched": "2026-10-21",
+    "id": "stream-json-hook-response-event",
+    "table": "prompt-governance"
+  },
+  "claude-code.stream-json-permission-denials": {
+    "fetched": "2026-10-21",
+    "id": "stream-json-permission-denials",
+    "table": "prompt-governance"
+  },
+  "claude-code.stream-json-tool-use-location": {
+    "fetched": "2026-10-02",
+    "id": "stream-json-tool-use-location",
+    "sourceText": "本機 headless，Claude Code 2.1.285",
+    "table": "prompt-governance"
+  },
+  "claude-code.subagent-isolated-context": {
+    "fetched": "2026-10-02",
+    "id": "subagent-isolated-context",
+    "table": "prompt-governance"
+  },
+  "claude-code.subagent-loads-claude-md": {
+    "fetched": "2026-10-20",
+    "id": "subagent-loads-claude-md",
+    "table": "prompt-governance"
+  },
+  "claude-code.subagent-no-ask-user": {
+    "fetched": "2026-10-02",
+    "id": "subagent-no-ask-user",
+    "table": "prompt-governance"
+  },
+  "claude-code.subagent-skills-preload": {
+    "fetched": "2026-10-20",
+    "id": "subagent-skills-preload",
+    "table": "prompt-governance"
+  },
+  "claude-code.traceparent-bash-subprocess": {
+    "fetched": "2026-10-07",
+    "id": "traceparent-bash-subprocess",
+    "table": "measurement"
+  },
+  "claude-code.tracing-enable-conditions": {
+    "fetched": "2026-10-07",
+    "id": "tracing-enable-conditions",
+    "table": "measurement"
+  },
+  "claude-desktop.desktop-bundled-claude": {
+    "fetched": "2026-10-20",
+    "id": "desktop-bundled-claude",
+    "sourceText": "本機，桌面 app 內建 2.1.299、終端機 `claude --version` 是 2.1.292",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.desktop-chat-code-actions": {
+    "fetched": "2026-10-18",
+    "id": "desktop-chat-code-actions",
+    "sourceText": "桌面 app 2.1.299 給模型的 Code 分頁說明",
+    "table": "collaboration"
+  },
+  "claude-desktop.desktop-chat-rendered-formats": {
+    "fetched": "2026-10-18",
+    "id": "desktop-chat-rendered-formats",
+    "sourceText": "桌面 app 2.1.299，使用者看同一則含這些格式的回覆，n=1",
+    "table": "collaboration"
+  },
+  "claude-desktop.desktop-chat-unrendered-formats": {
+    "fetched": "2026-10-18",
+    "id": "desktop-chat-unrendered-formats",
+    "sourceText": "桌面 app 2.1.299，使用者看同一則含這些格式的回覆，n=1",
+    "table": "collaboration"
+  },
+  "claude-desktop.desktop-cloud-session-no-report": {
+    "fetched": "2026-10-17",
+    "id": "desktop-cloud-session-no-report",
+    "sourceText": "桌面 app 2.1.299 的 start_session 工具說明與會話啟動指示",
+    "table": "collaboration"
+  },
+  "claude-desktop.desktop-hook-display": {
+    "fetched": "2026-09-27",
+    "id": "desktop-hook-display",
+    "sourceText": "桌面 app，Claude Code 2.1.281",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.desktop-session-address-local-id": {
+    "fetched": "2026-10-17",
+    "id": "desktop-session-address-local-id",
+    "sourceText": "桌面 app 2.1.299，成員會話用工作說明寫的 mainflow 會話名稱傳訊回報時找不到收件者，n=1。另一場會話用 local_ 開頭的 id 傳訊給兩場會話都送達，n=3",
+    "table": "collaboration"
+  },
+  "claude-desktop.desktop-session-opener-id": {
+    "fetched": "2026-10-17",
+    "id": "desktop-session-opener-id",
+    "sourceText": "桌面 app 2.1.299，由規劃會話用 start_session 開出的成員會話，啟動指示寫著規劃會話的 local_ 開頭 id，用它傳訊回報有送達，n=1",
+    "table": "collaboration"
+  },
+  "claude-desktop.desktop-session-report": {
+    "fetched": "2026-10-17",
+    "id": "desktop-session-report",
+    "sourceText": "桌面 app 2.1.299，規劃會話開出的五場本機成員會話停下時都送回通知，n=5",
+    "table": "collaboration"
+  },
+  "claude-desktop.desktop-session-start-user-turn": {
+    "fetched": "2026-10-17",
+    "id": "desktop-session-start-user-turn",
+    "sourceText": "桌面 app 2.1.299，規劃會話由成員會話的訊息喚醒時開不了會話，等使用者本人回覆那一輪才開成，n=1。同版本的會話啟動指示也寫明，由其他會話的訊息或自動事件觸發的那一輪，app 拒絕直接開會話",
+    "table": "collaboration"
+  },
+  "claude-desktop.mod-catch-fail-closed": {
+    "fetched": "2026-10-19",
+    "id": "mod-catch-fail-closed",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-clock-timer": {
+    "fetched": "2026-10-19",
+    "id": "mod-clock-timer",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-deny-rule-override": {
+    "fetched": "2026-10-19",
+    "id": "mod-deny-rule-override",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-desktop-hidden-sites": {
+    "fetched": "2026-10-20",
+    "id": "mod-desktop-hidden-sites",
+    "sourceText": "本機，桌面 app 內建的 Claude Code 2.1.299，介面示範 mod 在使用者送出多則訊息後計數仍是 0，n=1；官方 https://code.claude.com/docs/en/plugins/mods/reference.md 的 Render sites 表",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-desktop-shown-sites": {
+    "fetched": "2026-10-20",
+    "id": "mod-desktop-shown-sites",
+    "sourceText": "本機，桌面 app 內建的 Claude Code 2.1.299，介面示範 mod 計數各位置被呼叫的次數，使用者回報畫面，n=1",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-desktop-status-line": {
+    "fetched": "2026-10-21",
+    "id": "mod-desktop-status-line",
+    "sourceText": "本機，桌面 app 內建的 Claude Code 2.1.304，介面示範 mod 按狀態列的「試試看」，使用者回報看得到，n=1；每個 plugin 一行與清除方式取自同版 plugin-authoring skill 型別檔的 `$.ui.status` 說明",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-desktop-unconfirmed-calls": {
+    "fetched": "2026-10-20",
+    "id": "mod-desktop-unconfirmed-calls",
+    "sourceText": "本機，桌面 app 內建的 Claude Code 2.1.299，介面示範 mod 記下的回傳值，n=1",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-hook-failure-skip": {
+    "fetched": "2026-10-19",
+    "id": "mod-hook-failure-skip",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-hook-time-limit": {
+    "fetched": "2026-10-19",
+    "id": "mod-hook-time-limit",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-no-node-api": {
+    "fetched": "2026-10-19",
+    "id": "mod-no-node-api",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-prompt-events": {
+    "fetched": "2026-10-19",
+    "id": "mod-prompt-events",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-runtime-requirement": {
+    "fetched": "2026-10-19",
+    "id": "mod-runtime-requirement",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-tool-call-results": {
+    "fetched": "2026-10-19",
+    "id": "mod-tool-call-results",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-tool-check-classifier-skip": {
+    "fetched": "2026-10-19",
+    "id": "mod-tool-check-classifier-skip",
+    "sourceText": "本機 headless，桌面 app 內建的 Claude Code 2.1.299",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-tool-check-order": {
+    "fetched": "2026-10-19",
+    "id": "mod-tool-check-order",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-types-skill-copy": {
+    "fetched": "2026-10-19",
+    "id": "mod-types-skill-copy",
+    "sourceText": "本機，桌面 app 內建的 Claude Code 2.1.299 載入 plugin-authoring skill，tsc 7.0.2 對 promptex 匯出的 plugin 正反各 1 次",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-ui-render": {
+    "fetched": "2026-10-19",
+    "id": "mod-ui-render",
+    "table": "prompt-governance"
+  },
+  "claude-desktop.mod-worker-crash-unload": {
+    "fetched": "2026-10-19",
+    "id": "mod-worker-crash-unload",
+    "table": "prompt-governance"
+  },
+  "crates-io.cratesio-trusted-publishing-first-publish": {
+    "fetched": "2026-10-02",
+    "id": "cratesio-trusted-publishing-first-publish",
+    "table": "version-control",
+    "tool": "crates.io"
+  },
+  "crates-io.cratesio-trusted-publishing-workflow-ref": {
+    "fetched": "2026-10-02",
+    "id": "cratesio-trusted-publishing-workflow-ref",
+    "table": "version-control",
+    "tool": "crates.io"
+  },
+  "git.commit-cleanup-modes": {
+    "fetched": "2026-10-01",
+    "id": "commit-cleanup-modes",
+    "table": "version-control",
+    "tool": "git"
+  },
+  "git.squash-merge-detection": {
+    "fetched": "2026-10-01",
+    "id": "squash-merge-detection",
+    "sourceText": "本機 git 2.54.0，正反各一個樣本",
+    "table": "version-control",
+    "tool": "git"
+  },
+  "github.action-sha-pinning": {
+    "fetched": "2026-09-30",
+    "id": "action-sha-pinning",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.checkout-credentials-location": {
+    "fetched": "2026-09-30",
+    "id": "checkout-credentials-location",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.checkout-persist-credentials": {
+    "fetched": "2026-09-30",
+    "id": "checkout-persist-credentials",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.codeowners-enforcement": {
+    "fetched": "2026-09-29",
+    "id": "codeowners-enforcement",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.commit-keywords": {
+    "fetched": "2026-09-29",
+    "id": "commit-keywords",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.concurrency-group": {
+    "fetched": "2026-09-30",
+    "id": "concurrency-group",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.default-token-events": {
+    "fetched": "2026-09-29",
+    "id": "default-token-events",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.environment-plan-limit": {
+    "fetched": "2026-09-29",
+    "id": "environment-plan-limit",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.environment-tag-rule": {
+    "fetched": "2026-09-29",
+    "id": "environment-tag-rule",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.gfm-strikethrough": {
+    "fetched": "2026-09-30",
+    "id": "gfm-strikethrough",
+    "table": "collaboration"
+  },
+  "github.gh-api-default-method": {
+    "fetched": "2026-09-30",
+    "id": "gh-api-default-method",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.gh-pr-subcommands": {
+    "fetched": "2026-09-30",
+    "id": "gh-pr-subcommands",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.issue-close-keywords": {
+    "fetched": "2026-09-29",
+    "id": "issue-close-keywords",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.job-timeout-default": {
+    "fetched": "2026-09-30",
+    "id": "job-timeout-default",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.linear-history": {
+    "fetched": "2026-10-02",
+    "id": "linear-history",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.oidc-workflow-ref": {
+    "fetched": "2026-10-02",
+    "id": "oidc-workflow-ref",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.pr-keywords": {
+    "fetched": "2026-09-29",
+    "id": "pr-keywords",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.protected-branch-plan-limit": {
+    "fetched": "2026-10-01",
+    "id": "protected-branch-plan-limit",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.ruleset-plan-limit": {
+    "fetched": "2026-09-29",
+    "id": "ruleset-plan-limit",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.squash-default-message": {
+    "fetched": "2026-09-30",
+    "id": "squash-default-message",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.squash-merge-message": {
+    "fetched": "2026-09-29",
+    "id": "squash-merge-message",
+    "table": "version-control",
+    "tool": "GitHub"
+  },
+  "github.tag-triggered-workflow": {
+    "fetched": "2026-09-29",
+    "id": "tag-triggered-workflow",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.token-permissions-default": {
+    "fetched": "2026-09-30",
+    "id": "token-permissions-default",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "github.token-permissions-key": {
+    "fetched": "2026-09-30",
+    "id": "token-permissions-key",
+    "table": "version-control",
+    "tool": "GitHub Actions"
+  },
+  "google-play.play-version-code-limit": {
+    "fetched": "2026-10-02",
+    "id": "play-version-code-limit",
+    "table": "version-control",
+    "tool": "Google Play"
+  },
+  "npm.npm-prerelease-tag": {
+    "fetched": "2026-10-02",
+    "id": "npm-prerelease-tag",
+    "table": "version-control",
+    "tool": "npm"
+  },
+  "npm.npm-trusted-publishing-caller": {
+    "fetched": "2026-10-02",
+    "id": "npm-trusted-publishing-caller",
+    "table": "version-control",
+    "tool": "npm"
+  },
+  "npm.npm-trusted-publishing-runner": {
+    "fetched": "2026-10-02",
+    "id": "npm-trusted-publishing-runner",
+    "table": "version-control",
+    "tool": "npm"
+  },
+  "npm.npm-trusted-publishing-workflow-filename": {
+    "fetched": "2026-10-02",
+    "id": "npm-trusted-publishing-workflow-filename",
+    "table": "version-control",
+    "tool": "npm"
+  },
+  "npm.semver-identifier-base": {
+    "fetched": "2026-10-02",
+    "id": "semver-identifier-base",
+    "table": "version-control",
+    "tool": "npm"
+  },
+  "pnpm.filter-by-change": {
+    "fetched": "2026-09-29",
+    "id": "filter-by-change",
+    "table": "version-control",
+    "tool": "pnpm workspace"
+  },
+  "pnpm.include-workspace-root": {
+    "fetched": "2026-10-02",
+    "id": "include-workspace-root",
+    "table": "version-control",
+    "tool": "pnpm workspace"
+  },
+  "pnpm.pnpm-global-add-fresh-release": {
+    "fetched": "2026-10-20",
+    "id": "pnpm-global-add-fresh-release",
+    "sourceText": "本機 pnpm 12.3.4，2026-10-20，n=1",
+    "table": "mainline"
+  },
+  "pnpm.pnpm-minimum-release-age": {
+    "fetched": "2026-09-30",
+    "id": "pnpm-minimum-release-age",
+    "table": "mainline"
+  },
+  "pnpm.semver-caret-zero": {
+    "fetched": "2026-09-30",
+    "id": "semver-caret-zero",
+    "table": "mainline"
+  },
+  "pypi.pep440-prerelease": {
+    "fetched": "2026-10-02",
+    "id": "pep440-prerelease",
+    "table": "version-control",
+    "tool": "PyPI"
+  },
+  "pypi.pypi-trusted-publishing-reusable": {
+    "fetched": "2026-10-02",
+    "id": "pypi-trusted-publishing-reusable",
+    "table": "version-control",
+    "tool": "PyPI"
+  },
+  "release-please.commit-override-squash": {
+    "fetched": "2026-10-01",
+    "id": "commit-override-squash",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "release-please.commit-to-every-unit": {
+    "fetched": "2026-10-01",
+    "id": "commit-to-every-unit",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "release-please.commit-to-package": {
+    "fetched": "2026-09-29",
+    "id": "commit-to-package",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "release-please.initial-version": {
+    "fetched": "2026-09-29",
+    "id": "initial-version",
+    "sourceText": "https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md、https://github.com/googleapis/release-please/blob/main/schemas/config.json",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "release-please.peer-dependencies": {
+    "fetched": "2026-09-29",
+    "id": "peer-dependencies",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "release-please.prerelease-strategy": {
+    "fetched": "2026-10-02",
+    "id": "prerelease-strategy",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "release-please.release-as-changelog": {
+    "fetched": "2026-09-29",
+    "id": "release-as-changelog",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "release-please.release-as-overrides-strategy": {
+    "fetched": "2026-10-02",
+    "id": "release-as-overrides-strategy",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "release-please.release-as-version": {
+    "fetched": "2026-09-29",
+    "id": "release-as-version",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "release-please.release-pr-updates": {
+    "fetched": "2026-09-29",
+    "id": "release-pr-updates",
+    "table": "version-control",
+    "tool": "release-please"
+  },
+  "typescript.project-references": {
+    "fetched": "2026-09-29",
+    "id": "project-references",
+    "table": "version-control",
+    "tool": "TypeScript"
+  }
+}

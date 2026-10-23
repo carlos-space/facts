@@ -1,0 +1,28 @@
+{
+  "name": "facts-monorepo",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.3.4",
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=12.3.4"
+  },
+  "scripts": {
+    "prepare": "bash scripts/setup/git-hooks.sh",
+    "check": "pnpm typecheck && pnpm format:check && pnpm facts:check",
+    "facts:check": "node packages/fact-kit/src/bin.ts check --cwd packages/platform-facts",
+    "typecheck": "pnpm -r typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "build": "pnpm -r build",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.4",
+    "prettier": "^3.6.2",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# commit-msg: the subject follows Conventional Commits and the message carries no AI-platform attribution.
+set -euo pipefail
+root="$(git rev-parse --show-toplevel)"
+msg="$(grep -v '^#' "$1")"
+subject="$(printf '%s\n' "$msg" | head -n1)"
+bash "$root/scripts/ci/check-pr-title.sh" "$subject" >/dev/null || {
+  printf '%s\n' >&2 "commit-msg：commit 標題要符合 Conventional Commits（<type>(<scope>): <subject>）"; exit 1; }
+if printf '%s\n' "$msg" | grep -Eiq '^[[:space:]]*(co-authored-by:.*(claude|noreply@anthropic\.com|copilot|gemini|codex|openai)|generated with|made with)'; then
+  printf '%s\n' >&2 "commit-msg：commit 訊息不加 AI 平台署名"; exit 1
+fi

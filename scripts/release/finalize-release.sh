@@ -105,7 +105,9 @@ case "$phase" in
     run git switch -C "$sync_branch" origin/main
     for c in "${pending[@]}"; do
       if (( DRY_RUN )); then info "[dry-run] 套用 $(git log -1 --format='%h %s' "$c")"; continue; fi
-      git diff "$c^" "$c" -- . ':!release-please-config.json' | git apply --3way --allow-empty \
+      # manifest 不逐 commit 套用：其他套件的發布可能已改過 main 的 manifest，逐 commit 套用會在相鄰行衝突。
+      # 它由下一步以 main 為底、只取這個套件的版號合併。
+      git diff "$c^" "$c" -- . ":!$CONFIG" ":!$MANIFEST" | git apply --3way --allow-empty \
         || die "套用 $(git log -1 --format='%h %s' "$c") 時衝突，請手動處理後再執行本階段"
     done
 

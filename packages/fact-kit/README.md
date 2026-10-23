@@ -3,6 +3,14 @@
 Tooling to declare, check, build and read facts. Facts are published as plain JSON and JSON Schema, so
 reading them needs no fact-kit. This package helps with writing, checking, building and reading.
 
+## Install
+
+Add it as a dev dependency of the package that declares facts, and as a dependency where code reads them:
+
+```sh
+pnpm add -D fact-kit
+```
+
 ## Authoring
 
 A package holds one directory per entry: `facts/<entry>/index.ts`, which default-exports

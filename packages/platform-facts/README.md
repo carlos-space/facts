@@ -27,13 +27,19 @@ Every entry is a built `index.json` under a subpath.
 
 ## Usage
 
-Read facts with [`fact-kit`](https://www.npmjs.com/package/fact-kit):
+Install the package, and [`fact-kit`](https://www.npmjs.com/package/fact-kit) to read it:
+
+```sh
+pnpm add platform-facts fact-kit
+```
+
+`readFacts` resolves the package from the current directory (or `root`), so install it where the code runs:
 
 ```ts
 import { readFacts } from 'fact-kit'
 
 const facts = readFacts('platform-facts/claude-code')
-facts.value('claude-code.some-fact')
+facts.value('claude-code.hook-events')
 ```
 
 Or import an index directly:

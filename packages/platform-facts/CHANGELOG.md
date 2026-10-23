@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/carlos-space/facts/compare/platform-facts/v0.5.0...platform-facts/v0.5.1) (2026-10-23)
+
+
+### Fixed
+
+* **platform-facts:** README 補上安裝指令，範例改用實際存在的 fact id ([#2](https://github.com/carlos-space/facts/issues/2)) ([0b2a65f](https://github.com/carlos-space/facts/commit/0b2a65f5bf342f9c87941fb92cb9ade7e82be8ac))
+
 ## [0.5.0](https://github.com/carlos-space/facts/compare/platform-facts/v0.4.0...platform-facts/v0.5.0) (2026-10-23)
 
 

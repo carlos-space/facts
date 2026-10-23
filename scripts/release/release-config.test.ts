@@ -8,16 +8,23 @@ const readJson = (file: string) => JSON.parse(readFileSync(join(root, file), 'ut
 const config = readJson('release-please-config.json')
 const manifest = readJson('.release-please-manifest.json')
 
-test('config and manifest list the same package paths', () => {
-  expect(Object.keys(config.packages).sort()).toEqual(Object.keys(manifest).sort())
+const expected: Record<string, string> = {
+  'packages/fact-kit': 'fact-kit',
+  'packages/platform-facts': 'platform-facts',
+}
+
+// On main the config lists both packages. A release branch scopes it to the one package of its train
+// (cut-release.sh), so the config may list fewer packages than the manifest, never more. The manifest
+// always keeps every package: release-please reads the other package's version from it, and merge-back
+// restores main's entries.
+test('the manifest lists every package and the config lists some of them', () => {
+  expect(Object.keys(manifest).sort()).toEqual(Object.keys(expected).sort())
+  const configured = Object.keys(config.packages)
+  expect(configured.length).toBeGreaterThan(0)
+  for (const path of configured) expect(Object.keys(manifest), path).toContain(path)
 })
 
 test('every configured path has a package.json whose name matches its component', () => {
-  const expected: Record<string, string> = {
-    'packages/fact-kit': 'fact-kit',
-    'packages/platform-facts': 'platform-facts',
-  }
-  expect(Object.keys(config.packages).sort()).toEqual(Object.keys(expected).sort())
   for (const [path, entry] of Object.entries<any>(config.packages)) {
     expect(existsSync(join(root, path, 'package.json')), path).toBe(true)
     expect(entry.component).toBe(expected[path])

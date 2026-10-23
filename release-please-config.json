@@ -37,5 +37,5 @@
   },
   "versioning": "prerelease",
   "prerelease-type": "alpha.1",
-  "prerelease": true
+  "prerelease": false
 }

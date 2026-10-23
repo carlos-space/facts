@@ -1,9 +1,13 @@
 name: publish
 
 # Publishes the packages a release created (fact-kit, platform-facts) to the public npm registry.
-# release-please.yml dispatches it (gh workflow run) after each release; it can also be run by hand. It is
-# not a workflow_call target: npm trusts this workflow file as a Trusted Publisher, and a called workflow's
+# release-please.yml dispatches it (gh workflow run) after each release, on the release branch and with the
+# train's stage; it can also be run by hand. It is not a workflow_call target: npm trusts this workflow file as a Trusted Publisher, and a called workflow's
 # OIDC token names the caller, which would not match.
+#
+# The stage picks the npm dist-tag: alpha, beta and rc publish under a tag of the same name and only ga
+# publishes under latest, so a prerelease never becomes what `npm install` picks. publish-units.sh refuses a
+# package whose version does not belong to the stage.
 #
 # npm accepts OIDC tokens only from GitHub-hosted runners. The job is idempotent: a version already in the
 # registry is skipped, so re-running after a partial failure is safe.
@@ -14,6 +18,11 @@ on:
         description: 'JSON array of package paths to publish, e.g. ["packages/fact-kit"]'
         required: true
         type: string
+      stage:
+        description: 'release stage of the train; every package version must belong to it'
+        required: true
+        type: choice
+        options: [alpha, beta, rc, ga]
 
 permissions:
   contents: read
@@ -22,9 +31,10 @@ defaults:
   run:
     shell: bash
 
-# One pending run per group; only a repeat of the same request waits behind the running one.
+# One pending run per group; only a repeat of the same request (same stage and packages) waits behind the
+# running one.
 concurrency:
-  group: publish-${{ inputs.paths }}
+  group: publish-${{ inputs.stage }}-${{ inputs.paths }}
   cancel-in-progress: false
 
 jobs:
@@ -56,8 +66,9 @@ jobs:
       - name: Publish to npm (trusted publishing)
         env:
           PATHS: ${{ inputs.paths }}
+          STAGE: ${{ inputs.stage }}
           PUBLISH_OUT: ${{ runner.temp }}/publish
         run: |
           mapfile -t paths < <(jq -r '.[]' <<<"$PATHS")
           [[ ${#paths[@]} -gt 0 ]] || { echo "no package in this release"; exit 0; }
-          bash scripts/release/publish-units.sh "${paths[@]}"
+          bash scripts/release/publish-units.sh --tag "$STAGE" "${paths[@]}"

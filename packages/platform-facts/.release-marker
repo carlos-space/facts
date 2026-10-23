@@ -1,0 +1,5 @@
+0.6.0
+#
+# 由發布腳本在推進階段或 GA 時寫入，用途只有一個：讓帶 Release-As footer 的
+# commit 觸及本套件路徑且非空。發布結束前會被刪除，不會進入 main。
+# released from release/platform-facts/v0.6 at 2026-10-23T23:41:02Z

@@ -1,12 +1,17 @@
 name: ci
 
 # A pull request gets the checks that block the merge;
-# a push to main runs the same set. Three jobs (check, build, test) so each shows as its own check.
+# a push to main or to a release branch runs the same set. The release-branch run is what the ci gate of
+# advance-release.sh and finalize-release.sh waits for. Three jobs (check, build, test) so each shows as
+# its own check.
 on:
   pull_request:
   push:
     branches:
       - main
+      - 'release/**'
+      # the branch that carries a train back to main already has a pull request
+      - '!release/**--to-main'
 
 permissions:
   contents: read

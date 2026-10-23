@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0-alpha.1](https://github.com/carlos-space/facts/compare/platform-facts/v0.5.1...platform-facts/v0.6.0-alpha.1) (2026-10-23)
+
+
+### Added
+
+* **platform-facts:** 新增 Claude Code 與 Codex 的資源路徑、frontmatter 與 agent 檔欄位 facts ([#4](https://github.com/carlos-space/facts/issues/4)) ([6a8b61e](https://github.com/carlos-space/facts/commit/6a8b61e6cf1e5c48fad84e677a9e9dc22007eb19))
+
 ## [0.5.1](https://github.com/carlos-space/facts/compare/platform-facts/v0.5.0...platform-facts/v0.5.1) (2026-10-23)
 
 

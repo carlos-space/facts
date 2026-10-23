@@ -68,10 +68,12 @@ case "$phase" in
     [[ "$(current_branch)" == "$branch" ]] || die "請在 $branch 上執行"
     run git fetch --prune --tags origin
     run git merge --ff-only "origin/$branch"
+    train_base="$(train_base_shas "$component" "$branch" | head -1)"
+    [[ -n "$train_base" ]] || die "$branch 上找不到 Release-Train-Base: $component <sha> trailer，無法決定差異範圍"
     declare -a units=()
-    while IFS= read -r u; do [[ -n "$u" ]] && units+=("$u"); done < <(train_units_by_manifest)
-    (( ${#units[@]} )) || die "本分支與 main 的 manifest 無差異，沒有可合回的發布"
-    [[ "${units[*]}" == "$component" ]] || die "這條分支的 manifest 與 main 的差異是 ${units[*]}，應只有 ${component}"
+    while IFS= read -r u; do [[ -n "$u" ]] && units+=("$u"); done < <(train_units_by_manifest "$train_base")
+    (( ${#units[@]} )) || die "本分支與開分支時的 manifest 無差異，沒有可合回的發布"
+    [[ "${units[*]}" == "$component" ]] || die "這條分支的 manifest 與開分支時的差異是 ${units[*]}，應只有 ${component}"
     path="$(unit_path "$component")"
     version="$(manifest_version "$path")"
     [[ "$version" == *-* ]] && die "GA 尚未完成：$component 仍是 prerelease $version（先合併 Release PR 並等 tag 建立）"
@@ -96,8 +98,6 @@ case "$phase" in
     # cherry-pick 進發布分支，自 tag 重建時開分支的 commit 也同步了 main 的 scripts/。整段套用會把這些
     # 變更重套一次，已刪的檔報錯、改過的檔衝突。開分支的 commit 一律不套，
     # 它改的設定與 manifest 不進 main，manifest 由下一步另外合併。
-    train_base="$(train_base_shas "$component" "$branch" | head -1)"
-    [[ -n "$train_base" ]] || die "$branch 上找不到 Release-Train-Base: $component <sha> trailer，無法決定差異範圍"
     pending_list="$(train_commits_not_on_main "origin/$branch" "$component")" || die "無法列出 $branch 上 main 還沒有的 commit"
     declare -a pending=()
     while IFS= read -r c; do [[ -n "$c" ]] && pending+=("${c%% *}"); done <<< "$pending_list"
@@ -125,7 +125,17 @@ Release-Train-Base: $component $train_base"
     else
       info "合回內容已存在，略過提交"
     fi
-    external "$target" git push -f origin "$sync_branch"
+    # 不強制推送：合回分支每次都從 main 重建，遠端已有內容不同的同名分支表示前一次合回沒收完，
+    # 覆寫前要人確認。內容相同時（重跑）不必再推。
+    if git rev-parse -q --verify "refs/remotes/origin/$sync_branch" >/dev/null; then
+      if (( DRY_RUN )) || git diff --quiet "origin/$sync_branch" HEAD; then
+        info "⊘ 遠端的 ${sync_branch} 已是這次的合回內容"
+      else
+        die "遠端的 ${sync_branch} 和這次的合回內容不同（前一次合回沒收完）。確認可以覆寫後自己執行：git push --force-with-lease origin ${sync_branch}，再重跑本階段"
+      fi
+    else
+      external "$target" git push origin "$sync_branch"
+    fi
 
     # Release-Train-Base 必須寫在 PR body 裡：release PR 以 squash 合併，GitHub 取 PR 標題加
     # 內文作為 commit 訊息，合回分支上那個 commit 的訊息會整個被丟棄。放錯位置的後果是

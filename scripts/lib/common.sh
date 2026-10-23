@@ -175,14 +175,15 @@ train_base_shas() {
     | sed -nE "s/^${comp} ([0-9a-f]{7,40})\$/\1/p" || true
 }
 
-# Components this train shipped: the manifest entries that differ from main's. Derived rather than read
-# from the config, because merge-back restores the config from main and would otherwise lose the train
-# scope, making the phase impossible to re-run.
-train_units_by_manifest() {
+# Components this train shipped: the manifest entries that differ from the train's base (the main commit
+# the branch was cut from). Derived rather than read from the config, because merge-back restores the config
+# from main and would otherwise lose the train scope, making the phase impossible to re-run. Compared with
+# the base, not with today's main: another component's train may have merged back to main since the cut.
+train_units_by_manifest() { # train_units_by_manifest <base-rev>
   local p
   while IFS= read -r p; do [[ -n "$p" ]] && unit_component "$p"; done < <(
-    jq -s -r '.[0] as $main | .[1] | to_entries[] | select(.value != $main[.key]) | .key' \
-      <(git show origin/main:"$MANIFEST") "$MANIFEST")
+    jq -s -r '.[0] as $base | .[1] | to_entries[] | select(.value != $base[.key]) | .key' \
+      <(git show "$1":"$MANIFEST") "$MANIFEST")
   return 0
 }
 

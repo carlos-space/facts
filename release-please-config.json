@@ -30,15 +30,11 @@
     }
   ],
   "packages": {
-    "packages/fact-kit": {
-      "component": "fact-kit",
-      "release-type": "node"
-    },
     "packages/platform-facts": {
       "component": "platform-facts",
       "release-type": "node"
     }
   },
   "plugins": [],
-  "last-release-sha": "ec8401a6c73e670dc7a4ebd63373025d47a42003"
+  "last-release-sha": "3811f89a7e5743a4b77e0d7455ad942d60a05ffa"
 }

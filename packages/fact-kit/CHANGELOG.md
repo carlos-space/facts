@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/carlos-space/facts/compare/fact-kit/v0.4.2...fact-kit/v0.5.0) (2026-10-24)
+
+
+### Added
+
+* **facts:** 觀察來源加讀取日與說明欄，169 筆觀察事實回填 ([#25](https://github.com/carlos-space/facts/issues/25)) ([4935ea3](https://github.com/carlos-space/facts/commit/4935ea3f20305b6286914060aadf0444d64a8c4e))
+
 ## [0.4.2](https://github.com/carlos-space/facts/compare/fact-kit/v0.4.2-alpha.1...fact-kit/v0.4.2) (2026-10-24)
 
 

@@ -13,10 +13,10 @@ const expected: Record<string, string> = {
   'packages/platform-facts': 'platform-facts',
 }
 
-// On main the config lists both packages. A release branch scopes it to the one package of its train
-// (cut-release.sh), so the config may list fewer packages than the manifest, never more. The manifest
-// always keeps every package: release-please reads the other package's version from it, and merge-back
-// restores main's entries.
+// On main the config lists both packages. A release branch scopes it to the units of its train
+// (cut-release.sh --units), so the config may list fewer packages than the manifest, never more. The
+// manifest always keeps every package: release-please reads the other package's version from it, and
+// merge-back restores main's entries.
 test('the manifest lists every package and the config lists some of them', () => {
   expect(Object.keys(manifest).sort()).toEqual(Object.keys(expected).sort())
   const configured = Object.keys(config.packages)
@@ -34,13 +34,15 @@ test('every configured path has a package.json whose name matches its component'
   }
 })
 
-test('tags are <component>/v<version> with one version line per component', () => {
+test('tags are <component>/v<version>, one version line per component, one Release PR per train', () => {
   expect(config['include-component-in-tag']).toBe(true)
   expect(config['tag-separator']).toBe('/')
   expect(config['include-v-in-tag']).toBe(true)
   expect(config['bump-minor-pre-major']).toBe(true)
   expect(config['initial-version']).toBe('0.1.0')
-  expect(typeof config['separate-pull-requests']).toBe('boolean')
+  // false: a train is one release/vX.Y branch, so its units share a single Release PR. linked-versions is
+  // not used, so the units still version independently.
+  expect(config['separate-pull-requests']).toBe(false)
 })
 
 test('every package.json version equals its manifest version', () => {

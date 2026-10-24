@@ -336,6 +336,19 @@ const moduleApi = {
       summary: 'A Markdown table of the rows, with Field, Type, Required, Description and Extensions columns.',
     },
     {
+      name: 'valueListToMarkdown',
+      signature: 'valueListToMarkdown(fact: Fact, options?: { columns?: string[] }) => string',
+      summary:
+        'Renders a fact whose `content.value` is an array: one `- item` line per string, or a table for objects (columns default to the keys). Throws an error naming the fact id when the value is not an array.',
+    },
+    {
+      name: 'replaceFactBlocks',
+      signature:
+        'replaceFactBlocks(text: string, blocks: Record<string, string>) => { text: string; changed: boolean }',
+      summary:
+        'Replaces the text between `<!-- facts:begin NAME -->` and `<!-- facts:end NAME -->` with `blocks[NAME]`. `changed` is false when the document is already current, which is what a `--check` exits on. Throws an error naming the block on a missing end, a repeated name, or a name the document lacks.',
+    },
+    {
       name: 'readFacts',
       signature: 'readFacts(spec, options?) => FactReader',
       summary: 'Reads an installed fact package. Parameters and members are in `fact-kit.read-facts`.',

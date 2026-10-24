@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.9.0](https://github.com/carlos-space/facts/compare/platform-facts/v0.8.1...platform-facts/v0.9.0) (2026-10-24)
+
+
+### Added
+
+* **fact-kit:** 值清單渲染與文件區塊替換 ([#32](https://github.com/carlos-space/facts/issues/32)) ([3842eaf](https://github.com/carlos-space/facts/commit/3842eaf54949602b3a46b18e7680686233beeb11))
+
+
+### Fixed
+
+* **platform-facts:** 補回 0.8.0 漏掉的三筆 OTel fact，加上擋 id 消失的測試 ([#29](https://github.com/carlos-space/facts/issues/29)) ([541e175](https://github.com/carlos-space/facts/commit/541e175bd1910a4ecf35a6bd943b0c9c2433673c))
+
 ## [0.8.1](https://github.com/carlos-space/facts/compare/platform-facts/v0.8.0...platform-facts/v0.8.1) (2026-10-24)
 
 

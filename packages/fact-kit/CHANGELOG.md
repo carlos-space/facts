@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/carlos-space/facts/compare/fact-kit/v0.5.0...fact-kit/v0.6.0) (2026-10-24)
+
+
+### Added
+
+* **fact-kit:** 值清單渲染與文件區塊替換 ([#32](https://github.com/carlos-space/facts/issues/32)) ([3842eaf](https://github.com/carlos-space/facts/commit/3842eaf54949602b3a46b18e7680686233beeb11))
+
 ## [0.5.0](https://github.com/carlos-space/facts/compare/fact-kit/v0.4.2...fact-kit/v0.5.0) (2026-10-24)
 
 

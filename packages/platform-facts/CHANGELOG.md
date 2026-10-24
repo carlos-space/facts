@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/carlos-space/facts/compare/platform-facts/v0.8.0...platform-facts/v0.8.1) (2026-10-24)
+
+
+### Fixed
+
+* **platform-facts:** 補回 0.8.0 漏掉的三筆 OTel fact，加上擋 id 消失的測試 ([#29](https://github.com/carlos-space/facts/issues/29)) ([8b153b6](https://github.com/carlos-space/facts/commit/8b153b67b510ef25d220bf90f80a2499b7299ed1))
+
 ## [0.8.0](https://github.com/carlos-space/facts/compare/platform-facts/v0.7.0...platform-facts/v0.8.0) (2026-10-24)
 
 

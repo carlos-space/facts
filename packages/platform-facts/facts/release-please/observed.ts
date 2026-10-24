@@ -8,7 +8,12 @@ export const observed: Fact[] = [
     topics: ['release'],
     title: '指定版號',
     content: { statement: 'commit 內文有 `Release-As: x.y.z` 時，下一個發版 PR 用指定的版號' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://github.com/googleapis/release-please/blob/main/README.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://github.com/googleapis/release-please/blob/main/README.md',
+      fetched: '2026-09-29',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -31,6 +36,8 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md',
+      fetched: '2026-09-29',
+      note: 'https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md、https://github.com/googleapis/release-please/blob/main/schemas/config.json',
     },
     verify: {
       probe: {
@@ -53,6 +60,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: {
@@ -74,6 +82,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://github.com/googleapis/release-please/blob/main/src/util/commit-split.ts',
+      fetched: '2026-10-01',
     },
     verify: {
       probe: {
@@ -94,7 +103,12 @@ export const observed: Fact[] = [
       statement:
         'PR 合併後，在 PR 內文加覆寫區塊，可以改寫變更記錄用的 commit 訊息。區塊以 `BEGIN_COMMIT_OVERRIDE` 開頭、`END_COMMIT_OVERRIDE` 結尾。只在 squash 合併時有效，一般合併無效',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://github.com/googleapis/release-please/blob/main/README.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://github.com/googleapis/release-please/blob/main/README.md',
+      fetched: '2026-10-01',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'This feature will not work with plain merges', hash: 'sha256:78b81309ff0b3049' },
       verifiedOn: '2026-10-01',
@@ -113,6 +127,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: { kind: 'hash', anchor: "doesn't modify `peerDependencies` fields", hash: 'sha256:9715de40d869ca26' },
@@ -126,7 +141,12 @@ export const observed: Fact[] = [
     topics: ['release', 'pull-request'],
     title: '發版 PR 的更新',
     content: { statement: '發版 PR 會隨新的合併持續更新' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://github.com/googleapis/release-please/blob/main/README.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://github.com/googleapis/release-please/blob/main/README.md',
+      fetched: '2026-09-29',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'kept up-to-date as additional work is merged', hash: 'sha256:450605a62b66718e' },
       verifiedOn: '2026-09-29',
@@ -139,7 +159,12 @@ export const observed: Fact[] = [
     topics: ['release', 'changelog'],
     title: '`Release-As:` 的變更記錄',
     content: { statement: '帶 `Release-As:` 的 commit 本身也會出現在變更記錄' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://github.com/googleapis/release-please/pull/1220' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://github.com/googleapis/release-please/pull/1220',
+      fetched: '2026-09-29',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -163,6 +188,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://github.com/googleapis/release-please/blob/v17.6.0/src/versioning-strategies/prerelease.ts',
+      fetched: '2026-10-02',
     },
     verify: {
       probe: {
@@ -186,6 +212,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://github.com/googleapis/release-please/blob/v17.6.0/src/strategies/base.ts',
+      fetched: '2026-10-02',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'from release-as configuration', hash: 'sha256:dfda91e3ef07274b' },

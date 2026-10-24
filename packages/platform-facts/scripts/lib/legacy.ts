@@ -35,16 +35,13 @@ export interface LegacyRowOf extends LegacyRow {
   table: LegacyTable
 }
 
-/** What a migrated fact cannot carry itself. Keyed by the new fact id in `migration/legacy-fields.json`. */
+/** What a migrated fact does not carry (the workspace's presentation: table and tool label). Keyed by the new fact id in `migration/legacy-fields.json`. */
 export interface LegacySidecar {
   table: LegacyTable
   /** The original id, before the `<platform>.` prefix. */
   id: string
-  fetched: string
   /** The `tool` column of the version-control table (`GitHub`, `pnpm`, ...). */
   tool?: string
-  /** The original `source` text, kept only when `source.url` does not carry it exactly. */
-  sourceText?: string
 }
 
 export const defaultWorkspace = (): string => join(homedir(), 'workspace')
@@ -82,14 +79,19 @@ export function toFact(row: LegacyRow): { fact: Fact; sidecar: Omit<LegacySideca
     topics: [...row.topics],
     title: titleOf(row),
     content: { statement: row.fact },
-    source: { kind: 'observed', basis: row.sourceKind, ...(url ? { url } : {}) },
+    source: {
+      kind: 'observed',
+      basis: row.sourceKind,
+      ...(url ? { url } : {}),
+      fetched: row.fetched,
+      // The original text, kept as the note only when `source.url` does not carry it exactly.
+      ...(row.source !== url ? { note: row.source } : {}),
+    },
     verify: { probe: row.probe, verifiedOn: row.verifiedOn, screenedThrough: row.screenedThrough },
   }
   const sidecar: Omit<LegacySidecar, 'table'> = {
     id: row.id,
-    fetched: row.fetched,
     ...(row.tool !== undefined ? { tool: row.tool } : {}),
-    ...(row.source !== url ? { sourceText: row.source } : {}),
   }
   return { fact, sidecar }
 }
@@ -120,11 +122,11 @@ function readBack(fact: Fact, sidecar: LegacySidecar | undefined) {
     topics: fact.topics,
     fact: 'statement' in fact.content ? fact.content.statement : undefined,
     sourceKind: source?.basis,
-    source: sidecar?.sourceText ?? source?.url,
+    source: source?.note ?? source?.url,
     probe: fact.verify?.probe,
     verifiedOn: fact.verify?.verifiedOn,
     screenedThrough: fact.verify?.screenedThrough,
-    fetched: sidecar?.fetched,
+    fetched: source?.fetched,
     tool: sidecar?.tool,
     topic: sidecar?.tool !== undefined ? fact.title : undefined,
     table: sidecar?.table,

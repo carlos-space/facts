@@ -11,7 +11,7 @@ export const observed: Fact[] = [
       statement:
         '預設模式在開編輯器時等於 `strip`，會刪掉 `#` 開頭的行，`##` 標題跟著消失。`scissors` 保留 `#` 開頭的行，只刪掉剪刀線以下的內容。用 `-m` 或 `-F` 不開編輯器時，預設模式等於 `whitespace`，`##` 也保留',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://git-scm.com/docs/git-commit' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://git-scm.com/docs/git-commit', fetched: '2026-10-01' },
     verify: {
       probe: {
         kind: 'hash',
@@ -31,7 +31,7 @@ export const observed: Fact[] = [
       statement:
         '`git rev-list --merges {遠端}/{預設分支}..HEAD` 在 `git merge --squash` 後沒有輸出，分支內合併過預設分支也一樣。一般合併後它列出 merge commit。`git diff --name-only` 的路徑依單元目錄分組，就算得出一個 commit 碰到幾個單元',
     },
-    source: { kind: 'observed', basis: 'spike' },
+    source: { kind: 'observed', basis: 'spike', fetched: '2026-10-01', note: '本機 git 2.54.0，正反各一個樣本' },
     verify: {
       probe: { kind: 'sample', path: 'prompts/_tools/version-control/main-history/merge-and-unit-detection.mjs' },
       verifiedOn: '2026-10-01',

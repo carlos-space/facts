@@ -12,6 +12,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'close closes closed fix fixes fixed resolve', hash: 'sha256:502da836bc0234d7' },
@@ -32,6 +33,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'keywords are ignored, no links are created', hash: 'sha256:9f6f4ccd896d301b' },
@@ -49,6 +51,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: {
@@ -73,6 +76,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'Require review from Code Owners', hash: 'sha256:6b49d146246f5f2f' },
@@ -90,6 +94,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: {
@@ -113,6 +118,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches',
+      fetched: '2026-10-02',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'prevents collaborators from pushing merge', hash: 'sha256:0b1689adecdc2485' },
@@ -133,6 +139,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches',
+      fetched: '2026-10-01',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'Protected branches are available in public', hash: 'sha256:51d50011b6c7b2c6' },
@@ -149,7 +156,12 @@ export const observed: Fact[] = [
       statement:
         '`squash_merge_commit_title` 可設 `PR_TITLE` 或 `COMMIT_OR_PR_TITLE`，後者在 PR 只有一個 commit 時取該 commit 的標題。`squash_merge_commit_message` 可設 `PR_BODY`，讓 PR 內文結尾的 trailer 落進 commit。沒有設定時，平台的行為與 `COMMIT_OR_PR_TITLE` 相同',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://docs.github.com/en/rest/repos/repos' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://docs.github.com/en/rest/repos/repos',
+      fetched: '2026-09-29',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -173,6 +185,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests',
+      fetched: '2026-09-30',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'or the pull request title and list of commits', hash: 'sha256:9a2e0f01e59ce063' },
@@ -189,7 +202,7 @@ export const observed: Fact[] = [
       statement:
         '`gh api` 的預設方法是 GET。帶了 `-f`、`-F` 這類請求參數而沒有 `-X` 或 `--method` 時，自動改用 POST。要讓參數當查詢字串送出，得明寫 `--method GET`',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://cli.github.com/manual/gh_api' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://cli.github.com/manual/gh_api', fetched: '2026-09-30' },
     verify: {
       probe: {
         kind: 'hash',
@@ -209,7 +222,7 @@ export const observed: Fact[] = [
       statement:
         '`gh pr` 的子指令有 `create`、`list`、`status`、`checkout`、`checks`、`close`、`comment`、`diff`、`edit`、`lock`、`merge`、`ready`、`reopen`、`revert`、`review`、`unlock`、`update-branch`、`view`',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://cli.github.com/manual/gh_pr' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://cli.github.com/manual/gh_pr', fetched: '2026-09-30' },
     verify: {
       probe: {
         kind: 'hash',
@@ -233,6 +246,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/actions/concepts/security/github_token',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: {
@@ -254,6 +268,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'Tip commit pushed to the ref', hash: 'sha256:853b348f9c02dcd3' },
@@ -274,6 +289,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: {
@@ -295,6 +311,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: {
@@ -319,6 +336,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax',
+      fetched: '2026-09-30',
     },
     verify: {
       probe: {
@@ -340,6 +358,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax',
+      fetched: '2026-09-30',
     },
     verify: {
       probe: {
@@ -361,6 +380,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions',
+      fetched: '2026-09-30',
     },
     verify: {
       probe: {
@@ -382,7 +402,12 @@ export const observed: Fact[] = [
       statement:
         '`actions/checkout` 的 `persist-credentials` 預設為 true，會把 token 或 SSH key 設進本機的 git 設定，後續步驟的 git 指令就帶著憑證',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://github.com/actions/checkout/blob/main/README.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://github.com/actions/checkout/blob/main/README.md',
+      fetched: '2026-09-30',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -402,7 +427,12 @@ export const observed: Fact[] = [
       statement:
         '`actions/checkout` 從 v6 起，保留的憑證存在 `$RUNNER_TEMP` 底下的另一個檔，不再直接寫進 `.git/config`。`git fetch`、`git push` 這類指令照常可用',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://github.com/actions/checkout/blob/main/README.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://github.com/actions/checkout/blob/main/README.md',
+      fetched: '2026-09-30',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'separate file under', hash: 'sha256:4dfbdf5ccfcebb83' },
       verifiedOn: '2026-09-30',
@@ -419,6 +449,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax',
+      fetched: '2026-09-30',
     },
     verify: {
       probe: {
@@ -443,6 +474,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs',
+      fetched: '2026-09-30',
     },
     verify: {
       probe: {
@@ -463,7 +495,12 @@ export const observed: Fact[] = [
       statement:
         'OIDC token 的 `workflow_ref` 記的是被觸發的 workflow 檔。以 `workflow_call` 呼叫的可重用 workflow，記在 `job_workflow_ref`',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://docs.github.com/en/actions/reference/security/oidc' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://docs.github.com/en/actions/reference/security/oidc',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -480,7 +517,7 @@ export const observed: Fact[] = [
     topics: ['markdown'],
     title: 'gfm-strikethrough',
     content: { statement: 'GFM 把一個或兩個 `~` 成對包住的文字渲染成刪除線。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://github.github.com/gfm/' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://github.github.com/gfm/', fetched: '2026-09-30' },
     verify: {
       probe: {
         kind: 'hash',

@@ -71,6 +71,16 @@ const defs = {
           kind: { const: 'observed' },
           basis: { enum: ['doc', 'measured', 'spike'] },
           url: nonEmpty,
+          fetched: {
+            ...nonEmpty,
+            description:
+              'Date the source was read. It differs from `verify.verifiedOn` when a later check kept the fact.',
+          },
+          note: {
+            $ref: '#/$defs/Text',
+            description:
+              'What was observed on: environment, version and sample size of a measurement, or the sources of a document.',
+          },
         },
       },
     ],

@@ -18,7 +18,15 @@ export type FactContent =
 export type FactSource =
   | { kind: 'published' }
   | { kind: 'converted'; from: string; converter: string; upstream: string }
-  | { kind: 'observed'; basis: 'doc' | 'measured' | 'spike'; url?: string }
+  | {
+      kind: 'observed'
+      basis: 'doc' | 'measured' | 'spike'
+      url?: string
+      /** Date the source was read (`YYYY-MM-DD`). Differs from `verify.verifiedOn` when a later check kept the fact. */
+      fetched?: string
+      /** What was observed on: environment, version and sample size of a measurement, or the sources of a document. */
+      note?: Text
+    }
 
 export interface Fact {
   /** `<tool>.<name>`, unique across all sources. */

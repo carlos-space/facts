@@ -8,7 +8,12 @@ export const observed: Fact[] = [
     topics: ['version'],
     title: 'versionCode 的上限',
     content: { statement: '`versionCode` 的上限是 2100000000。每次發布的值要比前一版大，用過的值不能再上傳' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://developer.android.com/studio/publish/versioning?hl=en' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://developer.android.com/studio/publish/versioning?hl=en',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: {
         kind: 'hash',

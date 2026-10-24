@@ -8,20 +8,33 @@
   "bump-minor-pre-major": true,
   "initial-version": "0.1.0",
   "changelog-sections": [
-    { "type": "feat", "section": "Added" },
-    { "type": "fix", "section": "Fixed" },
-    { "type": "perf", "section": "Changed" },
-    { "type": "deps", "section": "Changed" },
-    { "type": "revert", "section": "Changed" }
+    {
+      "type": "feat",
+      "section": "Added"
+    },
+    {
+      "type": "fix",
+      "section": "Fixed"
+    },
+    {
+      "type": "perf",
+      "section": "Changed"
+    },
+    {
+      "type": "deps",
+      "section": "Changed"
+    },
+    {
+      "type": "revert",
+      "section": "Changed"
+    }
   ],
   "packages": {
-    "packages/fact-kit": {
-      "component": "fact-kit",
-      "release-type": "node"
-    },
     "packages/platform-facts": {
       "component": "platform-facts",
       "release-type": "node"
     }
-  }
+  },
+  "plugins": [],
+  "last-release-sha": "85df0822c5b49108bb6ee15ed080a7a848dc58ff"
 }

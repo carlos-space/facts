@@ -43,6 +43,25 @@ describe('c001 meta-schema', () => {
     ).toEqual([])
   })
 
+  test('an observed source takes fetched and note, and stays valid without them', () => {
+    const observed = (source: unknown): unknown => ({ ...valid, id: 'claude-code.thing', tool: 'claude-code', source })
+    // The old shape, with neither field.
+    expect(validateFact(observed({ kind: 'observed', basis: 'measured' }))).toEqual([])
+    expect(validateFact(observed({ kind: 'observed', basis: 'doc', url: 'https://docs.example.com/a' }))).toEqual([])
+    expect(
+      validateFact(
+        observed({ kind: 'observed', basis: 'measured', fetched: '2026-10-12', note: '本機 Claude Code 2.1.285，n=1' }),
+      ),
+    ).toEqual([])
+    expect(
+      validateFact(observed({ kind: 'observed', basis: 'spike', note: { en: 'local, n=1', 'zh-TW': '本機，n=1' } })),
+    ).toEqual([])
+    // Wrong shapes, and the fields on a kind that does not take them.
+    expect(validateFact(observed({ kind: 'observed', basis: 'doc', fetched: '' }))).not.toEqual([])
+    expect(validateFact(observed({ kind: 'observed', basis: 'doc', note: 3 }))).not.toEqual([])
+    expect(validateFact(observed({ kind: 'published', note: 'x' }))).not.toEqual([])
+  })
+
   test('a fact with a schema using every registered x- keyword passes', () => {
     const schema = {
       $schema: 'https://json-schema.org/draft/2020-12/schema',

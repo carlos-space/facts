@@ -105,7 +105,13 @@ export const factSchema = {
           then: {
             required: ['basis'],
             additionalProperties: false,
-            properties: { kind: true, basis: { enum: ['doc', 'measured', 'spike'] }, url: nonEmptyString },
+            properties: {
+              kind: true,
+              basis: { enum: ['doc', 'measured', 'spike'] },
+              url: nonEmptyString,
+              fetched: nonEmptyString,
+              note: text,
+            },
           },
         },
       ],

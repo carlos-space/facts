@@ -11,7 +11,7 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 不顯示 Stop hook 的 systemMessage；UserPromptSubmit 的 sessionTitle 不改側欄標題，卻會改會話名稱，而且 hook 設在工作區時會改到其他會話。回覆裡自訂 scheme 的連結點不開，http 連結交給預設瀏覽器。MessageDisplay 每則訊息觸發一次，替換後的連結可以點。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: { kind: 'observed', basis: 'measured', fetched: '2026-09-27', note: '桌面 app，Claude Code 2.1.281' },
     verify: {
       probe: {
         kind: 'manual',
@@ -30,7 +30,12 @@ export const observed: Fact[] = [
       statement:
         'mod 預設開啟。終端機要 Claude Code 2.1.287 以上，桌面 app 內建的 Claude Code 要 2.1.286 以上，版本不夠時 mod 不會載入。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/overview.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/overview.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -50,7 +55,12 @@ export const observed: Fact[] = [
       statement:
         'mod hook 處理一個事件最多 10 秒，prompt.edit hook 最多 50 毫秒。等 next 與 mods API 呼叫的時間不計，$.clock.sleep 除外。.catch 處理者最多 1 秒。超過時限的 hook 會被跳過。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/reference.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/reference.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: "A hook's own execution time for one event", hash: 'sha256:dac1d9e86a5d16d6' },
       verifiedOn: '2.1.299',
@@ -66,7 +76,12 @@ export const observed: Fact[] = [
       statement:
         '已安裝的 mod 共用一個 worker。worker 停止 3 次而查不出是哪個 mod 造成時，這個會話裡全部非內建的 mod 都會卸載，組織安裝的也一樣。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/troubleshoot.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/troubleshoot.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -86,7 +101,12 @@ export const observed: Fact[] = [
       statement:
         '沒有 .catch 的 mod hook 拋錯、逾時或回傳形態不對時，若還沒呼叫 next 就被跳過，由下一個處理者接手，等於這個 mod 不存在。有 .catch 時由它代為回應，但 .catch 處理者本身拋錯或逾時，也當成沒有處理者跳過。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/events.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/events.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: "A hook that fails doesn't break the session", hash: 'sha256:8223558b9a1f188b' },
       verifiedOn: '2.1.299',
@@ -102,7 +122,12 @@ export const observed: Fact[] = [
       statement:
         'mod 的 tool.check 在權限規則與 PreToolUse hook 判定之後執行。不在 plan mode，或呼叫是唯讀時，它的回答取代前面的判定。它能放行 ask 規則與非 managed 的 PreToolUse 阻擋，auto mode 下它放行的呼叫不經分類器。需要使用者互動的工具照樣詢問。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/permissions.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/permissions.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'answers after the rules and the', hash: 'sha256:dce7866d9d9abc03' },
       verifiedOn: '2.1.299',
@@ -118,7 +143,12 @@ export const observed: Fact[] = [
       statement:
         '有 managed settings 或以 Team、Enterprise 方案登入時，deny 規則預設優先於 mod 的 tool.check，組織可以改這個預設。其他情況下，不在 plan mode 或呼叫是唯讀時，mod 的 tool.check 能放行 deny 規則擋下的呼叫。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/permissions.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/permissions.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'deny rules hold over the mod by default', hash: 'sha256:b0bdf3df0263651a' },
       verifiedOn: '2.1.299',
@@ -134,7 +164,12 @@ export const observed: Fact[] = [
       statement:
         '擋下用的 mod hook 加了 .catch 時，原 hook 還沒呼叫 next 就失敗，.catch 回傳那個事件的拒絕，例如 tool.call 的 deny、prompt.submit 的 drop。原 hook 已呼叫 next 才失敗時，.catch 回傳 next(e)，它交回那次呼叫的結果，不會再執行一次。tool.check 與 plugin.register 回傳的拒絕在 next 之後仍然成立，.catch 直接回傳拒絕，不必分兩種情況。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/events.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/events.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'The same handler shape fits a guard on', hash: 'sha256:5037d503f1630371' },
       verifiedOn: '2.1.299',
@@ -149,7 +184,12 @@ export const observed: Fact[] = [
     content: {
       statement: 'mod 的 tool.call 在工具要執行時觸發。hook 可以交給 next 照常執行、回傳拒絕，或直接回傳結果代替執行。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/reference.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/reference.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'A tool is about to run', hash: 'sha256:65d8d0238a10b14f' },
       verifiedOn: '2.1.299',
@@ -165,7 +205,12 @@ export const observed: Fact[] = [
       statement:
         'mod 的 prompt.submit 在使用者送出提示時觸發，可以改寫提示、附加 context 或擋下提示。prompt.compose 在組系統提示時觸發，回傳依序送出的段落清單。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/reference.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/reference.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Claude Code renders a system prompt', hash: 'sha256:68282dba7f67c6df' },
       verifiedOn: '2.1.299',
@@ -181,7 +226,12 @@ export const observed: Fact[] = [
       statement:
         'mod 的 ui.render 在 Claude Code 要畫介面上的某個 render site 時觸發，回傳要畫的元素樹。render site 是介面的擴充點，終端機、桌面 app 與 VS Code 支援的位置不同。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/reference.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/reference.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'is about to be drawn', hash: 'sha256:704051dcfc05d574' },
       verifiedOn: '2.1.299',
@@ -197,7 +247,12 @@ export const observed: Fact[] = [
       statement:
         '跨事件的背景工作由 session.start 啟動的計時器執行，$.clock.every 與 $.clock.after 取代 setInterval 與 setTimeout。計時器在模組重新載入時停止。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/api.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/api.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Work that outlives one event', hash: 'sha256:0764477ee4b18b28' },
       verifiedOn: '2.1.299',
@@ -213,7 +268,12 @@ export const observed: Fact[] = [
       statement:
         'mod 的 hooks 模組沒有 Node.js API，也沒有 setTimeout 這類計時器全域。讀寫檔案、起行程與連網都要經過 mods API。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/api.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/api.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'The hooks module itself has no Node', hash: 'sha256:fa092ee7cea13de8' },
       verifiedOn: '2.1.299',
@@ -229,7 +289,12 @@ export const observed: Fact[] = [
       statement:
         'auto mode 下，tool.check 的 next 拿到的是分類器之前的判定。mod 回傳 allow 時權限判定 6 ms 就結束，不跑分類器。不載入 mod 時，同一個指令的判定花 3,948 ms（各 1 輪）。',
     },
-    source: { kind: 'observed', basis: 'spike' },
+    source: {
+      kind: 'observed',
+      basis: 'spike',
+      fetched: '2026-10-19',
+      note: '本機 headless，桌面 app 內建的 Claude Code 2.1.299',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -249,7 +314,12 @@ export const observed: Fact[] = [
       statement:
         '載入內建的 plugin-authoring skill 時，Claude Code 把這一版的 API 型別檔寫在 `/private/tmp/claude-<uid>/bundled-skills/<版本>/<雜湊>/plugin-authoring/types/claude-code.d.ts`，每個行程一份。用它加一份放在 mod 資料夾外的 tsconfig 就能做型別檢查。型別檔沒有宣告 `console`，測試檔用了它，型別檢查就會失敗。',
     },
-    source: { kind: 'observed', basis: 'spike' },
+    source: {
+      kind: 'observed',
+      basis: 'spike',
+      fetched: '2026-10-19',
+      note: '本機，桌面 app 內建的 Claude Code 2.1.299 載入 plugin-authoring skill，tsc 7.0.2 對 promptex 匯出的 plugin 正反各 1 次',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -269,7 +339,12 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 的 Code 分頁會呼叫 mod 的帶狀區（`AbovePrompt`）、模式標籤（`SessionMode`）、回覆下方（`AssistantMessage`）、`Spinner` 與面板（`Pane`）的 `ui.render`，送出訊息也經過 `prompt.submit`。`$.ui.toast`、`$.ui.ask`、`$.prompt.fill` 在畫面上有反應。render hook 每次重畫都被呼叫一次，所以次數遠多於畫面上出現的次數',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-20',
+      note: '本機，桌面 app 內建的 Claude Code 2.1.299，介面示範 mod 計數各位置被呼叫的次數，使用者回報畫面，n=1',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -289,7 +364,12 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 的 Code 分頁從未呼叫提示列（`PromptHint`）與自動完成（`prompt.autocomplete`）。`turn.complete` 有觸發，但回傳改寫的 `text` 不會顯示在回覆下方。`$.prompt.suggest` 回 `isShown: true`，畫面卻沒有出現建議。官方文件寫這幾項在桌面可用或會顯示，所以這是 app 和文件不一致，mod 端改不了',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-20',
+      note: '本機，桌面 app 內建的 Claude Code 2.1.299，介面示範 mod 在使用者送出多則訊息後計數仍是 0，n=1；官方 https://code.claude.com/docs/en/plugins/mods/reference.md 的 Render sites 表',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -309,7 +389,12 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 的 Code 分頁會把 `$.ui.status` 的文字顯示在輸入框下方。每個 plugin 一行，下一次呼叫取代上一次，傳 `undefined` 清掉',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-21',
+      note: '本機，桌面 app 內建的 Claude Code 2.1.304，介面示範 mod 按狀態列的「試試看」，使用者回報看得到，n=1；每個 plugin 一行與清除方式取自同版 plugin-authoring skill 型別檔的 `$.ui.status` 說明',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -328,7 +413,12 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 裡呼叫 `$.ui.log` 正常回傳，`$.ui.copy` 回 `{ isCopied: true }`，`$.audio.speak` 回 `{ via: "system" }`，但畫面上有沒有出現還沒有人確認',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-20',
+      note: '本機，桌面 app 內建的 Claude Code 2.1.299，介面示範 mod 記下的回傳值，n=1',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -347,7 +437,12 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 內建自己的 Claude Code，放在 `~/Library/Application Support/Claude/claude-code/<版本>/<雜湊>/claude.app/Contents/MacOS/claude`，版本可能比終端機 PATH 上的 `claude` 新',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-20',
+      note: '本機，桌面 app 內建 2.1.299、終端機 `claude --version` 是 2.1.292',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -366,7 +461,12 @@ export const observed: Fact[] = [
     content: {
       statement: '桌面 app 用 start_session 開的本機會話停下時，開它的會話會收到附報告開頭的通知，不必輪詢。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-17',
+      note: '桌面 app 2.1.299，規劃會話開出的五場本機成員會話停下時都送回通知，n=5',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -383,7 +483,12 @@ export const observed: Fact[] = [
     topics: ['session'],
     title: 'desktop-cloud-session-no-report',
     content: { statement: '桌面 app 用 start_session 在雲端開的會話，停下時不送通知給開它的會話，也不能傳訊回來。' },
-    source: { kind: 'observed', basis: 'doc' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      fetched: '2026-10-17',
+      note: '桌面 app 2.1.299 的 start_session 工具說明與會話啟動指示',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -403,7 +508,12 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 只在使用者本人訊息觸發的那一輪讓 start_session 直接開會話。由其他會話的訊息或自動事件觸發的那一輪，只能建提案卡，等使用者點開。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-17',
+      note: '桌面 app 2.1.299，規劃會話由成員會話的訊息喚醒時開不了會話，等使用者本人回覆那一輪才開成，n=1。同版本的會話啟動指示也寫明，由其他會話的訊息或自動事件觸發的那一輪，app 拒絕直接開會話',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -423,7 +533,12 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 用 start_session 開的本機會話，啟動指示寫著開它的會話的 `local_` 開頭 id，並說明要回報時用 SendMessage 寄給這個 id。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-17',
+      note: '桌面 app 2.1.299，由規劃會話用 start_session 開出的成員會話，啟動指示寫著規劃會話的 local_ 開頭 id，用它傳訊回報有送達，n=1',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -443,7 +558,12 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 的會話之間用 SendMessage 傳訊時，收件者要寫 `local_` 開頭的桌面會話 id。寫 mainflow 的會話名稱找不到人。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-17',
+      note: '桌面 app 2.1.299，成員會話用工作說明寫的 mainflow 會話名稱傳訊回報時找不到收件者，n=1。另一場會話用 local_ 開頭的 id 傳訊給兩場會話都送達，n=3',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -460,7 +580,12 @@ export const observed: Fact[] = [
     topics: ['desktop', 'markdown'],
     title: 'desktop-chat-unrendered-formats',
     content: { statement: '桌面 app 的聊天畫面不顯示摺疊區塊 `<details>` 與 mermaid 圖。' },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-18',
+      note: '桌面 app 2.1.299，使用者看同一則含這些格式的回覆，n=1',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -476,7 +601,12 @@ export const observed: Fact[] = [
     topics: ['desktop', 'markdown'],
     title: 'desktop-chat-rendered-formats',
     content: { statement: '桌面 app 的聊天畫面照格式顯示任務清單、刪除線與 `diff` 程式碼區塊。' },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-18',
+      note: '桌面 app 2.1.299，使用者看同一則含這些格式的回覆，n=1',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -496,7 +626,7 @@ export const observed: Fact[] = [
       statement:
         '桌面 app 在標了 shell 語言（例如 `bash`）的程式碼區塊加執行按鈕，工作目錄內以相對路徑寫的 `[檔名](路徑:行號)` 連結在檔案窗格點得開。',
     },
-    source: { kind: 'observed', basis: 'doc' },
+    source: { kind: 'observed', basis: 'doc', fetched: '2026-10-18', note: '桌面 app 2.1.299 給模型的 Code 分頁說明' },
     verify: {
       probe: {
         kind: 'manual',

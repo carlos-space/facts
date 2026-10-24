@@ -11,7 +11,7 @@ export const observed: Fact[] = [
       statement:
         'Trusted Publishing 目前只支援雲端託管的 runner。在 GitHub Actions 上要用 GitHub 託管的 runner，self-hosted runner 還不支援',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://docs.npmjs.com/trusted-publishers' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://docs.npmjs.com/trusted-publishers', fetched: '2026-10-02' },
     verify: {
       probe: {
         kind: 'hash',
@@ -31,7 +31,7 @@ export const observed: Fact[] = [
       statement:
         '用 `workflow_call` 呼叫另一個執行 `npm publish` 的 workflow 時，驗證比對的是呼叫端 workflow 的名稱，不是含發布指令的 workflow。`id-token: write` 權限要同時給呼叫端與被呼叫端',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://docs.npmjs.com/trusted-publishers' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://docs.npmjs.com/trusted-publishers', fetched: '2026-10-02' },
     verify: {
       probe: {
         kind: 'hash',
@@ -52,7 +52,7 @@ export const observed: Fact[] = [
       statement:
         '在 npm 登記 GitHub Actions 的 Trusted Publisher 時，填的是 workflow 檔名，例如 `publish.yml`。只填檔名不填路徑，要含副檔名，Environment 名稱可留空',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://docs.npmjs.com/trusted-publishers' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://docs.npmjs.com/trusted-publishers', fetched: '2026-10-02' },
     verify: {
       probe: { kind: 'hash', anchor: 'Enter only the filename, not the full path', hash: 'sha256:94d3edb27856a692' },
       verifiedOn: '2026-10-02',
@@ -68,7 +68,12 @@ export const observed: Fact[] = [
       statement:
         'npm 11 發布預發布版時，沒指定 `--tag`，`publishConfig.tag` 也沒設，就拒絕發布。帶 `--force` 時略過這個檢查',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://github.com/npm/cli/blob/v11.19.0/lib/commands/publish.js' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://github.com/npm/cli/blob/v11.19.0/lib/commands/publish.js',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -85,7 +90,12 @@ export const observed: Fact[] = [
     topics: ['version'],
     title: '預發布序號的起點',
     content: { statement: 'semver 的 `inc` 可以指定預發布序號從 0 或 1 起，命令列用 `-n` 指定。沒指定時從 0 起' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://github.com/npm/node-semver/blob/v7.8.5/README.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://github.com/npm/node-semver/blob/v7.8.5/README.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: {
         kind: 'hash',

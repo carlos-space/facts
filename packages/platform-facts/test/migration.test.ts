@@ -31,11 +31,11 @@ function rowOf(id: string): LegacyRowOf {
     topics: fact.topics,
     fact: fact.content.statement as string,
     sourceKind: fact.source.basis,
-    source: side.sourceText ?? (fact.source.url as string),
+    source: (fact.source.note ?? fact.source.url) as string,
     probe: fact.verify.probe,
     verifiedOn: fact.verify.verifiedOn,
     screenedThrough: fact.verify.screenedThrough as string,
-    fetched: side.fetched,
+    fetched: fact.source.fetched as string,
     ...(side.tool !== undefined ? { tool: side.tool, topic: fact.title as string } : {}),
   }
 }
@@ -69,6 +69,20 @@ describe('migration comparison', () => {
     const result = compareMigration(rows, facts, sidecars)
     expect(result.mismatched).toBe(1)
     expect(result.differences.map((d) => d.field)).toEqual(['verifiedOn'])
+  })
+
+  it('reports the note and the fetched date when either one is changed on the fact', () => {
+    const victim = rows.find((r) => r.sourceKind === 'measured') as LegacyRowOf
+    const id = `${victim.platform}.${victim.id}`
+    const fact = allFacts.get(id) as Fact
+    const source = fact.source as Extract<Fact['source'], { kind: 'observed' }>
+    expect(source.note).toBeTruthy()
+    expect(source.fetched).toBeTruthy()
+    const changed = (patch: object) => new Map(allFacts).set(id, { ...fact, source: { ...source, ...patch } })
+    const note = compareMigration(rows, changed({ note: 'other' }), sidecars)
+    expect(note.differences.map((d) => d.field)).toEqual(['source'])
+    const fetched = compareMigration(rows, changed({ fetched: '1999-01-01' }), sidecars)
+    expect(fetched.differences.map((d) => d.field)).toEqual(['fetched'])
   })
 
   it('reports a row whose fact is missing, and a dropped sidecar column', () => {

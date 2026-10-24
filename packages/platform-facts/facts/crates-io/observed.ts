@@ -12,6 +12,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://github.com/rust-lang/crates.io/blob/b5675037f2789e5d531adf5789d1cd115f612d1a/crates/crates_io_trustpub/src/github/workflows.rs',
+      fetched: '2026-10-02',
     },
     verify: {
       probe: {
@@ -33,6 +34,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://github.com/rust-lang/crates.io/blob/b5675037f2789e5d531adf5789d1cd115f612d1a/svelte/src/routes/docs/trusted-publishing/+page.svelte',
+      fetched: '2026-10-02',
     },
     verify: {
       probe: {

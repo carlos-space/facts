@@ -12,6 +12,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://developer.apple.com/tutorials/data/documentation/bundleresources/information-property-list/cfbundleshortversionstring.json',
+      fetched: '2026-10-02',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'three period-separated integers', hash: 'sha256:8ce3a4f424a75e47' },

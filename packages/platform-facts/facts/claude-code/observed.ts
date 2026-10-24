@@ -11,7 +11,7 @@ export const observed: Fact[] = [
       statement:
         '現行可阻擋的 hook 事件有 16 個：PreToolUse、UserPromptSubmit、UserPromptExpansion、Stop、SubagentStop、TeammateIdle、TaskCreated、TaskCompleted、ConfigChange、PostToolBatch、PreCompact、PreModelSwitch、Elicitation、ElicitationResult、WorktreeCreate、WorktreeRemove。PostToolUse 等事後類事件在動作已執行後才觸發，不能阻擋。matcher 對工具事件用正則，或以管道符號、逗號分隔的工具名比對。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-02' },
     verify: {
       probe: {
         kind: 'hash',
@@ -31,7 +31,7 @@ export const observed: Fact[] = [
       statement:
         'exit 0 時的純文字 stdout 多數只寫進除錯紀錄，模型看不到；例外是 UserPromptSubmit、UserPromptExpansion、SessionStart、PostModelSwitch 四個事件，這幾個事件的純文字 stdout 會加進模型可見的 context。PostToolUse 要讓模型看到內容，須輸出 JSON 的 hookSpecificOutput.additionalContext；以退出碼 2 結束時 stderr 會顯示給模型，但仍不能阻擋，因為工具已執行完畢。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-19' },
     verify: {
       probe: { kind: 'hash', anchor: 'adds plain-text stdout as context', hash: 'sha256:ac134e5adef03537' },
       verifiedOn: '2.1.285',
@@ -47,7 +47,12 @@ export const observed: Fact[] = [
       statement:
         'PreCompact hook 以結束碼 0 結束時，非空的 stdout 會附加進摘要指示，寫摘要的模型看得到。多個 PreCompact hook 的輸出都會進摘要，官方文件沒寫順序，一輪試跑看到的順序和宣告順序相反。',
     },
-    source: { kind: 'observed', basis: 'spike' },
+    source: {
+      kind: 'observed',
+      basis: 'spike',
+      fetched: '2026-10-03',
+      note: '本機 headless，Claude Code 2.1.285，一輪試跑，兩個 hook 各印一個標記，另讀 Claude Code 程式包的壓縮流程確認 stdout 併入摘要指示',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -67,7 +72,12 @@ export const observed: Fact[] = [
       statement:
         'permission 規則寫成 ToolName 或 ToolName(pattern)。Edit 與 Read 支援 ~/ 與 ** glob，Bash 支援指令前綴模式。優先序由高到低是 managed、command line、project local、shared project、user；同一層 deny 優先於 allow。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/permissions.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/permissions.md',
+      fetched: '2026-10-21',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Permission rule syntax', hash: 'sha256:967e50dd504439a8' },
       verifiedOn: '2.1.292',
@@ -83,7 +93,12 @@ export const observed: Fact[] = [
       statement:
         'Bash 規則同時有中間的 `*` 與結尾的 `:*` 時，整條當成字面前綴，`*` 不展開，實際比對不到。中間有 `*`、結尾不加 `:*` 的規則照萬用字元比對整條指令，例如 `git push * --force *` 比對得到 `git push origin --force main`。`*` 也比對得到空字串，例如 `node *consistency.mjs *` 比對得到 `node consistency.mjs --dry-run`。',
     },
-    source: { kind: 'observed', basis: 'spike' },
+    source: {
+      kind: 'observed',
+      basis: 'spike',
+      fetched: '2026-10-22',
+      note: '本機 headless，Claude Code 2.1.292，三個臨時目錄各放一條 deny，各跑一輪；同版本對混用的規則印出「will likely never match」警告。空字串另以 --settings 帶入 `Bash(node:*)` allow 與 `Bash(node *consistency.mjs *)` ask 跑一輪，`node consistency.mjs --dry-run` 要求核准，`node other.mjs --dry-run` 直接執行',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -103,7 +118,7 @@ export const observed: Fact[] = [
       statement:
         'skill 的 allowed-tools 只在觸發該 skill 的那個回合免詢問放行，不限縮可用工具：未列出的工具依然可以呼叫，只是仍受一般 permission 設定約束。授權在使用者送出下一則訊息時清除。user-invocable 設 false 時從選單隱藏，只由模型呼叫；disable-model-invocation 設 true 時只由使用者呼叫。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/skills.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/skills.md', fetched: '2026-10-02' },
     verify: {
       probe: { kind: 'hash', anchor: 'does not restrict which tools are available', hash: 'sha256:db5eb62374b88142' },
       verifiedOn: '2.1.285',
@@ -119,7 +134,12 @@ export const observed: Fact[] = [
       statement:
         'agent 的 tools 是允許清單，disallowedTools 是拒絕清單；兩者都設時先套用 disallowedTools，再用 tools 從剩下的池子裡篩選。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sub-agents.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/sub-agents.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'is applied first, then', hash: 'sha256:c8f6eb1d54ac22cc' },
       verifiedOn: '2.1.285',
@@ -135,7 +155,7 @@ export const observed: Fact[] = [
       statement:
         'rule 沒有 paths 時在啟動時載入；有 paths 時，在 Claude 用 Read、Write 或 Edit 工具處理命中 paths 的檔案時才載入，用算作讀取的 Bash 指令（例如 cat、head）檢視單一命中檔案也算，不是每次工具使用都觸發。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/memory.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/memory.md', fetched: '2026-10-20' },
     verify: {
       probe: {
         kind: 'hash',
@@ -155,7 +175,7 @@ export const observed: Fact[] = [
       statement:
         '工作目錄以上各層的 CLAUDE.md 在每個 session 啟動時載入 context；子目錄的 CLAUDE.md 不在啟動時載入，要到 Claude 讀取、寫入或編輯該子目錄的其他檔案時才載入，用算作讀取的 Bash 指令（例如 cat、head）檢視單一檔案也算讀取。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/memory.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/memory.md', fetched: '2026-10-20' },
     verify: {
       probe: {
         kind: 'hash',
@@ -174,7 +194,13 @@ export const observed: Fact[] = [
     content: {
       statement: '寫入前能檢查內容的機制只有 PreToolUse hook 與 permission deny 兩種，沒有獨立的寫入前 linter。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks-guide.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/hooks-guide.md',
+      fetched: '2026-10-02',
+      note: 'https://code.claude.com/docs/en/hooks-guide.md、https://code.claude.com/docs/en/permissions.md、https://code.claude.com/docs/en/plugins.md',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -194,7 +220,7 @@ export const observed: Fact[] = [
       statement:
         'PreToolUse hook 在工具呼叫前、matcher 命中時觸發，可以讀 tool_input 判斷。回傳 hookSpecificOutput.permissionDecision 為 deny 會阻擋該次呼叫；退出碼 2 一律阻擋，且蓋過 JSON 的 allow，阻擋原因取 JSON 的 reason，沒有就取 stderr。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-18' },
     verify: {
       probe: { kind: 'hash', anchor: 'Exit 2 blocks even when your hook prints JSON', hash: 'sha256:d9b18c12e69f31b3' },
       verifiedOn: '2.1.285',
@@ -210,7 +236,7 @@ export const observed: Fact[] = [
       statement:
         'PostToolUse hook 在工具呼叫成功後觸發，此時工具已執行完畢，不能阻擋。要讓模型看到內容須輸出 JSON 的 hookSpecificOutput.additionalContext；以退出碼 2 結束時 stderr 會顯示給模型，但仍不能阻擋。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-02' },
     verify: {
       probe: { kind: 'hash', anchor: 'Shows stderr to Claude; the tool already ran', hash: 'sha256:ac85f3c85f79bddd' },
       verifiedOn: '2.1.285',
@@ -226,7 +252,7 @@ export const observed: Fact[] = [
       statement:
         'Stop hook 在回合結束時觸發。退出碼 2 或 JSON 的 decision 為 block 會阻止結束、讓對話繼續；stop_hook_active 欄位標示這次續行是否已由 Stop hook 促成。Stop hook 連續讓回合續行 8 次後，平台會覆寫下一次阻擋並結束回合；模型每次呼叫工具時連續次數歸零，上限可用 CLAUDE_CODE_STOP_HOOK_BLOCK_CAP 調整。JSON 的 hookSpecificOutput.additionalContext 也會讓對話繼續，紀錄標成 Stop hook feedback，不顯示 hook 錯誤通知。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-21' },
     verify: {
       probe: { kind: 'hash', anchor: '8-consecutive-continuation cap', hash: 'sha256:d5f415db50e94a8e' },
       verifiedOn: '2.1.304',
@@ -242,7 +268,7 @@ export const observed: Fact[] = [
       statement:
         'MessageDisplay hook 在助理訊息串流顯示的過程中分批觸發，每批新完成的幾行觸發一次，回傳 hookSpecificOutput.displayContent 會取代畫面上的那幾行，對話紀錄與模型讀到的仍是原文。它不支援 matcher，沒有決策控制，中性事件詞彙沒有它，要以 promptex:event 指名。非互動執行與 Agent SDK 每則訊息只觸發一次，輸入沒有 stop_reason，message_id 也對不到對話紀錄，所以分不出哪一則是回合的最後一則。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-21' },
     verify: {
       probe: { kind: 'hash', anchor: 'Runs while an assistant message streams', hash: 'sha256:de059c0d79189c64' },
       verifiedOn: '2.1.304',
@@ -258,7 +284,7 @@ export const observed: Fact[] = [
       statement:
         'hook 事件依觸發頻率分三類：每個 session 一次（SessionStart、SessionEnd）、每個回合一次（UserPromptSubmit、Stop、StopFailure）、每次工具呼叫一次（PreToolUse、PostToolUse）。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-02' },
     verify: {
       probe: { kind: 'hash', anchor: 'Events fall into three cadences', hash: 'sha256:674f3ea1ae070324' },
       verifiedOn: '2.1.285',
@@ -274,7 +300,12 @@ export const observed: Fact[] = [
       statement:
         'permission 模式六種：default（標籤 Manual，僅讀取免問）、acceptEdits（另加檔案寫入與常見檔案系統指令）、plan（不改源碼，auto mode 可用時分類器核准的指令也會執行）、auto（由分類器審查多數動作）、dontAsk（會詢問的動作一律拒絕）、bypassPermissions（除了沒有模式會自動放行的動作以外都不詢問，deny 規則仍生效）。CLI 也接受 manual 作為 default 的別名。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/permission-modes.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/permission-modes.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'as an alias wherever you type the value', hash: 'sha256:324fcd263f0af004' },
       verifiedOn: '2.1.285',
@@ -290,7 +321,12 @@ export const observed: Fact[] = [
       statement:
         '--output-format stream-json 時，SessionStart 或 Setup hook 執行期間會即時發出 hook_started、hook_progress、hook_response 三種事件（system 訊息的子型別），跑在 system/init 事件之前。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/headless.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/headless.md',
+      fetched: '2026-10-21',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'These stream as the hook produces them', hash: 'sha256:e3fa7d2185c1b3b2' },
       verifiedOn: '2.1.285',
@@ -306,7 +342,12 @@ export const observed: Fact[] = [
       statement:
         '搭配 --permission-prompts none 時，被拒絕的呼叫在 stream-json 以 permission_denied 系統訊息即時出現，並在最終的 result 事件的 permission_denials 欄位彙總列出。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/headless.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/headless.md',
+      fetched: '2026-10-21',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -330,6 +371,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://code.claude.com/docs/en/authentication.md#generate-a-long-lived-token',
+      fetched: '2026-10-21',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'does not save the token anywhere', hash: 'sha256:ad0ecfe6f1c50f09' },
@@ -346,7 +388,12 @@ export const observed: Fact[] = [
       statement:
         '每個子代理從全新、獨立的 context window 開始，看不到主對話的歷史。fork 出來的子代理例外，會繼承父對話。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sub-agents.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/sub-agents.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -363,7 +410,12 @@ export const observed: Fact[] = [
     topics: ['subagent', 'tool-restriction'],
     title: 'subagent-no-ask-user',
     content: { statement: '子代理的可用工具一律移除 `AskUserQuestion`，即使列在 tools 裡也一樣。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sub-agents.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/sub-agents.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -383,7 +435,12 @@ export const observed: Fact[] = [
       statement:
         '除了內建的 Explore 與 Plan，每個子代理啟動時都載入 CLAUDE.md 與 git status 快照。定義設了 `omitClaudeMd: true` 時，啟動時略過 user、project、local 三層 CLAUDE.md，managed 政策檔仍載入（managed 子代理除外）；CLAUDE.md 與專案記憶仍會經一般的訊息流程載入，例如處理子目錄的檔案時那裡的 CLAUDE.md。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sub-agents.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/sub-agents.md',
+      fetched: '2026-10-20',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -400,7 +457,12 @@ export const observed: Fact[] = [
     topics: ['subagent', 'skill'],
     title: 'subagent-skills-preload',
     content: { statement: 'agent 定義的 `skills` 欄位列出啟動時預載進子代理 context 的 skill，注入的是 skill 全文。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sub-agents.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/sub-agents.md',
+      fetched: '2026-10-20',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -417,7 +479,7 @@ export const observed: Fact[] = [
     topics: ['hook', 'filter'],
     title: 'hook-matcher-omitted',
     content: { statement: 'hook 的 matcher 省略或寫 `*` 時比對全部，事件每次發生都觸發。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-02' },
     verify: {
       probe: { kind: 'hash', anchor: 'If you omit the matcher or use', hash: 'sha256:02bb049dffd7760b' },
       verifiedOn: '2.1.285',
@@ -430,7 +492,7 @@ export const observed: Fact[] = [
     topics: ['skill'],
     title: 'skill-content-injected',
     content: { statement: '用 Skill 工具載入時，SKILL.md 內文以一則訊息注入對話，不經過 Read 工具。' },
-    source: { kind: 'observed', basis: 'spike' },
+    source: { kind: 'observed', basis: 'spike', fetched: '2026-10-02', note: '本機 headless，Claude Code 2.1.285' },
     verify: {
       probe: {
         kind: 'manual',
@@ -447,7 +509,7 @@ export const observed: Fact[] = [
     topics: ['headless', 'stream-json'],
     title: 'stream-json-tool-use-location',
     content: { statement: 'stream-json 輸出裡，tool_use 是 assistant 事件 `message.content` 陣列中的一種區塊。' },
-    source: { kind: 'observed', basis: 'spike' },
+    source: { kind: 'observed', basis: 'spike', fetched: '2026-10-02', note: '本機 headless，Claude Code 2.1.285' },
     verify: {
       probe: {
         kind: 'manual',
@@ -467,7 +529,7 @@ export const observed: Fact[] = [
       statement:
         'Stop hook 以 decision block 擋下時，已送出的回覆不會收回。reason 以 Stop hook feedback 送回模型，模型在後面再回一則，兩則都留在對話裡。',
     },
-    source: { kind: 'observed', basis: 'spike' },
+    source: { kind: 'observed', basis: 'spike', fetched: '2026-10-21', note: '本機 headless，Claude Code 2.1.285' },
     verify: {
       probe: {
         kind: 'manual',
@@ -487,7 +549,12 @@ export const observed: Fact[] = [
       statement:
         '略過權限模式（`--dangerously-skip-permissions`）下，mod 的 tool.check 仍會被呼叫。唯讀的 `echo` 指令，next 拿到的判定是 allow。mod 回傳 deny 時，呼叫照樣被擋下，列進 result 事件的 permission_denials。',
     },
-    source: { kind: 'observed', basis: 'spike' },
+    source: {
+      kind: 'observed',
+      basis: 'spike',
+      fetched: '2026-10-19',
+      note: '評測 sandbox 內的終端機 Claude Code 2.1.292，macos-lite 模式、eval 用途，headless，放行與擋下各 1 輪',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -507,7 +574,12 @@ export const observed: Fact[] = [
       statement:
         '`~/.claude/skills/` 或專案 `.claude/skills/` 底下帶 `.claude-plugin/plugin.json` 的資料夾會被當成 plugin 原地載入，id 是 manifest 的 name 加 `@skills-dir`。開不開看 manifest 的 `defaultEnabled`，設定檔可以用 `<name>@skills-dir` 覆寫。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/loading.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/loading.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -527,7 +599,12 @@ export const observed: Fact[] = [
       statement:
         'manifest 沒設 `defaultEnabled` 時預設是 `true`，使用者還沒在 `enabledPlugins` 設定這個 plugin 時，它一開始就是開的',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins-reference.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins-reference.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -547,7 +624,12 @@ export const observed: Fact[] = [
       statement:
         '專案 `.claude/skills/` 底下的 plugin 要先接受那個資料夾的工作區信任才會載入，信任上層資料夾或用 `-p` 執行都不夠。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/loading.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/loading.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -567,7 +649,12 @@ export const observed: Fact[] = [
       statement:
         'Claude Code 只在互動會話用 `--plugin-dir` 載入 mod，或載入 Claude 代寫的 mod 時，把這一版的型別檔與 tsconfig 寫進 mod 的 `.claude-plugin/types/`。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/create.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/create.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -587,7 +674,12 @@ export const observed: Fact[] = [
       statement:
         '`claude plugin validate <目錄>` 讀 plugin 的 manifest 與 hooks module，回報錯誤、處理的事件與呼叫的 mods API。`--strict` 把警告當成錯誤，例如 manifest 缺 author、skill 缺 description。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/reference.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/reference.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: '`--strict` treats warnings as errors', hash: 'sha256:289fe568991a9af1' },
       verifiedOn: '2.1.292',
@@ -603,7 +695,12 @@ export const observed: Fact[] = [
       statement:
         '`claude plugin test <目錄>` 跑目錄底下所有檔名結尾是 `.test.ts` 或 `.test.tsx` 的測試，測試從 `claude-code/testing` 取測試工具，不需要會話、登入或網路。每個測試檔至少要有一個 `test()`，有測試失敗時結束碼是 1。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/plugins/mods/test.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/plugins/mods/test.md',
+      fetched: '2026-10-19',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Every test file needs at least one `test()`', hash: 'sha256:18a24f6155f0dd32' },
       verifiedOn: '2.1.292',
@@ -616,7 +713,12 @@ export const observed: Fact[] = [
     topics: ['mod'],
     title: 'mod-terminal-only-sites',
     content: { statement: '`ui.render` 的 `TurnDuration` 與 `InfoNotice` 只在終端機觸發，桌面 app 不呼叫' },
-    source: { kind: 'observed', basis: 'doc' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      fetched: '2026-10-21',
+      note: 'Claude Code 內建 plugin-authoring skill 的型別檔 `claude-code.d.ts`（2.1.304）中這兩個元件的 Raised on 說明',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -635,7 +737,12 @@ export const observed: Fact[] = [
       statement:
         '`Button` 的子元素只能是字串與 `Text`，放其他元素時整棵樹會被引擎拒絕。`Input` 寫 `rows` 2 以上時是多行輸入框。mobile 介面沒有 `Input` 與 `Select`。終端機沒有 `Svg`，桌面、VS Code 與 mobile 有，動畫要寫在 SVG 裡',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-21',
+      note: 'Input 的 rows、mobile 沒有的元素與終端機沒有 Svg 取自文件，出處是 plugin-authoring skill 2.1.304 的型別檔 `ButtonProps`、`InputProps` 與 `Elements`，以及更新紀錄 2.1.295 與 2.1.301 的條目。Button 的子元素是實測：本機，桌面 app 內建的 Claude Code 2.1.304 的 `claude plugin test` 掛載 Button 帶 Text 子元素的 mod 通過',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -655,7 +762,12 @@ export const observed: Fact[] = [
       statement:
         '間距（`gap`、`padding`）寫數字時單位是字元格，桌面 app 上幾乎沒有留白。2.1.299 起可以寫 `xs`、`sm`、`md`、`lg`、`xl` 級距，由各介面換成自己的尺度。較舊的版本會拒絕級距、`weight` 與 `tabular`',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-21',
+      note: '本機，終端機的 Claude Code 2.1.292 與桌面 app 內建的 2.1.299 對同一個 mod 跑 `claude plugin test`，2.1.292 拒絕 `gap="md"`、2.1.299 通過；型別檔 `Space` 的說明',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -675,7 +787,12 @@ export const observed: Fact[] = [
       statement:
         '從資料夾載入的 mod，在會話自己這一輪裡改的檔，等這一輪結束才重新載入一次；這個 mod 註冊的工具或指令要執行時會提早重載。重新載入會重跑 `register` 與 `session.start`，模組變數從頭來，計時器被取消，`$.state` 與 `$.store` 保留',
     },
-    source: { kind: 'observed', basis: 'doc' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      fetched: '2026-10-21',
+      note: 'Claude Code 內建 plugin-authoring skill 的 SKILL.md 與 reference.md（2.1.304）的「Developing one」節',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -695,7 +812,12 @@ export const observed: Fact[] = [
       statement:
         '`tool.call` 事件裡，工具的參數放在事件頂層，和 `tool` 並列，例如 AskUserQuestion 是 `e.questions`。`tool.check` 的參數才在 `e.input`。對要人回答的工具（AskUserQuestion、計畫確認）在 `tool.check` 回 allow 不會關掉對話框，要在 `tool.call` 直接回 `{ result }`',
     },
-    source: { kind: 'observed', basis: 'doc' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      fetched: '2026-10-20',
+      note: 'Claude Code 內建 plugin-authoring skill 的型別檔 `claude-code.d.ts`（2.1.299）的 `ToolCallInput`、`ToolCheckInput` 與 `tool.check` 說明',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -715,7 +837,12 @@ export const observed: Fact[] = [
       statement:
         '`attribution` 設成 `{"commit": "", "pr": "", "sessionUrl": false}` 時，commit 與 PR 都不加署名。設成 `false` 效果相同，但要 2.1.281 以上，較舊的版本會略過整份設定檔',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/settings-reference.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/settings-reference.md',
+      fetched: '2026-10-01',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -735,7 +862,12 @@ export const observed: Fact[] = [
       statement:
         '`includeCoAuthoredBy` 從 2.0.62 起棄用，由 `attribution` 取代。Claude Code 仍會讀它，新設定改寫 `attribution`',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/settings-reference.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/settings-reference.md',
+      fetched: '2026-10-01',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Deprecated since v2.0.62, when', hash: 'sha256:2ce9bac85a24e20d' },
       verifiedOn: '2.1.285',
@@ -748,7 +880,12 @@ export const observed: Fact[] = [
     topics: ['subagent'],
     title: 'agent-call-model',
     content: { statement: '呼叫 Agent 工具時可以帶 `model` 參數，只覆寫這一次委派用的模型。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sub-agents.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/sub-agents.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'can also pass a', hash: 'sha256:2752b121a9b0ac65' },
       verifiedOn: '2.1.285',
@@ -761,7 +898,12 @@ export const observed: Fact[] = [
     topics: ['subagent'],
     title: 'agent-frontmatter-effort',
     content: { statement: 'effort 是子代理定義 frontmatter 的欄位，子代理執行時會覆寫 session 的 effort 層級。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sub-agents.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/sub-agents.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Effort level when this subagent is active', hash: 'sha256:c03f2612fc728bbb' },
       verifiedOn: '2.1.285',
@@ -777,7 +919,12 @@ export const observed: Fact[] = [
       statement:
         '內建的 Explore、Plan、general-purpose 子代理用預先定義的提示詞，使用者或專案層的同名定義會蓋過內建的。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sub-agents.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/sub-agents.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Built-in agents have predefined prompts', hash: 'sha256:f4e8a38a21a2cb82' },
       verifiedOn: '2.1.285',
@@ -793,7 +940,12 @@ export const observed: Fact[] = [
       statement:
         '同一個搜尋任務每多一層子代理，就多一份固定成本，只負責轉交的那一層也一樣。較新的 2.1.285 量到每層約 4.8 萬 token 與 5 秒，轉交層做 1 次工具呼叫。較早的一次量到每層約 15.3 萬 token 與 40 秒，轉交層做 2 次工具呼叫，量測紀錄沒記版本與執行方式。兩次的數字差 3 到 8 倍，差距的原因沒查。三層在 2.1.285 沒有量到。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-02',
+      note: '本機。較早一次沒記版本，同日的 spike 用 Claude Code 2.1.283。較新一次是 headless，Claude Code 2.1.285',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -813,7 +965,12 @@ export const observed: Fact[] = [
       statement:
         '同一個任務，設 `omitClaudeMd` 的子代理看不到 CLAUDE.md 的標題，用的 token 比不設的少。2.1.283 量到 14218 對 95754，少約 85%，兩組的工具呼叫是 2 次對 1 次。2.1.285 量到三次中位數 23618 對 33926，少約 30%，兩組都是 1 次。兩次的差距原因沒查。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-02',
+      note: '本機 headless，Claude Code 2.1.283（2026-09-28）與 2.1.285（2026-10-02）兩次量測',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -833,7 +990,12 @@ export const observed: Fact[] = [
       statement:
         'Monitor 掛的每一次監看都有期限，預設 5 分鐘、最長 30 分鐘，用 `-p` 單次提示執行時最長 10 分鐘。期限到了監看結束，只通知一次，需要時再掛一次。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/tools-reference' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/tools-reference',
+      fetched: '2026-10-03',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Every watch Claude starts has a deadline', hash: 'sha256:c36d8c5eddeb8135' },
       verifiedOn: '2.1.285',
@@ -849,7 +1011,7 @@ export const observed: Fact[] = [
       statement:
         '背景子代理連續 10 分鐘沒有串流進度就會被中止，預設值 600000 毫秒，可用環境變數 `CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS` 調整。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/env-vars' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/env-vars', fetched: '2026-10-03' },
     verify: {
       probe: { kind: 'hash', anchor: 'CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS', hash: 'sha256:51deb28276afd350' },
       verifiedOn: '2.1.285',
@@ -865,7 +1027,12 @@ export const observed: Fact[] = [
       statement:
         '預設只有 Claude 訂閱方案在包含的用量內，主對話的快取存活 1 小時。子代理、壓縮等主對話以外的請求是 5 分鐘，超過方案用量後主對話也降為 5 分鐘。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/prompt-caching' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/prompt-caching',
+      fetched: '2026-10-03',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Unless you choose a TTL yourself', hash: 'sha256:016c5eb065f09386' },
       verifiedOn: '2.1.285',
@@ -880,7 +1047,12 @@ export const observed: Fact[] = [
     content: {
       statement: '快取從最後一次命中它的請求起算，閒置超過存活時間就過期。過期後的下一次請求要重新計算整段輸入。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/prompt-caching' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/prompt-caching',
+      fetched: '2026-10-03',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -900,7 +1072,12 @@ export const observed: Fact[] = [
       statement:
         '主會話的 Bash 工具子行程有環境變數 `CLAUDE_CODE_SESSION_ID`，值是會話 id，這場會話的對話紀錄就是 `~/.claude/projects/<專案>/<id>.jsonl`。以 `run_in_background` 執行的指令也讀得到這個變數。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-03',
+      note: '本機桌面版互動會話，Claude Code 2.1.285，前景與背景的 Bash 子行程各實跑一次，變數值對得到紀錄檔（背景 n=1）',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -920,7 +1097,12 @@ export const observed: Fact[] = [
       statement:
         '背景指令的時限只在無人值守的會話（例如 `-p`、Agent SDK、CI）生效，預設 30 分鐘，`run_in_background` 帶 `timeout` 時最長 2 小時（7200000 毫秒）。從終端機、桌面版或 VS Code 擴充功能工作的本機會話沒有時限。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/tools-reference' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/tools-reference',
+      fetched: '2026-10-03',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -940,7 +1122,12 @@ export const observed: Fact[] = [
       statement:
         '設定檔的 `autoCompactWindow` 是 100000 到 1000000 的 token 數，超過模型視窗時取模型視窗。`--autocompact` 優先於它，環境變數 `CLAUDE_CODE_AUTO_COMPACT_WINDOW` 優先於兩者。`/autocompact` 接受 `500k` 這種寫法，文件寫明自 2.1.288 起它存成各模型自己的值，同一個檔裡優先於這個鍵。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/settings-reference' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/settings-reference',
+      fetched: '2026-10-03',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Claude Code caps the value at your model', hash: 'sha256:4a67f4bb72c3318a' },
       verifiedOn: '2.1.285',
@@ -956,7 +1143,12 @@ export const observed: Fact[] = [
       statement:
         '`/autocompact` 只收 `auto` 或 100k 到 1M 的數字，`default` 與 `reset` 也寫成 `"auto"`。`clear` 回「Couldn\'t parse」錯誤，設定檔不變，所以沒有寫法能把各模型的值從設定檔移除。各模型的值是 `"auto"` 時，上限是模型預設，不用頂層的 `autoCompactWindow`。mod 的 `settings.read` hook 改寫回答，不影響 `/context` 與 `/autocompact` 用的上限。mod 用 `$.env.set` 設 `CLAUDE_CODE_AUTO_COMPACT_WINDOW`，在會話開始時或會話中途設定，都在下一次 `/context` 生效，`/autocompact` 標出來源是這個變數，設定檔不變。',
     },
-    source: { kind: 'observed', basis: 'spike' },
+    source: {
+      kind: 'observed',
+      basis: 'spike',
+      fetched: '2026-10-21',
+      note: '本機 headless stream-json 會話，CLAUDE_CONFIG_DIR 指向隔離的設定目錄。第一組、第二組的 "auto" 與不設、第三組、第四組都用 Claude Code 2.1.304，第二組的 null 用 2.1.292，各情境 n=1',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -973,7 +1165,12 @@ export const observed: Fact[] = [
     topics: ['session'],
     title: 'cross-session-discovery',
     content: { statement: '`ListAgents` 列出可以傳訊的會話，`SendMessage` 用來傳訊。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/cross-session-messaging.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/cross-session-messaging.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Claude discovers the target with', hash: 'sha256:36eed192879344a7' },
       verifiedOn: '2.1.285',
@@ -989,7 +1186,12 @@ export const observed: Fact[] = [
       statement:
         '`SendMessage` 的 `notify_when_idle` 讓對方下次閒置時送回一則通知，可以附在要傳的訊息上，也可以單獨送。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/cross-session-messaging.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/cross-session-messaging.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1006,7 +1208,12 @@ export const observed: Fact[] = [
     topics: ['session'],
     title: 'cross-session-plain-text',
     content: { statement: '另一個會話的訊息以純文字送達。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/cross-session-messaging.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/cross-session-messaging.md',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1026,7 +1233,12 @@ export const observed: Fact[] = [
       statement:
         '等待的這一邊在自己這一輪結束前收不到閒置通知，通知在這一輪結束後才送達，成為新的一輪。閒置通知附對方最後一則回覆的摘要。',
     },
-    source: { kind: 'observed', basis: 'spike' },
+    source: {
+      kind: 'observed',
+      basis: 'spike',
+      fetched: '2026-10-02',
+      note: '協調端在 VS Code 擴充功能（Claude Code 2.1.286），受測會話是 headless stream-json 會話（Claude Code 2.1.285）',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -1043,7 +1255,12 @@ export const observed: Fact[] = [
     topics: ['session'],
     title: 'list-agents-status',
     content: { statement: '`ListAgents` 每列有名稱、`[ref]`、類型與狀態，狀態分 idle、busy、waiting、offline。' },
-    source: { kind: 'observed', basis: 'spike' },
+    source: {
+      kind: 'observed',
+      basis: 'spike',
+      fetched: '2026-10-02',
+      note: '本機 headless 會話，Claude Code 2.1.285',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -1060,7 +1277,12 @@ export const observed: Fact[] = [
     topics: ['session'],
     title: 'list-agents-waiting',
     content: { statement: '實測中一場停在 waiting 的會話卡在 Edit 的權限確認，另一個會話傳訊之後它仍停在 waiting。' },
-    source: { kind: 'observed', basis: 'spike' },
+    source: {
+      kind: 'observed',
+      basis: 'spike',
+      fetched: '2026-10-02',
+      note: '協調端在 VS Code 擴充功能（Claude Code 2.1.286），受測會話是 headless stream-json 會話（Claude Code 2.1.285）',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -1080,7 +1302,12 @@ export const observed: Fact[] = [
       statement:
         'Cloud Session 是跑在雲端基礎設施上、不在自己機器上的 Claude Code 會話，預設跑在 Anthropic 管理的設施。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/claude-code-on-the-web.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/claude-code-on-the-web.md',
+      fetched: '2026-10-16',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1100,7 +1327,12 @@ export const observed: Fact[] = [
       statement:
         '`claude --cloud "<任務>"` 建立 Cloud Session。雲端 VM clone 的是目前目錄的 GitHub remote 在目前分支的內容，不是本機檔案，所以有本機 commit 要先 push。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/claude-code-on-the-web.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/claude-code-on-the-web.md',
+      fetched: '2026-10-16',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1120,7 +1352,12 @@ export const observed: Fact[] = [
       statement:
         'Cloud Session 能讀的私有倉庫，限於裝了 Claude GitHub App 的倉庫，或用 `/web-setup` 送出的本機 `gh` token 讀得到的倉庫。其他私有倉庫讀不到。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/claude-code-on-the-web.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/claude-code-on-the-web.md',
+      fetched: '2026-10-18',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1137,7 +1374,12 @@ export const observed: Fact[] = [
     topics: ['session'],
     title: 'cloud-session-parallel',
     content: { statement: '每個 `claude --cloud` 指令都建立自己的 Cloud Session，各自獨立執行，可以同時跑多個。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/claude-code-on-the-web.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/claude-code-on-the-web.md',
+      fetched: '2026-10-16',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1157,7 +1399,12 @@ export const observed: Fact[] = [
       statement:
         'Remote Control 讓 claude.ai/code 或 Claude app 連到跑在自己機器上的會話。程式執行與檔案存取都留在那台機器。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/remote-control.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/remote-control.md',
+      fetched: '2026-10-16',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Claude keeps running locally the entire time', hash: 'sha256:0f0e38f3185dcb31' },
       verifiedOn: '2.1.285',
@@ -1173,7 +1420,12 @@ export const observed: Fact[] = [
       statement:
         '在要被遠端操作的那台機器的專案目錄執行 `claude remote-control`，就啟動 Remote Control。第一次會先問是否啟用，答 `y` 才啟動。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/remote-control.md' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/remote-control.md',
+      fetched: '2026-10-16',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'In your project directory, run:', hash: 'sha256:584b52f43be819c0' },
       verifiedOn: '2.1.285',
@@ -1189,7 +1441,12 @@ export const observed: Fact[] = [
       statement:
         '`claude --bg --model <model> "<任務>"` 在背景開一場會話並印出會話 id，之後用 `claude logs <id>` 或 `claude attach <id>` 看它。沒帶 `--effort` 時用預設的 effort，權限模式沿用設定。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-17',
+      note: '本機 headless 會話（claude -p，haiku）用 Bash 執行 `claude --bg --model sonnet`，Claude Code 2.1.285，背景會話是 Sonnet、effort high、auto mode，n=1',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -1209,7 +1466,12 @@ export const observed: Fact[] = [
       statement:
         '模型用 Bash 執行 `claude --bg` 時要權限詢問。沒人回答的 headless 會話會被拒（`This command requires approval`），放行規則加 `Bash(claude --bg:*)` 後才執行。',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-17',
+      note: '本機 headless 會話（claude -p，haiku，預設權限）用 Bash 執行 `claude --bg --model sonnet`，Claude Code 2.1.285，結果列在 permission_denials，n=1',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -1229,7 +1491,12 @@ export const observed: Fact[] = [
       statement:
         'Claude Code 不把 `OTEL_*` 環境變數傳給它開的子程序，包括 Bash 工具、hook、MCP server 與 language server。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-05',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1248,7 +1515,12 @@ export const observed: Fact[] = [
     content: {
       statement: '`otelHeadersHelper` 指定的腳本在啟動時執行，之後預設每 29 分鐘再執行一次，用來換新 token。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-05',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1265,126 +1537,16 @@ export const observed: Fact[] = [
     topics: ['telemetry', 'security'],
     title: 'otel-user-email-always',
     content: { statement: 'OTel 匯出只要取得到 `user.email` 就一律帶上，用戶端沒有開關能拿掉它。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-05',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'User email address, from your sign-in', hash: 'sha256:73eda686f91c94a3' },
       verifiedOn: '2.1.285',
       screenedThrough: '2.1.285',
-    },
-  },
-  {
-    id: 'claude-code.otel-content-switches',
-    tool: 'claude-code',
-    topics: ['telemetry', 'security'],
-    title: 'otel-content-switches',
-    description: '五個決定 OTel 匯出是否帶內容的環境變數，預設值與開啟後多送什麼。',
-    content: {
-      value: [
-        {
-          name: 'OTEL_LOG_USER_PROMPTS',
-          default: 'disabled',
-          enableWith: '1',
-          whenEnabled:
-            '送出使用者提示詞全文。關閉時 user_prompt 事件的提示詞值是 <REDACTED>。tracing 開著時，也讓 span 帶 new_context、system_reminders、system_prompt_preview、user_system_prompt 與 response.model_output 等內容屬性。',
-        },
-        {
-          name: 'OTEL_LOG_ASSISTANT_RESPONSES',
-          default: 'disabled',
-          enableWith: '1',
-          disableWith: '0',
-          whenEnabled:
-            '在 assistant_response 事件送出模型回覆文字。沒設定時沿用 OTEL_LOG_USER_PROMPTS 的值，設 0 則保持遮蔽。',
-        },
-        {
-          name: 'OTEL_LOG_TOOL_DETAILS',
-          default: 'disabled',
-          enableWith: '1',
-          whenEnabled:
-            '在工具事件與 trace span 屬性送出工具參數與輸入，包括 Bash 指令、MCP server 與工具名、skill 名、使用者自訂的 workflow 名與 hook 定義。user_prompt 事件會帶自訂、plugin 與 MCP 指令名，成本與 token 計數器會帶實際的 agent、skill、plugin 與 MCP 名稱。',
-        },
-        {
-          name: 'OTEL_LOG_TOOL_CONTENT',
-          default: 'disabled',
-          enableWith: '1',
-          requires: 'tracing',
-          whenEnabled:
-            '在 tool.output span 事件送出工具輸出內容，超過內容上限（預設 60 KB）會截斷。Edit 與 Write 另須同時開 OTEL_LOG_TOOL_DETAILS 才會記錄。',
-        },
-        {
-          name: 'OTEL_LOG_RAW_API_BODIES',
-          default: 'disabled',
-          enableWith: '1',
-          alsoAccepts: 'file:<dir>',
-          whenEnabled:
-            '以 api_request_body 與 api_response_body 事件送出完整的 Anthropic Messages API 請求與回應 JSON，內含整段對話歷史。設 1 時內嵌並在內容上限（預設 60 KB）截斷，設 file:<dir> 時寫成磁碟檔、事件帶 body_ref。開啟等同同意 OTEL_LOG_USER_PROMPTS、OTEL_LOG_TOOL_DETAILS 與 OTEL_LOG_TOOL_CONTENT 會洩漏的一切。',
-        },
-      ],
-    },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
-    verify: {
-      probe: {
-        kind: 'hash',
-        anchor: 'Bodies include the entire conversation history',
-        hash: 'sha256:a4168fa393ec5290',
-      },
-      verifiedOn: '2.1.308',
-      screenedThrough: '2.1.308',
-    },
-  },
-  {
-    id: 'claude-code.otel-metrics-attribute-switches',
-    tool: 'claude-code',
-    topics: ['telemetry'],
-    title: 'otel-metrics-attribute-switches',
-    description: '三個決定 metrics 帶不帶某些屬性的環境變數，預設值與控制的屬性。',
-    content: {
-      value: [
-        {
-          name: 'OTEL_METRICS_INCLUDE_SESSION_ID',
-          default: 'true',
-          disableWith: 'false',
-          controls: ['session.id', 'ccr.session.id'],
-          note: 'ccr.session.id 只出現在雲端 session。',
-        },
-        {
-          name: 'OTEL_METRICS_INCLUDE_VERSION',
-          default: 'false',
-          enableWith: 'true',
-          controls: ['app.version'],
-        },
-        {
-          name: 'OTEL_METRICS_INCLUDE_ACCOUNT_UUID',
-          default: 'true',
-          disableWith: 'false',
-          controls: ['user.account_uuid', 'user.account_id'],
-        },
-      ],
-    },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
-    verify: {
-      probe: {
-        kind: 'hash',
-        anchor: 'Include user.account_uuid and user.account_id attributes in metrics',
-        hash: 'sha256:26b09fa782b12aeb',
-      },
-      verifiedOn: '2.1.308',
-      screenedThrough: '2.1.308',
-    },
-  },
-  {
-    id: 'claude-code.otel-metrics-exporter',
-    tool: 'claude-code',
-    topics: ['telemetry'],
-    title: 'otel-metrics-exporter',
-    content: {
-      statement:
-        '`OTEL_METRICS_EXPORTER` 指定 metrics 的匯出器，可填 `console`、`otlp`、`prometheus`、`none`，以逗號分隔可同時用多個，填 `none` 關閉 metrics 匯出。',
-    },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
-    verify: {
-      probe: { kind: 'hash', anchor: 'Metrics exporter types, comma-separated', hash: 'sha256:12efc306cf2a2c1d' },
-      verifiedOn: '2.1.308',
-      screenedThrough: '2.1.308',
     },
   },
   {
@@ -1396,7 +1558,12 @@ export const observed: Fact[] = [
       statement:
         'hook 程序的環境有 `CLAUDE_CODE_SESSION_ID`。開著 detailed beta tracing 時也有 `TRACEPARENT`，指向 hook span 的父節點',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-05',
+      note: '本機 headless（`-p`），Claude Code 2.1.285，開著 detailed beta tracing，探針 hook 印出自己的環境變數，主會話與子代理共三輪',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -1416,7 +1583,12 @@ export const observed: Fact[] = [
       statement:
         '沒開 detailed beta tracing 時，主會話裡 matcher 為 Bash 的 PreToolUse hook 也有 `TRACEPARENT`。同一輪的 4 次呼叫值相同。同一場的 SessionStart hook 沒有 `TRACEPARENT`。它指向哪個 span 還沒量過。其他工具的 PreToolUse、其他 hook 事件與子代理的 hook 有沒有，也還沒量過。實測只設了 `CLAUDE_CODE_ENABLE_TELEMETRY=1`、`CLAUDE_CODE_ENHANCED_TELEMETRY_BETA=1` 與 `OTEL_TRACES_EXPORTER=otlp`。detailed 的兩個變數沒寫在指令裡。當天事後用 rg 查 `env` 與 `~/.claude/settings.json`，也沒有命中。開著 detailed 時 traces 會改送 `BETA_TRACING_ENDPOINT`，這次接收端在一般的 `/v1/traces` 收到 traces',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-08',
+      note: '本機 headless（`-p`），Claude Code 2.1.285，一場主會話，n=1',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -1435,7 +1607,12 @@ export const observed: Fact[] = [
     content: {
       statement: '要開 detailed beta tracing，得同時設 `ENABLE_BETA_TRACING_DETAILED=1` 與 `BETA_TRACING_ENDPOINT`',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-08',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1455,7 +1632,12 @@ export const observed: Fact[] = [
       statement:
         'tracing 啟用時，Bash 與 PowerShell 子程序會繼承 `TRACEPARENT`，內容是當下工具執行 span 的 W3C trace context',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-07',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'subprocesses automatically inherit a', hash: 'sha256:8ff988b468116eaa' },
       verifiedOn: '2.1.285',
@@ -1471,7 +1653,12 @@ export const observed: Fact[] = [
       statement:
         '要啟用 tracing，得同時設 `CLAUDE_CODE_ENABLE_TELEMETRY=1` 與 `CLAUDE_CODE_ENHANCED_TELEMETRY_BETA=1`，再用 `OTEL_TRACES_EXPORTER` 指定 span 送到哪裡',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-07',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1491,7 +1678,12 @@ export const observed: Fact[] = [
       statement:
         '`OTEL_LOGS_EXPORT_INTERVAL` 與 `OTEL_TRACES_EXPORT_INTERVAL` 設定 logs 與 spans 的匯出間隔，單位毫秒，預設都是 5000',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-07',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Logs export interval in milliseconds', hash: 'sha256:37b080f400b8b795' },
       verifiedOn: '2.1.285',
@@ -1507,7 +1699,12 @@ export const observed: Fact[] = [
       statement:
         '開著 detailed beta tracing 時，logs 與 traces 改送 `BETA_TRACING_ENDPOINT`，不經一般的 logs 與 traces 匯出器',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-07',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'exports logs and traces to', hash: 'sha256:58a2003a7dd4a22e' },
       verifiedOn: '2.1.285',
@@ -1522,7 +1719,12 @@ export const observed: Fact[] = [
     content: {
       statement: '`claude_code.hook` span 只有開著 detailed beta tracing 時才有，只開 enhanced telemetry 不會產生',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-07',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1542,7 +1744,12 @@ export const observed: Fact[] = [
       statement:
         '`llm_request` span 的 `query_source`（例如子代理名稱）要開 detailed beta tracing 才有。不開時只有收斂過的 `query_source_safe`，值像 `agent.builtin.general-purpose`',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-07',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'Subsystem that issued the request', hash: 'sha256:5843c6a24a25e90b' },
       verifiedOn: '2.1.285',
@@ -1558,7 +1765,12 @@ export const observed: Fact[] = [
       statement:
         '`tool_input`、`system_prompt_preview`、`response.model_output` 這類帶內容的 span 欄位，只有開著 detailed beta tracing 時才送',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/monitoring-usage',
+      fetched: '2026-10-07',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1578,7 +1790,12 @@ export const observed: Fact[] = [
       statement:
         '開著 detailed beta tracing 時，`OTEL_EXPORTER_OTLP_COMPRESSION=gzip` 會讓 traces 的請求壓縮。logs 的請求在同時設 `OTEL_EXPORTER_OTLP_LOGS_COMPRESSION=gzip` 時會壓縮，只設通用變數時還沒量過。兩個變數都不設時都不壓縮。`OTEL_BLRP_MAX_EXPORT_BATCH_SIZE` 與 `OTEL_BSP_MAX_EXPORT_BATCH_SIZE` 設 5 時，logs 與 traces 每個請求都不超過 5 筆。關掉 detailed beta tracing 時，gzip 已另立一列（otlp-gzip-without-detailed），只剩批次上限還沒量過',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-07',
+      note: '本機 headless（`-p`），Claude Code 2.1.285，開著 detailed beta tracing 對本機接收端匯出。同時設 `OTEL_EXPORTER_OTLP_COMPRESSION=gzip`、`OTEL_EXPORTER_OTLP_LOGS_COMPRESSION=gzip` 與批次上限 5 時，26 個 logs 與 11 個 traces 請求都壓縮且不超過 5 筆。同樣約 125 筆 logs，gzip 後 50,435 B、不壓縮 229,133 B。不設批次上限時單一請求 79 筆、160,737 B',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -1598,7 +1815,12 @@ export const observed: Fact[] = [
       statement:
         '關掉 detailed beta tracing，並設 `OTEL_EXPORTER_OTLP_COMPRESSION=gzip` 與兩個批次上限 100 時，logs 與 traces 的請求各 1 個，都帶 `Content-Encoding: gzip`。批次上限在這個條件下還沒驗到，因為會話沒有接近 100 筆',
     },
-    source: { kind: 'observed', basis: 'measured' },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-09',
+      note: '本機 headless（`-p`），Claude Code 2.1.285，對已部署的接收端，一輪，logs 與 traces 各 1 個請求（各 n=1）',
+    },
     verify: {
       probe: {
         kind: 'manual',
@@ -1618,7 +1840,12 @@ export const observed: Fact[] = [
       statement:
         '設定檔 `env` 裡的值會蓋掉 shell 匯出的同名變數。例外是由 Claude Desktop app 或自架環境的 runner 啟動的會話，這時啟動環境已設的變數優先，設定檔的值會被略過。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/settings-reference' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/settings-reference',
+      fetched: '2026-10-06',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -1638,7 +1865,7 @@ export const observed: Fact[] = [
       statement:
         'command 型 hook 沒有 `args` 時，指令字串交給 shell 執行，macOS 與 Linux 是 `sh -c`。shell 會切字、展開變數，也會解讀管線、`&&`、重導向與萬用字元。',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/hooks', fetched: '2026-10-06' },
     verify: {
       probe: { kind: 'hash', anchor: 'The command string is passed to a shell', hash: 'sha256:e2a128ec11ec6282' },
       verifiedOn: '2.1.285',
@@ -1651,7 +1878,12 @@ export const observed: Fact[] = [
     topics: ['hook', 'session'],
     title: 'cloud-skips-user-hooks',
     content: { statement: '雲端會話不套用使用者層 `~/.claude/settings.json` 的 hook，因為使用者層的設定只留在本機。' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/cloud-environments' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://code.claude.com/docs/en/cloud-environments',
+      fetched: '2026-10-05',
+    },
     verify: {
       probe: { kind: 'hash', anchor: 'User-level settings stay on your machine', hash: 'sha256:fab6db61bb2d11f5' },
       verifiedOn: '2.1.285',
@@ -1667,7 +1899,7 @@ export const observed: Fact[] = [
       statement:
         '對話紀錄 `~/.claude/projects/<專案>/<session>.jsonl` 每一列的格式是 Claude Code 的內部格式，會隨版本變動',
     },
-    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sessions' },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/sessions', fetched: '2026-10-02' },
     verify: {
       probe: { kind: 'hash', anchor: 'The entry format is internal to Claude Code', hash: 'sha256:745e547f87f1cdb7' },
       verifiedOn: '2.1.285',
@@ -1680,7 +1912,7 @@ export const observed: Fact[] = [
     topics: ['hook', 'pretooluse'],
     title: 'edit-missing-file-skips-pretooluse',
     content: { statement: 'Edit 對本機不存在的檔會在任何 hook 執行前就回錯' },
-    source: { kind: 'observed', basis: 'measured' },
+    source: { kind: 'observed', basis: 'measured', fetched: '2026-10-12', note: '本機 Claude Code 2.1.285，n=1' },
     verify: {
       probe: {
         kind: 'manual',

@@ -8,7 +8,12 @@ export const observed: Fact[] = [
     topics: ['authentication', 'actions'],
     title: 'Trusted Publishing 與可重用 workflow',
     content: { statement: '可重用 workflow 目前不能當 Trusted Publisher 登記的 workflow' },
-    source: { kind: 'observed', basis: 'doc', url: 'https://docs.pypi.org/trusted-publishers/troubleshooting/' },
+    source: {
+      kind: 'observed',
+      basis: 'doc',
+      url: 'https://docs.pypi.org/trusted-publishers/troubleshooting/',
+      fetched: '2026-10-02',
+    },
     verify: {
       probe: {
         kind: 'hash',
@@ -32,6 +37,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://packaging.python.org/en/latest/specifications/version-specifiers/',
+      fetched: '2026-10-02',
     },
     verify: {
       probe: {

@@ -15,6 +15,7 @@ export const observed: Fact[] = [
       kind: 'observed',
       basis: 'doc',
       url: 'https://www.typescriptlang.org/docs/handbook/project-references.html',
+      fetched: '2026-09-29',
     },
     verify: {
       probe: { kind: 'hash', anchor: 'will instead load its output declaration file', hash: 'sha256:e9bd68962a663e50' },

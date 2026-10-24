@@ -17,11 +17,13 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "build": "pnpm -r build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "snapshot": "bash scripts/release/snapshot.sh"
   },
   "devDependencies": {
     "@types/node": "^24.13.4",
     "prettier": "^3.6.2",
+    "semver": "^7.8.5",
     "typescript": "^7.0.2",
     "vitest": "^4.1.11"
   }

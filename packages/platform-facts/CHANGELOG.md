@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/carlos-space/facts/compare/platform-facts/v0.6.1...platform-facts/v0.7.0) (2026-10-24)
+
+
+### Added
+
+* **platform-facts:** claude-code 補 OTel 內容開關與 metrics 屬性開關的 fact ([#22](https://github.com/carlos-space/facts/issues/22)) ([ec8401a](https://github.com/carlos-space/facts/commit/ec8401a6c73e670dc7a4ebd63373025d47a42003))
+
 ## [0.6.1](https://github.com/carlos-space/facts/compare/platform-facts/v0.6.1-alpha.1...platform-facts/v0.6.1) (2026-10-24)
 
 

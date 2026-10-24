@@ -8,11 +8,11 @@
 
 ## Feature Inventory
 
-切 train 時依實際進版的 Issue 補上，一個 Issue 一列。
+這一版沒有功能改動，也沒有對應的 Issue。舊的套件 tag 刪除後，用 train 重新發出兩個套件的下一個 patch，版號以 `Release-As` 指定。
 
-| Issue    | 單元                     | 狀態   | 批次 |
-| :------- | :----------------------- | :----- | :--- |
-| （待填） | fact-kit、platform-facts | 規劃中 | 1    |
+| Issue | 單元                     | 狀態   | 批次 |
+| :---- | :----------------------- | :----- | :--- |
+| 無    | fact-kit、platform-facts | 規劃中 | 1    |
 
 ## Snapshot 對照（GA 當下由 `pnpm snapshot --check-tags` 產出後貼入）
 
@@ -26,11 +26,11 @@
 
 ## Breaking Changes
 
-待確認：切 train 時依入版的 commit 補上，沒有就寫「無」。
+無。自起算點 `83a70c3` 之後，main 上動到 `packages/` 的只有兩個合回 commit（#11、#15），內容是已發布的 fact-kit 0.4.1 與 platform-facts 0.6.0。
 
 ## Rollback
 
-- 可回退：npm 上已發布的版本不能撤回。把 `latest` 指回前一版用 `npm dist-tag add <套件>@<前一版> latest`，並對有問題的版本執行 `npm deprecate`。
+- 可回退：npm 上已發布的版本原則上不撤回（72 小時內可以 unpublish，但撤掉的版號不能再用）。把 `latest` 指回前一版用 `npm dist-tag add <套件>@<前一版> latest`，並對有問題的版本執行 `npm deprecate`。
 - 不可回退：已推送的 tag 與已發布的 npm 版本；補救走修補發布（`release/v0.1` 從 `v0.1.0` 重建，`cut-release.sh --line 0.1 --from v0.1.0`）。
 
 ## 變更記錄

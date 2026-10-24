@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.2](https://github.com/carlos-space/facts/compare/fact-kit/v0.4.2-alpha.1...fact-kit/v0.4.2) (2026-10-24)
+
+
+### chore
+
+* **release/v0.1:** fact-kit 0.4.2 ([df94ea2](https://github.com/carlos-space/facts/commit/df94ea2e994333c9f2b11cb158330cde8e8616fa))
+
 ## [0.4.2-alpha.1](https://github.com/carlos-space/facts/compare/fact-kit/v0.4.1...fact-kit/v0.4.2-alpha.1) (2026-10-24)
 
 

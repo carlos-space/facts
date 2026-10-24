@@ -71,4 +71,4 @@ jobs:
         run: |
           mapfile -t paths < <(jq -r '.[]' <<<"$PATHS")
           [[ ${#paths[@]} -gt 0 ]] || { echo "no package in this release"; exit 0; }
-          bash scripts/release/publish-units.sh --tag "$STAGE" "${paths[@]}"
+          bash scripts/release/publish-units.sh "$STAGE" "${paths[@]}"

@@ -44,35 +44,35 @@ function run(dir: string, ...args: string[]) {
 describe('publish-units.sh stage and dist-tag checks', () => {
   test('a prerelease version with stage ga is refused', () => {
     const { dir } = fixture('0.4.1-alpha.1')
-    const r = run(dir, '--tag', 'ga', 'packages/fact-kit')
+    const r = run(dir, 'ga', 'packages/fact-kit')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/belongs to stage alpha, but this release's stage is ga/)
   })
 
   test('a prerelease version with stage latest is refused', () => {
     const { dir } = fixture('0.4.1-alpha.1')
-    const r = run(dir, '--tag', 'latest', 'packages/fact-kit')
+    const r = run(dir, 'latest', 'packages/fact-kit')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/stage "latest" is not alpha, beta, rc or ga/)
   })
 
   test('a stable version with stage alpha is refused', () => {
     const { dir } = fixture('0.4.1')
-    const r = run(dir, '--tag', 'alpha', 'packages/fact-kit')
+    const r = run(dir, 'alpha', 'packages/fact-kit')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/belongs to stage ga, but this release's stage is alpha/)
   })
 
   test('a prerelease version with a different prerelease stage is refused', () => {
     const { dir } = fixture('0.4.1-beta.2')
-    const r = run(dir, '--tag', 'rc', 'packages/fact-kit')
+    const r = run(dir, 'rc', 'packages/fact-kit')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/belongs to stage beta, but this release's stage is rc/)
   })
 
   test('a version that is not X.Y.Z or X.Y.Z-<stage>.N is refused', () => {
     const { dir } = fixture('0.4.1-staging.1')
-    const r = run(dir, '--tag', 'alpha', 'packages/fact-kit')
+    const r = run(dir, 'alpha', 'packages/fact-kit')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/release stage is unknown/)
   })
@@ -84,7 +84,7 @@ describe('publish-units.sh stage and dist-tag checks', () => {
     ['0.4.1', 'ga', 'latest'],
   ])('version %s with stage %s passes the checks and would publish under dist-tag %s', (version, stage, tag) => {
     const { dir } = fixture(version)
-    const r = run(dir, '--tag', stage, 'packages/fact-kit')
+    const r = run(dir, stage, 'packages/fact-kit')
     expect(r.out).toContain(`check only: fact-kit@${version} passed (stage ${stage}, dist-tag ${tag})`)
     expect(r.status).toBe(0)
   })
@@ -93,7 +93,7 @@ describe('publish-units.sh stage and dist-tag checks', () => {
     const { dir } = fixture('0.4.1-alpha.1')
     const r = run(dir, 'packages/fact-kit')
     expect(r.status).not.toBe(0)
-    expect(r.out).toMatch(/usage: publish-units\.sh --tag/)
+    expect(r.out).toMatch(/usage: publish-units\.sh <alpha\|beta\|rc\|ga>/)
   })
 })
 
@@ -101,7 +101,7 @@ describe('publish-units.sh same-content check against the tag', () => {
   test('the package equal to its tag passes', () => {
     const { dir, git } = fixture('0.4.1-alpha.1')
     git('tag', 'fact-kit/v0.4.1-alpha.1')
-    expect(run(dir, '--tag', 'alpha', 'packages/fact-kit').status).toBe(0)
+    expect(run(dir, 'alpha', 'packages/fact-kit').status).toBe(0)
   })
 
   test('the package changed since its tag is refused', () => {
@@ -110,7 +110,7 @@ describe('publish-units.sh same-content check against the tag', () => {
     writeFileSync(join(dir, 'packages/fact-kit/index.js'), 'export {}\n')
     git('add', '-A')
     git(...identity, 'commit', '-q', '-m', 'change after the tag')
-    const r = run(dir, '--tag', 'alpha', 'packages/fact-kit')
+    const r = run(dir, 'alpha', 'packages/fact-kit')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/內容和 tag fact-kit\/v0\.4\.1-alpha\.1 不同/)
   })

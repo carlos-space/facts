@@ -75,6 +75,39 @@ TypeScript 5 on demand, so `readFacts` and `check` do not pull it in.
 `x-` keywords, merging `allOf`. `schemaRowsToMarkdown(rows)` renders those rows as a Markdown table, for
 docs that list fields from a fact instead of copying them.
 
+## Value lists and generated doc blocks
+
+`valueListToMarkdown(fact, { columns? })` renders a fact whose `content.value` is an array. An array of strings
+gives one `- item` line each. An array of objects gives a table, with the keys as columns unless `columns`
+picks them. It throws an error that names the fact id when the value is not an array.
+
+`replaceFactBlocks(text, blocks)` rewrites the text between `<!-- facts:begin NAME -->` and
+`<!-- facts:end NAME -->` with `blocks[NAME]` and returns `{ text, changed }`. It throws an error that names the
+block when a `begin` has no `end`, a name appears twice, or `blocks` names a block the document does not have.
+Blocks the document has but `blocks` does not name stay as they are.
+
+`changed` is what a `--check` needs: write the file when it is true, and exit non-zero instead of writing when
+the check flag is set. This script generates a README block from the built facts and checks it:
+
+```js docs-example
+// scripts/generate-docs.mjs: node scripts/generate-docs.mjs [--check]
+import { readFileSync, writeFileSync } from 'node:fs'
+import { replaceFactBlocks, valueListToMarkdown } from 'fact-kit'
+
+const index = JSON.parse(readFileSync('dist/sdk/index.json', 'utf8'))
+const kinds = index.facts.find((f) => f.id === 'demo.sdk.kinds')
+const { text, changed } = replaceFactBlocks(readFileSync('README.md', 'utf8'), {
+  kinds: valueListToMarkdown(kinds),
+})
+
+if (process.argv.includes('--check')) {
+  console.log(changed ? 'README.md is out of date. Run: node scripts/generate-docs.mjs' : 'up to date')
+  process.exit(changed ? 1 : 0)
+}
+if (changed) writeFileSync('README.md', text)
+console.log(changed ? 'wrote README.md' : 'up to date')
+```
+
 ## Examples
 
 An example group shows how several facts are used together. `defineExamples` types one group or an array of them:

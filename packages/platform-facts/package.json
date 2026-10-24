@@ -1,6 +1,6 @@
 {
   "name": "platform-facts",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Unofficial machine-readable facts about third-party developer tools. Not affiliated with Anthropic, OpenAI or GitHub.",
   "license": "MIT",
   "type": "module",

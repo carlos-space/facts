@@ -1,10 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
-  "$comment": "Two components, one version line each, released straight from main. separate-pull-requests is true because fact-kit (tooling) and platform-facts (data) change for unrelated reasons: a fact edit must not wait on, or force a version bump of, the tool, and each Release PR then carries one changelog.",
+  "$comment": "Two components released together on one release train: a release/vX.Y branch carries the whole repository, cut-release.sh --units picks the packages that board it, and scoped to the train this config holds only those. separate-pull-requests is false so the train gets a single Release PR with one changelog per package; fact-kit and platform-facts still keep separate versions and tags. Nothing is released from main.",
   "include-component-in-tag": true,
   "include-v-in-tag": true,
   "tag-separator": "/",
-  "separate-pull-requests": true,
+  "separate-pull-requests": false,
   "bump-minor-pre-major": true,
   "initial-version": "0.1.0",
   "changelog-sections": [

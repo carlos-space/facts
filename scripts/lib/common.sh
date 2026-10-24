@@ -2,7 +2,7 @@
 # Shared helpers for release / scenario scripts. Source it; do not execute.
 #   DRY_RUN=1     print every mutating command instead of running it
 #   ASSUME_YES=1  skip the interactive confirmation for external writes (CI / scenario --yes)
-#   TASK_DIR      where external-ops.log lives (default tmp/<today>-release-ops)
+#   TASK_DIR      where external-ops.log lives (default tmp/<today>-git-flow-sim)
 # A script that skipped any external write (declined, or no terminal to answer the prompt) lists the
 # skipped writes and exits 3 even when everything else succeeded, outside DRY_RUN.
 set -euo pipefail
@@ -17,10 +17,11 @@ fi
 REPO_ROOT="${REPO_ROOT:-$(git rev-parse --show-toplevel)}"
 DRY_RUN="${DRY_RUN:-0}"
 ASSUME_YES="${ASSUME_YES:-0}"
-TASK_DIR="${TASK_DIR:-$REPO_ROOT/tmp/$(date +%Y-%m-%d)-release-ops}"
+TASK_DIR="${TASK_DIR:-$REPO_ROOT/tmp/$(date +%Y-%m-%d)-git-flow-sim}"
 AUDIT_LOG="$TASK_DIR/external-ops.log"
 CONFIG="release-please-config.json"
 MANIFEST=".release-please-manifest.json"
+MOBILE_UNITS=(macos ios android)
 
 log()  { printf '%s\n' "→ $*"; }
 info() { printf '%s\n' "  $*"; }
@@ -120,45 +121,39 @@ require_clean_tree() {
 
 current_branch() { git branch --show-current; }
 
-# Remote release branches of one component, including its --to-main branch: release/<component>/vX.Y.
-# A cap of one per component, not per repository: fact-kit and platform-facts release independently.
-release_branches() { # release_branches <component>
-  git branch -r --list "origin/release/$1/*" | sed 's#.*origin/##'
-}
+release_branches() { git branch -r --list 'origin/release/*' | sed 's#.*origin/##'; }
 
-# The package directory of a component (config entry whose component matches; else packages/<component>)
-unit_path() { # unit_path fact-kit -> packages/fact-kit
+unit_path() { # unit_path web -> apps/web; a config entry whose component differs from its folder wins
   local u="$1" p
   p="$(jq -r --arg u "$u" '.packages | to_entries[] | select(.value.component == $u) | .key' "$CONFIG" 2>/dev/null | head -1)"
   if [[ -n "$p" && -d "$p" ]]; then printf '%s\n' "$p"
+  elif [[ -d "apps/$u" ]]; then printf '%s\n' "apps/$u"
   elif [[ -d "packages/$u" ]]; then printf '%s\n' "packages/$u"
+  elif [[ -d "libs/$u" ]]; then printf '%s\n' "libs/$u"
   else return 1; fi
 }
 
-unit_component() { # unit_component packages/fact-kit -> fact-kit; the folder name when the config sets no component
+unit_component() { # unit_component packages/cli -> mainflow; the folder name when the config sets no component
   local p="${1%/}" c
   c="$(jq -r --arg p "$p" '.packages[$p].component // empty' "$CONFIG" 2>/dev/null)"
   printf '%s\n' "${c:-${p##*/}}"
 }
 
-manifest_version() { jq -r --arg p "$1" '.[$p] // empty' "$MANIFEST"; }
+# whether the unit has shipped before: release-please only applies its versioning strategy on top of a
+# previous release; without one it takes initial-version verbatim (1.0.0 when unset)
+unit_released() { [[ -n "$(git tag --list "$1/v*" | head -1)" ]]; }
 
-# Whether the unit has shipped before: release-please only applies its versioning strategy on top of a
-# previous release; without one it takes initial-version verbatim. A unit counts as released when it has
-# a <component>/v* tag or a real version in the manifest. This repo's fact-kit has a manifest version
-# (0.4.0) but no tag, and release-please bumps from the manifest version, so a tag-only test would call
-# it new and set a misleading initial-version.
-unit_released() { # unit_released <component>
-  local v
-  [[ -n "$(git tag --list "$1/v*" | head -1)" ]] && return 0
-  v="$(manifest_version "$(unit_path "$1" 2>/dev/null || true)" 2>/dev/null || true)"
-  [[ -n "$v" && "$v" != 0.0.0 ]]
+unit_kind() { # service | mobile
+  local u="$1"
+  if in_array "$u" "${MOBILE_UNITS[@]}"; then printf '%s\n' mobile; else printf '%s\n' service; fi
 }
+
+manifest_version() { jq -r --arg p "$1" '.[$p] // empty' "$MANIFEST"; }
 
 # strip a prerelease suffix: 1.2.0-rc.3 → 1.2.0
 stable_version() { printf '%s\n' "${1%%-*}"; }
 
-# components listed in the config on <ref> (default: working tree)
+# units listed in the config on <ref> (default: working tree), by component name when one is set
 # shellcheck disable=SC2120 # <ref> is optional; most callers read the working tree
 config_units() {
   local q='.packages | to_entries[] | (.value.component // (.key | split("/")[1]))'
@@ -166,34 +161,57 @@ config_units() {
   else jq -r "$q" "$CONFIG"; fi
 }
 
-# Release-Train-Base trailers carry the component: "Release-Train-Base: <component> <sha>". Each component
-# has its own train and its own starting point, so a bare sha could not say whose it is.
-# train_base_shas <component> <rev> [-n N] → shas of that component's trailers on <rev>, newest first
-train_base_shas() {
-  local comp="$1" rev="$2"; shift 2
-  git log "$rev" "$@" --format='%(trailers:key=Release-Train-Base,valueonly)' 2>/dev/null \
-    | sed -nE "s/^${comp} ([0-9a-f]{7,40})\$/\1/p" || true
-}
-
-# Components this train shipped: the manifest entries that differ from the train's base (the main commit
-# the branch was cut from). Derived rather than read from the config, because merge-back restores the config
-# from main and would otherwise lose the train scope, making the phase impossible to re-run. Compared with
-# the base, not with today's main: another component's train may have merged back to main since the cut.
-train_units_by_manifest() { # train_units_by_manifest <base-rev>
-  local p
-  while IFS= read -r p; do [[ -n "$p" ]] && unit_component "$p"; done < <(
-    jq -s -r '.[0] as $base | .[1] | to_entries[] | select(.value != $base[.key]) | .key' \
-      <(git show "$1":"$MANIFEST") "$MANIFEST")
+# linked-versions binds a group of components to a single version, so a train shipping any member
+# must carry the whole group: the plugin cannot bump components that are absent from the scoped
+# config. Returns every component of every group containing one of the given units.
+linked_group_members() { # linked_group_members <unit>... → component names (may be empty)
+  local u
+  for u in "$@"; do
+    jq -r --arg u "$u" '
+      (.plugins // [])[]
+      | select(.type == "linked-versions")
+      | select((.components // []) | index($u))
+      | .components[]
+    ' "$CONFIG" 2>/dev/null
+  done | sort -u
   return 0
 }
 
-# --component and --line are validated the same way by all three scripts
-check_component_line() { # check_component_line <component> <line>
-  local known
-  if git rev-parse -q --verify refs/remotes/origin/main >/dev/null; then known="$(config_units origin/main)"; else known="$(config_units)"; fi
-  [[ -n "$1" ]] || die "--component 必填（$(paste -sd '|' - <<<"$known")）"
-  grep -qx -- "$1" <<<"$known" || die "--component 需為 $(paste -sd '|' - <<<"$known")（目前 $1）"
-  [[ "$2" =~ ^[0-9]+\.[0-9]+$ ]] || die "--line 需為 X.Y"
+# Workspace dependents of the given units, transitively. release-please's node-workspace plugin can
+# only bump packages that are in the config, so a train that ships a package must also carry whatever
+# depends on it — otherwise the dependents keep pointing at a version that no longer matches.
+workspace_dependents() { # workspace_dependents <unit>... → dependent unit names (may be empty)
+  local d u p pkgname dn
+  local -a frontier=("$@") found=()
+  while (( ${#frontier[@]} )); do
+    u="${frontier[0]}"; frontier=("${frontier[@]:1}")
+    p="$(unit_path "$u" 2>/dev/null)" || continue
+    pkgname="$(jq -r '.name // empty' "$p/package.json" 2>/dev/null)"
+    [[ -n "$pkgname" ]] || continue
+    for d in apps/*/ packages/*/ libs/*/; do
+      [[ -f "$d/package.json" ]] || continue
+      dn="$(unit_component "$d")"
+      [[ "$dn" == "$u" ]] && continue
+      if jq -e --arg n "$pkgname" '((.dependencies // {}) + (.peerDependencies // {})) | has($n)' "$d/package.json" >/dev/null 2>&1; then
+        in_array "$dn" "${found[@]:-}" || { found+=("$dn"); frontier+=("$dn"); }
+      fi
+    done
+  done
+  # one per line: callers split on newlines, and a space-separated list would arrive as a single
+  # bogus unit name
+  (( ${#found[@]} )) && printf '%s\n' "${found[@]}"
+  return 0
+}
+
+# Units this train actually shipped: the manifest entries that differ from main's. Derived rather
+# than read from the config, because merge-back restores the config from main and would otherwise
+# lose the train scope, making the phase impossible to re-run.
+train_units_by_manifest() {
+  local p
+  while IFS= read -r p; do [[ -n "$p" ]] && unit_component "$p"; done < <(
+    jq -s -r '.[0] as $main | .[1] | to_entries[] | select(.value != $main[.key]) | .key' \
+      <(git show origin/main:"$MANIFEST") "$MANIFEST")
+  return 0
 }
 
 # release stages (alpha → beta → rc → ga) and the steps that move a train between them

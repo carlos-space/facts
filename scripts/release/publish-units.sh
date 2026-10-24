@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Publish packages to the public npm registry. publish.yml calls it with the package paths a release created.
-# usage: publish-units.sh --tag <alpha|beta|rc|ga> <package path>...      e.g. --tag alpha packages/fact-kit
-#   --tag            the release stage of the train, and so the npm dist-tag: alpha, beta and rc publish under
+# usage: publish-units.sh <alpha|beta|rc|ga> <package path>...      e.g. alpha packages/fact-kit
+#   <stage>          the release stage of the train, and so the npm dist-tag: alpha, beta and rc publish under
 #                    the tag of that name, ga under latest. `latest` must only ever point at a GA, so every
 #                    package version must belong to the stage (X.Y.Z-<stage>.N, or X.Y.Z for ga); a mismatch
 #                    stops the run before anything is packed.
@@ -84,12 +84,11 @@ publish_one() { # publish_one <package path> <stage>
   summary "published \`$name@$ver\` to $reg, dist-tag \`$(npm_dist_tag "$stage")\` ${dry[*]:-}"
 }
 
-usage="usage: publish-units.sh --tag <alpha|beta|rc|ga> <package path>..."
-[[ "${1:-}" == --tag ]] || die "$usage"
-stage="${2:-}"
+usage="usage: publish-units.sh <alpha|beta|rc|ga> <package path>..."
+[[ $# -ge 2 ]] || die "$usage"
+stage="$1"
 case "$stage" in alpha | beta | rc | ga) ;; *) die "stage \"${stage}\" is not alpha, beta, rc or ga. $usage" ;; esac
-shift 2
-[[ $# -ge 1 ]] || die "$usage"
+shift
 PUBLISH_OUT="${PUBLISH_OUT:-$root/tmp/publish}"
 for u in "$@"; do
   u="${u%/}"

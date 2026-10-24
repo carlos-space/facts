@@ -1,11 +1,12 @@
 name: release-please
 
-# Versioning engine, and it runs only on release branches: release/<component>/vX.Y, one per package
-# (fact-kit, platform-facts). main never carries a release-please commit. scripts/release/cut-release.sh
-# scopes release-please-config.json to the branch's package and puts it in prerelease mode;
-# finalize-release.sh --phase ga takes it back out. Merging the Release PR tags <component>/v<version> and
-# creates the GitHub Release. A tag created with GITHUB_TOKEN raises no events, so this workflow
-# dispatches publish.yml itself after a release, with the train's stage.
+# Versioning engine, and it runs only on release branches: release/vX.Y, one per repository at a time,
+# carrying the packages picked with cut-release.sh --units (fact-kit, platform-facts). main never carries
+# a release-please commit. scripts/release/cut-release.sh scopes release-please-config.json to the
+# train's packages and puts it in prerelease mode; finalize-release.sh --phase ga takes it back out.
+# Merging the Release PR tags <component>/v<version> and creates the GitHub Release. A tag created with
+# GITHUB_TOKEN raises no events, so this workflow dispatches publish.yml itself after a release, with the
+# train's stage.
 #
 # A Release PR opened with GITHUB_TOKEN triggers a ci run that waits for approval. Set the repository
 # variable RELEASE_PLEASE_APP_CLIENT_ID (and the RELEASE_PLEASE_APP_PRIVATE_KEY secret) and release-please

@@ -10,18 +10,19 @@
     "pnpm": ">=12.3.4"
   },
   "scripts": {
-    "prepare": "bash scripts/setup/git-hooks.sh",
     "check": "pnpm typecheck && pnpm format:check && pnpm facts:check",
     "facts:check": "node packages/fact-kit/src/bin.ts check --cwd packages/platform-facts",
     "typecheck": "pnpm -r typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "build": "pnpm -r build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "snapshot": "bash scripts/release/snapshot.sh"
   },
   "devDependencies": {
     "@types/node": "^24.13.4",
     "prettier": "^3.6.2",
+    "semver": "^7.8.5",
     "typescript": "^7.0.2",
     "vitest": "^4.1.11"
   }

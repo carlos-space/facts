@@ -1,7 +1,9 @@
 name: pr-message
 
-# Squash-merge makes the PR title the commit subject and the PR body the commit body, so both get the same
-# rules as a local commit on main, from the same scripts the commit-msg hook calls.
+# Squash-merge makes the PR title the commit subject and the PR body the commit body
+# (squash_merge_commit_title: PR_TITLE, squash_merge_commit_message: PR_BODY), so both get the rules of a
+# commit on main. main only takes pull requests and there is no local hook, so these two scripts are the
+# only place the rules run.
 #
 # A separate workflow because it also runs on "edited": fixing the title or body re-runs only this
 # cheap check. Putting "edited" on ci.yml would either rebuild for a text change or record skipped

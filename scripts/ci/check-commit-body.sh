@@ -7,41 +7,35 @@
 #                declares "Coupled-Change: <why>" in the message's last paragraph. The manifest, not
 #                release-please-config.json, is the source because a release branch shrinks the config to
 #                one package while the manifest keeps every package, so main and release branches agree.
-# The single source of both rules for the commit-msg hook and the pr-message workflow.
+# The single source of both rules, called by the pr-message workflow on a pull request's title-and-body
+# (squash-merge makes them the commit that enters main). There is no local hook: main only takes pull requests.
 #
-# usage: check-commit-body.sh [--only attribution|units] --commit <sha>
-#        check-commit-body.sh [--only attribution|units] --message <file|-> [--cached | --diff <rev-range>]
-#   --commit <sha>   message and changed files both from the commit
-#   --message        message from a file, or - for stdin; changed files from the index (--cached) or a
-#                    diff (--diff origin/main...HEAD). Without either, the units rule is skipped.
+# usage: check-commit-body.sh [--only attribution|units] --message <file|-> [--diff <rev-range>]
+#   --message        message from a file, or - for stdin; changed files from a diff
+#                    (--diff origin/main...HEAD). Without --diff, the units rule is skipped.
 # Exit 1 on a violation, each one reported on stderr.
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
 source "$(dirname "$0")/../lib/common.sh"
-usage() { die "usage: check-commit-body.sh [--only attribution|units] (--commit <sha> | --message <file|-> [--cached | --diff <rev-range>])"; }
+usage() { die "usage: check-commit-body.sh [--only attribution|units] --message <file|-> [--diff <rev-range>]"; }
 
-only="" commit="" msg_src="" files_from=""
+only="" msg_src="" files_from=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --only) only="${2:-}"; [[ "$only" == attribution || "$only" == units ]] || usage; shift 2 ;;
-    --commit) commit="${2:?}"; files_from=commit; shift 2 ;;
     --message) msg_src="${2:?}"; shift 2 ;;
-    --cached) files_from=cached; shift ;;
     --diff) files_from="diff"; diff_range="${2:?}"; shift 2 ;;
     *) usage ;;
   esac
 done
-[[ -n "$commit" || -n "$msg_src" ]] || usage
+[[ -n "$msg_src" ]] || usage
 
-# Read the message before changing directory: a hook gets a path relative to where git started it.
-if [[ -n "$commit" ]]; then message="$(git log -1 --format=%B "$commit")"
-elif [[ "$msg_src" == - ]]; then message="$(cat)"
+# Read the message before changing directory: a path is relative to where the caller started.
+if [[ "$msg_src" == - ]]; then message="$(cat)"
 else message="$(cat "$msg_src")"; fi
 cd "$REPO_ROOT"
-# A PR body arrives with CRLF line ends. Under commit.cleanup scissors, git drops everything from its
-# scissors line on, so only the part above it becomes the commit message.
+# A PR body arrives with CRLF line ends.
 message="${message//$'\r'/}"
-message="$(sed -E '/^[#;] -+ >8 -+$/,$d' <<<"$message")"
 
 bad=0
 
@@ -79,8 +73,6 @@ check_units() {
   local f p best
   mapfile -t paths < <(jq -r 'keys[]' "$MANIFEST")
   case "$files_from" in
-    commit) mapfile -t files < <(git diff-tree --root --no-commit-id --name-only -r "$commit") ;;
-    cached) mapfile -t files < <(git diff --cached --name-only) ;;
     diff) mapfile -t files < <(git diff --name-only "$diff_range") ;;
   esac
   declare -A units=()

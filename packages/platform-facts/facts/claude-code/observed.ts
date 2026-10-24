@@ -1273,6 +1273,121 @@ export const observed: Fact[] = [
     },
   },
   {
+    id: 'claude-code.otel-content-switches',
+    tool: 'claude-code',
+    topics: ['telemetry', 'security'],
+    title: 'otel-content-switches',
+    description: '五個決定 OTel 匯出是否帶內容的環境變數，預設值與開啟後多送什麼。',
+    content: {
+      value: [
+        {
+          name: 'OTEL_LOG_USER_PROMPTS',
+          default: 'disabled',
+          enableWith: '1',
+          whenEnabled:
+            '送出使用者提示詞全文。關閉時 user_prompt 事件的提示詞值是 <REDACTED>。tracing 開著時，也讓 span 帶 new_context、system_reminders、system_prompt_preview、user_system_prompt 與 response.model_output 等內容屬性。',
+        },
+        {
+          name: 'OTEL_LOG_ASSISTANT_RESPONSES',
+          default: 'disabled',
+          enableWith: '1',
+          disableWith: '0',
+          whenEnabled:
+            '在 assistant_response 事件送出模型回覆文字。沒設定時沿用 OTEL_LOG_USER_PROMPTS 的值，設 0 則保持遮蔽。',
+        },
+        {
+          name: 'OTEL_LOG_TOOL_DETAILS',
+          default: 'disabled',
+          enableWith: '1',
+          whenEnabled:
+            '在工具事件與 trace span 屬性送出工具參數與輸入，包括 Bash 指令、MCP server 與工具名、skill 名、使用者自訂的 workflow 名與 hook 定義。user_prompt 事件會帶自訂、plugin 與 MCP 指令名，成本與 token 計數器會帶實際的 agent、skill、plugin 與 MCP 名稱。',
+        },
+        {
+          name: 'OTEL_LOG_TOOL_CONTENT',
+          default: 'disabled',
+          enableWith: '1',
+          requires: 'tracing',
+          whenEnabled:
+            '在 tool.output span 事件送出工具輸出內容，超過內容上限（預設 60 KB）會截斷。Edit 與 Write 另須同時開 OTEL_LOG_TOOL_DETAILS 才會記錄。',
+        },
+        {
+          name: 'OTEL_LOG_RAW_API_BODIES',
+          default: 'disabled',
+          enableWith: '1',
+          alsoAccepts: 'file:<dir>',
+          whenEnabled:
+            '以 api_request_body 與 api_response_body 事件送出完整的 Anthropic Messages API 請求與回應 JSON，內含整段對話歷史。設 1 時內嵌並在內容上限（預設 60 KB）截斷，設 file:<dir> 時寫成磁碟檔、事件帶 body_ref。開啟等同同意 OTEL_LOG_USER_PROMPTS、OTEL_LOG_TOOL_DETAILS 與 OTEL_LOG_TOOL_CONTENT 會洩漏的一切。',
+        },
+      ],
+    },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    verify: {
+      probe: {
+        kind: 'hash',
+        anchor: 'Bodies include the entire conversation history',
+        hash: 'sha256:a4168fa393ec5290',
+      },
+      verifiedOn: '2.1.308',
+      screenedThrough: '2.1.308',
+    },
+  },
+  {
+    id: 'claude-code.otel-metrics-attribute-switches',
+    tool: 'claude-code',
+    topics: ['telemetry'],
+    title: 'otel-metrics-attribute-switches',
+    description: '三個決定 metrics 帶不帶某些屬性的環境變數，預設值與控制的屬性。',
+    content: {
+      value: [
+        {
+          name: 'OTEL_METRICS_INCLUDE_SESSION_ID',
+          default: 'true',
+          disableWith: 'false',
+          controls: ['session.id', 'ccr.session.id'],
+          note: 'ccr.session.id 只出現在雲端 session。',
+        },
+        {
+          name: 'OTEL_METRICS_INCLUDE_VERSION',
+          default: 'false',
+          enableWith: 'true',
+          controls: ['app.version'],
+        },
+        {
+          name: 'OTEL_METRICS_INCLUDE_ACCOUNT_UUID',
+          default: 'true',
+          disableWith: 'false',
+          controls: ['user.account_uuid', 'user.account_id'],
+        },
+      ],
+    },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    verify: {
+      probe: {
+        kind: 'hash',
+        anchor: 'Include user.account_uuid and user.account_id attributes in metrics',
+        hash: 'sha256:26b09fa782b12aeb',
+      },
+      verifiedOn: '2.1.308',
+      screenedThrough: '2.1.308',
+    },
+  },
+  {
+    id: 'claude-code.otel-metrics-exporter',
+    tool: 'claude-code',
+    topics: ['telemetry'],
+    title: 'otel-metrics-exporter',
+    content: {
+      statement:
+        '`OTEL_METRICS_EXPORTER` 指定 metrics 的匯出器，可填 `console`、`otlp`、`prometheus`、`none`，以逗號分隔可同時用多個，填 `none` 關閉 metrics 匯出。',
+    },
+    source: { kind: 'observed', basis: 'doc', url: 'https://code.claude.com/docs/en/monitoring-usage' },
+    verify: {
+      probe: { kind: 'hash', anchor: 'Metrics exporter types, comma-separated', hash: 'sha256:12efc306cf2a2c1d' },
+      verifiedOn: '2.1.308',
+      screenedThrough: '2.1.308',
+    },
+  },
+  {
     id: 'claude-code.hook-env-session-trace',
     tool: 'claude-code',
     topics: ['hook', 'environment', 'telemetry'],

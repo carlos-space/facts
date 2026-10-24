@@ -69,3 +69,5 @@ pnpm test
 ```
 
 PR 以 squash 合併，所以 PR 標題要符合 Conventional Commits。
+
+一個變更同時改到 `packages/fact-kit` 與 `packages/platform-facts` 時，commit 訊息或 PR 內文的最後一段必須有 `Coupled-Change: <為什麼必須一起合>`。能拆開就拆成每個套件各一個 PR。`main` 上的 `scripts/hooks/commit-msg` 與 PR 的 `pr-message` workflow（job 名稱 `pr-title`）都會檢查，內文也不能帶 AI 平台署名。

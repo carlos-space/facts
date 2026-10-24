@@ -25,20 +25,6 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  # Squash-merge makes the PR title the commit on main, so it must follow Conventional Commits.
-  pr-title:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-      - name: PR title follows Conventional Commits
-        run: bash scripts/ci/check-pr-title.sh "$PR_TITLE"
-        env:
-          PR_TITLE: ${{ github.event.pull_request.title }}
-
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 15

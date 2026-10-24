@@ -1,11 +1,26 @@
 #!/usr/bin/env bash
 # commit-msg: the subject follows Conventional Commits and the message carries no AI-platform attribution.
+# On main, a local squash merge writes the commit release-please reads, so a commit whose staged files span
+# two or more release units must also declare Coupled-Change: in its last paragraph. Other branches only get
+# the attribution check; their commits never reach main, the PR title and body do.
+# The body rules live in scripts/ci/check-commit-body.sh, shared with the pr-message workflow.
+# The body checks need bash 4 (scripts/lib/common.sh); macOS ships 3.2 as /bin/bash. This file stays
+# bash 3.2 compatible so it can say so.
 set -euo pipefail
 root="$(git rev-parse --show-toplevel)"
-msg="$(grep -v '^#' "$1")"
-subject="$(printf '%s\n' "$msg" | head -n1)"
+subject="$(grep -v '^#' "$1" | head -n1)"
 bash "$root/scripts/ci/check-pr-title.sh" "$subject" >/dev/null || {
   printf '%s\n' >&2 "commit-msg：commit 標題要符合 Conventional Commits（<type>(<scope>): <subject>）"; exit 1; }
-if printf '%s\n' "$msg" | grep -Eiq '^[[:space:]]*(co-authored-by:.*(claude|noreply@anthropic\.com|copilot|gemini|codex|openai)|generated with|made with)'; then
-  printf '%s\n' >&2 "commit-msg：commit 訊息不加 AI 平台署名"; exit 1
+if (( BASH_VERSINFO[0] < 4 )); then
+  printf '%s\n' >&2 "commit-msg：目前的 bash 是 ${BASH_VERSION}，內文檢查要 bash 4 以上，這次略過。用 brew install bash 安裝新版，並讓 PATH 裡的 bash 指向它。"
+  exit 0
 fi
+if [[ "$(git branch --show-current)" != main ]]; then
+  bash "$root/scripts/ci/check-commit-body.sh" --only attribution --message "$1" >/dev/null || {
+    printf '%s\n' >&2 "commit-msg：commit 訊息不加 AI 平台署名"; exit 1; }
+  exit 0
+fi
+bash "$root/scripts/ci/check-commit-body.sh" --message "$1" --cached >/dev/null || {
+  printf '%s\n' >&2 "commit-msg：沒有提交。照上面的原因改訊息或拆開變更，不用 --no-verify 跳過"
+  exit 1
+}

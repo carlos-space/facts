@@ -36,3 +36,4 @@
 ## 變更記錄
 
 - 0.3.0：直接 GA
+- 0.3.1（修補，platform-facts 0.8.1）：0.8.0 漏了 `claude-code.otel-content-switches`、`claude-code.otel-metrics-attribute-switches`、`claude-code.otel-metrics-exporter` 三筆 fact，補回並加上擋 id 消失的測試。從 `v0.3.0` 重建 `release/v0.3`，只含 platform-facts

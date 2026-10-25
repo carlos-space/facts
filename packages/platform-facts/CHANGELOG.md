@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0-beta.1](https://github.com/carlos-space/facts/compare/platform-facts/v0.9.0...platform-facts/v0.10.0-beta.1) (2026-10-25)
+
+
+### Added
+
+* **platform-facts:** 新增 Sparkle、Apple 公證與 Cloudflare R2 的 fact ([#36](https://github.com/carlos-space/facts/issues/36)) ([fb75085](https://github.com/carlos-space/facts/commit/fb750856c47b6e84396823ba016b0c6e2fcb52ee))
+
 ## [0.9.0](https://github.com/carlos-space/facts/compare/platform-facts/v0.8.1...platform-facts/v0.9.0) (2026-10-24)
 
 

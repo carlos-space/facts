@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/carlos-space/facts/compare/platform-facts/v0.10.0-beta.1...platform-facts/v0.10.0) (2026-10-25)
+
+
+### chore
+
+* **release/v0.5:** platform-facts 0.10.0 ([c466e9a](https://github.com/carlos-space/facts/commit/c466e9a6c82b9eb8fdaa64aae9007eff5bdb5821))
+
 ## [0.10.0-beta.1](https://github.com/carlos-space/facts/compare/platform-facts/v0.9.0...platform-facts/v0.10.0-beta.1) (2026-10-25)
 
 

@@ -302,6 +302,31 @@ export const observed: Fact[] = [
     },
   },
   {
+    id: 'github.environment-secrets-free-private',
+    tool: 'github',
+    topics: ['actions', 'environment', 'plan', 'secrets'],
+    title: 'Free 組織私有倉庫的 environment secrets',
+    content: {
+      statement:
+        '文件寫 GitHub Free 只能替公開倉庫設 environment，但實測 Free 方案組織的私有倉庫有 `production` environment 與它的 secrets，job 寫 `environment: production` 讀得到這些 secrets。這個 environment 沒有保護規則',
+    },
+    source: {
+      kind: 'observed',
+      basis: 'measured',
+      fetched: '2026-10-26',
+      note: '`gh api orgs/carlos-space` 的方案是 free，carlos-space/notchhub 是私有倉庫。environment 與 secrets 由 Infisical 同步建立，run 40241815759 在 ubuntu-latest 讀到 9 個非空的 secret。文件原句在 https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments 的 `Users with GitHub Free plans can only configure environments for public repositories`',
+    },
+    verify: {
+      probe: {
+        kind: 'manual',
+        reason:
+          '要一個 Free 方案組織的私有倉庫與一個有 secret 的 environment。推一個 job 寫 `environment: <名稱>` 的 workflow，只印 secret 是否非空。成立的條件是 run 成功且印出非空',
+      },
+      verifiedOn: '2026-10-26',
+      screenedThrough: '2026-10-26',
+    },
+  },
+  {
     id: 'github.environment-tag-rule',
     tool: 'github',
     topics: ['actions', 'environment', 'tag'],

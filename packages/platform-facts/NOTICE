@@ -3,8 +3,8 @@ Copyright (c) 2026 carlos-space
 Licensed under the MIT License (see LICENSE).
 
 This package is unofficial. It is not affiliated with, endorsed by, or sponsored by
-Anthropic, OpenAI, or GitHub. Product and company names are trademarks of their
-respective owners.
+Anthropic, OpenAI, GitHub, Apple, Cloudflare, or the Sparkle project. Product and
+company names are trademarks of their respective owners.
 
 The converted facts under facts/*/converted.json are derived from the third-party
 sources below. Each source keeps its own license. Every converted fact records the

@@ -1,7 +1,7 @@
 {
   "name": "platform-facts",
   "version": "0.9.0",
-  "description": "Unofficial machine-readable facts about third-party developer tools. Not affiliated with Anthropic, OpenAI or GitHub.",
+  "description": "Unofficial machine-readable facts about third-party developer tools. Not affiliated with Anthropic, OpenAI, GitHub, Apple, Cloudflare or the Sparkle project.",
   "license": "MIT",
   "type": "module",
   "repository": {
@@ -50,6 +50,9 @@
     "./pnpm/index.json": "./dist/pnpm/index.json",
     "./pypi/index.json": "./dist/pypi/index.json",
     "./release-please/index.json": "./dist/release-please/index.json",
-    "./typescript/index.json": "./dist/typescript/index.json"
+    "./typescript/index.json": "./dist/typescript/index.json",
+    "./apple-notarization/index.json": "./dist/apple-notarization/index.json",
+    "./cloudflare-r2/index.json": "./dist/cloudflare-r2/index.json",
+    "./sparkle/index.json": "./dist/sparkle/index.json"
   }
 }

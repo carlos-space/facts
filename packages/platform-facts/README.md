@@ -2,28 +2,31 @@
 
 Machine-readable facts about third-party developer tools: commands, settings fields, hook events and observed behavior of Claude Code, Claude Desktop, Codex, GitHub, pnpm, npm, git and others. Each fact records where it came from and, for observed facts, how to check it again.
 
-This package is unofficial. It is not affiliated with, endorsed by, or sponsored by Anthropic, OpenAI or GitHub. Claude, Claude Code, Codex, OpenAI and GitHub are trademarks of their respective owners.
+This package is unofficial. It is not affiliated with, endorsed by, or sponsored by Anthropic, OpenAI, GitHub, Apple, Cloudflare or the Sparkle project. Claude, Claude Code, Codex, OpenAI, GitHub, Apple and Cloudflare are trademarks of their respective owners.
 
 ## Entries
 
 Every entry is a built `index.json` under a subpath.
 
-| Subpath                                    | Describes                                      |
-| :----------------------------------------- | :--------------------------------------------- |
-| `platform-facts/app-store/index.json`      | Apple App Store                                |
-| `platform-facts/claude-code/index.json`    | Claude Code                                    |
-| `platform-facts/claude-desktop/index.json` | Claude Desktop                                 |
-| `platform-facts/codex/index.json`          | Codex                                          |
-| `platform-facts/crates-io/index.json`      | crates.io                                      |
-| `platform-facts/fact-kit/index.json`       | fact-kit, the toolkit that builds this package |
-| `platform-facts/git/index.json`            | git                                            |
-| `platform-facts/github/index.json`         | GitHub                                         |
-| `platform-facts/google-play/index.json`    | Google Play                                    |
-| `platform-facts/npm/index.json`            | npm                                            |
-| `platform-facts/pnpm/index.json`           | pnpm                                           |
-| `platform-facts/pypi/index.json`           | PyPI                                           |
-| `platform-facts/release-please/index.json` | release-please                                 |
-| `platform-facts/typescript/index.json`     | TypeScript                                     |
+| Subpath                                        | Describes                                       |
+| :--------------------------------------------- | :---------------------------------------------- |
+| `platform-facts/app-store/index.json`          | Apple App Store                                 |
+| `platform-facts/apple-notarization/index.json` | Apple notarization, code signing and Gatekeeper |
+| `platform-facts/claude-code/index.json`        | Claude Code                                     |
+| `platform-facts/claude-desktop/index.json`     | Claude Desktop                                  |
+| `platform-facts/cloudflare-r2/index.json`      | Cloudflare R2 and wrangler                      |
+| `platform-facts/codex/index.json`              | Codex                                           |
+| `platform-facts/crates-io/index.json`          | crates.io                                       |
+| `platform-facts/fact-kit/index.json`           | fact-kit, the toolkit that builds this package  |
+| `platform-facts/git/index.json`                | git                                             |
+| `platform-facts/github/index.json`             | GitHub                                          |
+| `platform-facts/google-play/index.json`        | Google Play                                     |
+| `platform-facts/npm/index.json`                | npm                                             |
+| `platform-facts/pnpm/index.json`               | pnpm                                            |
+| `platform-facts/pypi/index.json`               | PyPI                                            |
+| `platform-facts/release-please/index.json`     | release-please                                  |
+| `platform-facts/sparkle/index.json`            | Sparkle                                         |
+| `platform-facts/typescript/index.json`         | TypeScript                                      |
 
 ## Usage
 

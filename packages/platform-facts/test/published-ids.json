@@ -1,8 +1,16 @@
 {
-  "baseline": "platform-facts@0.8.1",
+  "baseline": "platform-facts@0.1.0",
   "removed": [],
   "ids": {
     "app-store": ["app-store.app-store-short-version"],
+    "apple-notarization": [
+      "apple-notarization.accepted-containers",
+      "apple-notarization.notarytool-api-key",
+      "apple-notarization.requirements",
+      "apple-notarization.secure-timestamp",
+      "apple-notarization.spctl-assess-type",
+      "apple-notarization.staple-targets"
+    ],
     "claude-code": [
       "claude-code.agent-call-model",
       "claude-code.agent-frontmatter",
@@ -243,6 +251,14 @@
       "claude-desktop.mod-ui-render",
       "claude-desktop.mod-worker-crash-unload"
     ],
+    "cloudflare-r2": [
+      "cloudflare-r2.custom-domain-cache",
+      "cloudflare-r2.custom-domain-same-account",
+      "cloudflare-r2.default-cached-extensions",
+      "cloudflare-r2.free-tier",
+      "cloudflare-r2.wrangler-auth-env",
+      "cloudflare-r2.wrangler-object-local-default"
+    ],
     "codex": [
       "codex.agent-file",
       "codex.agent-paths",
@@ -310,6 +326,7 @@
       "github.concurrency-group",
       "github.default-token-events",
       "github.environment-plan-limit",
+      "github.environment-secrets-free-private",
       "github.environment-tag-rule",
       "github.gfm-strikethrough",
       "github.gh-api-default-method",
@@ -357,6 +374,18 @@
       "release-please.release-as-overrides-strategy",
       "release-please.release-as-version",
       "release-please.release-pr-updates"
+    ],
+    "sparkle": [
+      "sparkle.appcast-merge-existing",
+      "sparkle.bundle-version-compare",
+      "sparkle.channels",
+      "sparkle.generate-appcast-options",
+      "sparkle.generate-keys-options",
+      "sparkle.info-plist-keys",
+      "sparkle.manual-signing-order",
+      "sparkle.non-sandboxed-xpc-keys",
+      "sparkle.remove-xpc-services",
+      "sparkle.version-comparator"
     ],
     "typescript": ["typescript.project-references"]
   }

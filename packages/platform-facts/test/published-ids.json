@@ -1,5 +1,5 @@
 {
-  "baseline": "platform-facts@0.1.0",
+  "baseline": "platform-facts@0.2.0",
   "removed": [],
   "ids": {
     "app-store": ["app-store.app-store-short-version"],
@@ -367,8 +367,14 @@
       "release-please.commit-override-squash",
       "release-please.commit-to-every-unit",
       "release-please.commit-to-package",
+      "release-please.config-unknown-keys",
+      "release-please.default-strategy-prerelease-version",
       "release-please.initial-version",
+      "release-please.linked-versions-max-version",
+      "release-please.node-workspace-direction",
+      "release-please.package-level-overrides",
       "release-please.peer-dependencies",
+      "release-please.prerelease-flag-github-release",
       "release-please.prerelease-strategy",
       "release-please.release-as-changelog",
       "release-please.release-as-overrides-strategy",

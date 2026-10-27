@@ -1,0 +1,6 @@
+{
+  "product": { "name": "facts", "members": [] },
+  "units": {
+    "platform-facts": { "kind": "package", "stages": ["ga"] }
+  }
+}

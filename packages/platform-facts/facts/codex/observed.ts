@@ -1,4 +1,4 @@
-import type { Fact } from '../../../fact-kit/src/index.ts'
+import type { Fact } from 'fact-kit'
 
 // Constants read from the source of openai/codex at rust-v0.164.0 (commit 6aaac694803004a63c6f393d153c96d22521a6b9).
 // Each hash comes from the workspace document probe (external-facts/probe.mjs): the raw file is normalized,

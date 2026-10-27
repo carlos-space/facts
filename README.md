@@ -4,14 +4,15 @@
 
 ## 套件
 
-| 套件             | 內容                                                                     | 發布到哪    |
-| :--------------- | :----------------------------------------------------------------------- | :---------- |
-| `fact-kit`       | fact 的型別與 meta-schema，以及撰寫、檢查、建置、讀取與比對 facts 的工具 | npm（公開） |
-| `platform-facts` | 第三方工具的 facts，依平台分成子路徑，另含 fact-kit 自己的定義           | npm（公開） |
+| 套件             | 內容                                 | 發布到哪    |
+| :--------------- | :----------------------------------- | :---------- |
+| `platform-facts` | 第三方工具的 facts，依平台分成子路徑 | npm（公開） |
+
+本倉庫只發布 `platform-facts`。撰寫、檢查、建置、讀取與比對 facts 的工具由 npm 的 `fact-kit` 套件提供（原始碼在倉庫 carlos-space/fact-kit），`platform-facts` 以它建置。fact-kit 自己的 facts 由 npm 的 `fact-kit-facts` 提供。
 
 ## 授權與非官方聲明
 
-`fact-kit` 與 `platform-facts` 都以 MIT 授權發布。`platform-facts` 的轉換內容來自 SchemaStore 與 openai/codex（Apache-2.0）和 GitHub REST API 描述（MIT），著作權聲明在 `packages/platform-facts/NOTICE`。Claude Agent SDK 只取名稱與型別，不含說明文字。
+`platform-facts` 以 MIT 授權發布。它的轉換內容來自 SchemaStore 與 openai/codex（Apache-2.0）和 GitHub REST API 描述（MIT），著作權聲明在 `packages/platform-facts/NOTICE`。Claude Agent SDK 只取名稱與型別，不含說明文字。
 
 本專案是非官方的，與 Anthropic、OpenAI、GitHub 沒有關係。Claude、Codex、OpenAI、GitHub 等名稱是各自所有者的商標。
 
@@ -30,10 +31,10 @@
 2. 切分支，預設從 alpha 開始。`--units` 是入版的套件，用逗號分隔，沒有 commit 的套件不會發版。腳本會把相依的套件一併納入。推送後 release-please 在分支上開 Release PR。
 
    ```bash
-   bash scripts/release/cut-release.sh --line 0.1 --units fact-kit,platform-facts [--stage alpha|beta|rc|ga] [--from v0.1.0]
+   bash scripts/release/cut-release.sh --line 0.1 --units platform-facts [--stage alpha|beta|rc|ga] [--from v0.1.0]
    ```
 
-3. 合併分支上的 Release PR。release-please 為每個入版的套件建立 tag，例如 `fact-kit/v0.4.2-alpha.1`，`publish.yml` 以 dist-tag `alpha` 發布到 npm。分支上再有 `fix:` commit 時，每次都再開一次 Release PR，序號加一。
+3. 合併分支上的 Release PR。release-please 為每個入版的套件建立 tag，例如 `platform-facts/v0.4.2-alpha.1`，`publish.yml` 以 dist-tag `alpha` 發布到 npm。分支上再有 `fix:` commit 時，每次都再開一次 Release PR，序號加一。
 
 4. 推進階段。順序是 alpha、beta、rc，可以跳過，不能往回。省略 `--to` 時推進到下一階段。每個階段的序號從 `.1` 開始，再重複第 3 步。
 
@@ -41,7 +42,7 @@
    bash scripts/release/advance-release.sh --line 0.1 [--to beta|rc]
    ```
 
-5. GA。`--to ga` 必須帶 `--product-version`。腳本等分支最新 commit 的 ci 通過，寫入各套件的正式版號並離開預發布模式。合併分支上的 Release PR 後，tag 變成 `fact-kit/v0.4.2`，以 dist-tag `latest` 發布。
+5. GA。`--to ga` 必須帶 `--product-version`。腳本等分支最新 commit 的 ci 通過，寫入各套件的正式版號並離開預發布模式。合併分支上的 Release PR 後，tag 變成 `platform-facts/v0.4.2`，以 dist-tag `latest` 發布。
 
    ```bash
    bash scripts/release/advance-release.sh --line 0.1 --to ga --product-version 0.1.0
@@ -72,4 +73,4 @@ pnpm test
 
 main 只收 PR，以 squash 合併，所以 PR 標題要符合 Conventional Commits，PR 內文就是 main 上的 commit 內文。本機不裝 git hook，規則都由 PR 的 workflow 檢查。
 
-一個變更同時改到 `packages/fact-kit` 與 `packages/platform-facts` 時，commit 訊息或 PR 內文的最後一段必須有 `Coupled-Change: <為什麼必須一起合>`。能拆開就拆成每個套件各一個 PR。PR 的 `pr-message` workflow（job 名稱 `pr-title`）會檢查這一點，內文也不能帶 AI 平台署名。
+一個變更同時改到 `.release-please-manifest.json` 列出的兩個以上發布單元時（目前只有 `packages/platform-facts` 一個，所以現在不會觸發），commit 訊息或 PR 內文的最後一段必須有 `Coupled-Change: <為什麼必須一起合>`。能拆開就拆成每個套件各一個 PR。PR 的 `pr-message` workflow（job 名稱 `pr-title`）會檢查這一點，內文也不能帶 AI 平台署名。

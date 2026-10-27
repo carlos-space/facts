@@ -21,11 +21,6 @@ npm install --no-audit --no-fund --silent "$work"/packed/*.tgz
 
 for p in "${paths[@]}"; do
   case "$p" in
-    packages/fact-kit)
-      node --input-type=module -e "
-        import { defineFacts, checkFacts } from 'fact-kit'
-        if (typeof defineFacts !== 'function' || typeof checkFacts !== 'function') throw new Error('fact-kit exports are missing')"
-      ./node_modules/.bin/fact-kit --help | grep -q '^Commands' ;;
     packages/platform-facts)
       node --input-type=module -e "
         import { readFileSync } from 'node:fs'

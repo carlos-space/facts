@@ -1,4 +1,4 @@
-import type { Fact } from '../../../fact-kit/src/index.ts'
+import type { Fact } from 'fact-kit'
 
 // Where Codex reads each kind of resource from, and the frontmatter of skills and the keys of agent files.
 // Paths come from the official documentation at learn.chatgpt.com. The skill and agent shapes come from the

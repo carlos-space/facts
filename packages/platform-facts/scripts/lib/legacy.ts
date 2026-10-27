@@ -3,7 +3,7 @@
 import { homedir } from 'node:os'
 import { join } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import type { Fact, FactIndex, FactProbe } from '../../../fact-kit/src/index.ts'
+import type { Fact, FactIndex, FactProbe } from 'fact-kit'
 
 /** The five tables of the workspace, each exporting `PLATFORM_FACTS`. */
 export const LEGACY_TABLES = [

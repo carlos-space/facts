@@ -3,10 +3,10 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
-import { loadEntries } from '../../fact-kit/src/load.ts'
+import { loadEntries } from 'fact-kit'
 import { compareMigration, defaultWorkspace, factsById, loadLegacyRows, toFact } from '../scripts/lib/legacy.ts'
 import type { LegacyRowOf, LegacySidecar } from '../scripts/lib/legacy.ts'
-import type { Fact } from '../../fact-kit/src/index.ts'
+import type { Fact } from 'fact-kit'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const workspace = process.env.LEGACY_WORKSPACE ?? defaultWorkspace()

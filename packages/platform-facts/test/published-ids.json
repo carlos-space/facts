@@ -1,6 +1,17 @@
 {
   "baseline": "platform-facts@0.2.0",
-  "removed": [],
+  "removed": [
+    "fact-kit.cli",
+    "fact-kit.config-file",
+    "fact-kit.entry-module",
+    "fact-kit.example-group",
+    "fact-kit.fact",
+    "fact-kit.index",
+    "fact-kit.module-api",
+    "fact-kit.problem-codes",
+    "fact-kit.read-facts",
+    "fact-kit.x-keywords"
+  ],
   "ids": {
     "app-store": ["app-store.app-store-short-version"],
     "apple-notarization": [

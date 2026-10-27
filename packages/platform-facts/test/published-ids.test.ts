@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
-import { loadEntries } from '../../fact-kit/src/load.ts'
+import { loadEntries } from 'fact-kit'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const published = JSON.parse(await readFile(join(root, 'test', 'published-ids.json'), 'utf8')) as {

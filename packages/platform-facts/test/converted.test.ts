@@ -4,8 +4,8 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { promisify } from 'node:util'
 import { describe, expect, it } from 'vitest'
-import { readStringTuplesFromFile, validateSchemaDocument } from '../../fact-kit/src/index.ts'
-import type { Fact } from '../../fact-kit/src/index.ts'
+import { readStringTuplesFromFile, validateSchemaDocument } from 'fact-kit'
+import type { Fact } from 'fact-kit'
 import { normalizeSchema } from '../scripts/lib/schema.ts'
 
 const root = fileURLToPath(new URL('..', import.meta.url))

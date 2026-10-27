@@ -11,7 +11,7 @@
   },
   "scripts": {
     "check": "pnpm typecheck && pnpm format:check && pnpm facts:check",
-    "facts:check": "node packages/fact-kit/src/bin.ts check --cwd packages/platform-facts",
+    "facts:check": "pnpm -C packages/platform-facts exec fact-kit check",
     "typecheck": "pnpm -r typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

@@ -6,8 +6,8 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { interfaceToJsonSchema, readStringTuplesFromFile } from '../../fact-kit/src/index.ts'
-import type { Fact, JsonSchema } from '../../fact-kit/src/index.ts'
+import { interfaceToJsonSchema, readStringTuplesFromFile } from 'fact-kit'
+import type { Fact, JsonSchema } from 'fact-kit'
 import { stableJson, writeFormatted } from './lib/format.ts'
 import { normalizeSchema } from './lib/schema.ts'
 

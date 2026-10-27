@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
-  "$comment": "Two components released together on one release train: a release/vX.Y branch carries the whole repository, cut-release.sh --units picks the packages that board it, and scoped to the train this config holds only those. separate-pull-requests is false so the train gets a single Release PR with one changelog per package; fact-kit and platform-facts still keep separate versions and tags. Nothing is released from main.",
+  "$comment": "One component, platform-facts, released on a release train: a release/vX.Y branch carries the whole repository, cut-release.sh --units picks the packages that board it, and scoped to the train this config holds only those. separate-pull-requests is false so the train gets a single Release PR with one changelog per package. Nothing is released from main.",
   "include-component-in-tag": true,
   "include-v-in-tag": true,
   "tag-separator": "/",
@@ -15,10 +15,6 @@
     { "type": "revert", "section": "Changed" }
   ],
   "packages": {
-    "packages/fact-kit": {
-      "component": "fact-kit",
-      "release-type": "node"
-    },
     "packages/platform-facts": {
       "component": "platform-facts",
       "release-type": "node"

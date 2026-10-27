@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
-import type { Fact } from '../../fact-kit/src/index.ts'
+import type { Fact } from 'fact-kit'
 import { stripDescriptions } from '../scripts/convert-codex.ts'
 import { observed } from '../facts/codex/observed.ts'
 

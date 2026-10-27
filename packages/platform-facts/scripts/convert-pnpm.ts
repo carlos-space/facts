@@ -2,7 +2,7 @@
 // Usage: node scripts/convert-pnpm.ts
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { Fact, JsonSchema } from '../../fact-kit/src/index.ts'
+import type { Fact, JsonSchema } from 'fact-kit'
 import { stableJson, writeFormatted } from './lib/format.ts'
 import { normalizeSchema } from './lib/schema.ts'
 import { readPinned, sourceUrl } from './lib/sources.ts'

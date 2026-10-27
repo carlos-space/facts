@@ -1,4 +1,4 @@
-import type { Fact, FactsModule } from '../../../fact-kit/src/index.ts'
+import type { Fact, FactsModule } from 'fact-kit'
 import converted from './converted.json' with { type: 'json' }
 import { observed } from './observed.ts'
 

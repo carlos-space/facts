@@ -1,4 +1,4 @@
-import type { Fact } from '../../../fact-kit/src/index.ts'
+import type { Fact } from 'fact-kit'
 
 // Where Claude Code reads each kind of resource from, and the frontmatter fields of skills, agents and rules.
 // All of it is read from the official documentation at code.claude.com. The Agent SDK has neither the paths

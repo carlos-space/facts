@@ -1,4 +1,4 @@
-import type { Fact } from '../../../fact-kit/src/index.ts'
+import type { Fact } from 'fact-kit'
 
 export const observed: Fact[] = [
   {

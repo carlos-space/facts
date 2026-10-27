@@ -7,10 +7,10 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Ajv2020 } from 'ajv/dist/2020.js'
 import { beforeAll, describe, expect, it } from 'vitest'
-import type { Fact, FactIndex } from '../../fact-kit/src/index.ts'
+import type { Fact, FactIndex } from 'fact-kit'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const kitBin = fileURLToPath(new URL('../../fact-kit/src/bin.ts', import.meta.url))
+const kitBin = join(root, 'node_modules/.bin/fact-kit')
 
 const CLAUDE_PATHS = [
   'claude-code.skill-paths',
@@ -40,7 +40,7 @@ let claude = new Map<string, Fact>()
 let codex = new Map<string, Fact>()
 
 beforeAll(() => {
-  execFileSync(process.execPath, [kitBin, 'build'], { cwd: root, stdio: 'pipe' })
+  execFileSync(kitBin, ['build'], { cwd: root, stdio: 'pipe' })
   const read = (entry: string) =>
     new Map(
       (JSON.parse(readFileSync(join(root, 'dist', entry, 'index.json'), 'utf8')) as FactIndex).facts.map((f) => [

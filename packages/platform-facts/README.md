@@ -17,7 +17,6 @@ Every entry is a built `index.json` under a subpath.
 | `platform-facts/cloudflare-r2/index.json`      | Cloudflare R2 and wrangler                      |
 | `platform-facts/codex/index.json`              | Codex                                           |
 | `platform-facts/crates-io/index.json`          | crates.io                                       |
-| `platform-facts/fact-kit/index.json`           | fact-kit, the toolkit that builds this package  |
 | `platform-facts/git/index.json`                | git                                             |
 | `platform-facts/github/index.json`             | GitHub                                          |
 | `platform-facts/google-play/index.json`        | Google Play                                     |

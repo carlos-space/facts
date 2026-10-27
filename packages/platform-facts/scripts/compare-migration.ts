@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url'
 import { parseArgs } from 'node:util'
 import { compareMigration, defaultWorkspace, factsById, loadLegacyRows } from './lib/legacy.ts'
 import type { LegacySidecar } from './lib/legacy.ts'
-import type { FactIndex } from '../../fact-kit/src/index.ts'
+import type { FactIndex } from 'fact-kit'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const { values } = parseArgs({ options: { workspace: { type: 'string' }, dist: { type: 'string' } } })

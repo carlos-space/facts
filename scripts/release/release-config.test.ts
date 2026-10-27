@@ -9,11 +9,10 @@ const config = readJson('release-please-config.json')
 const manifest = readJson('.release-please-manifest.json')
 
 const expected: Record<string, string> = {
-  'packages/fact-kit': 'fact-kit',
   'packages/platform-facts': 'platform-facts',
 }
 
-// On main the config lists both packages. A release branch scopes it to the units of its train
+// On main the config lists every package. A release branch scopes it to the units of its train
 // (cut-release.sh --units), so the config may list fewer packages than the manifest, never more. The
 // manifest always keeps every package: release-please reads the other package's version from it, and
 // merge-back restores main's entries.

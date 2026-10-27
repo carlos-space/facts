@@ -1,6 +1,6 @@
 // Normalizes JSON Schema documents from other sources to the 2020-12 dialect that facts use.
-import { X_KEYWORDS } from '../../../fact-kit/src/index.ts'
-import type { JsonSchema } from '../../../fact-kit/src/index.ts'
+import { X_KEYWORDS } from 'fact-kit'
+import type { JsonSchema } from 'fact-kit'
 
 export const DRAFT_2020_12 = 'https://json-schema.org/draft/2020-12/schema'
 

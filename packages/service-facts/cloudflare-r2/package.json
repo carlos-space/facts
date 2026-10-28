@@ -1,0 +1,19 @@
+{
+  "name": "cloudflare-r2-facts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Facts about Cloudflare R2. Private workspace package, published through service-facts.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "fact-kit build",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "fact-kit": "^0.8.0",
+    "oxc-parser": "^0.155.0"
+  },
+  "exports": {
+    "./cloudflare-r2/index.json": "./dist/cloudflare-r2/index.json"
+  }
+}

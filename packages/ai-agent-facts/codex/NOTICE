@@ -1,0 +1,26 @@
+codex-facts
+Copyright (c) 2026 carlos-space
+Licensed under the MIT License (see LICENSE).
+
+This package is unofficial. It is not affiliated with, endorsed by, or sponsored by
+Anthropic, OpenAI, GitHub, Apple, Cloudflare, or the Sparkle project. Product and
+company names are trademarks of their respective owners.
+
+The converted facts of codex are derived from the third-party
+sources below. Each source keeps its own license. Every converted fact records the
+upstream repository, the pinned commit, and the converter that produced it.
+----------------------------------------------------------------------------------
+OpenAI Codex
+  https://github.com/openai/codex
+  Used for: codex (JSON Schemas for hook events and configuration)
+  Pinned tag: rust-v0.164.0 (commit 6aaac694803004a63c6f393d153c96d22521a6b9)
+  License: Apache License 2.0, full text in LICENSE-APACHE-2.0
+
+  Upstream NOTICE, reproduced:
+    OpenAI Codex
+    Copyright 2025 OpenAI
+
+  The schema text was converted (flattened, with fields and descriptions
+  re-organized into facts). It was modified from the original. Only the committed JSON
+  Schema files were read. No Codex source code is included, so the third-party
+  notice for Ratatui in the upstream NOTICE does not apply.

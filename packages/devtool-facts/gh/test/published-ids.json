@@ -1,0 +1,5 @@
+{
+  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "removed": [],
+  "ids": { "gh": ["gh.api-default-method", "gh.pr-subcommands"] }
+}

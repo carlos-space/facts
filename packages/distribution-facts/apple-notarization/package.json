@@ -1,0 +1,19 @@
+{
+  "name": "apple-notarization-facts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Facts about Apple notarization, code signing and Gatekeeper. Private workspace package, published through distribution-facts.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "fact-kit build",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "fact-kit": "^0.8.0",
+    "oxc-parser": "^0.155.0"
+  },
+  "exports": {
+    "./apple-notarization/index.json": "./dist/apple-notarization/index.json"
+  }
+}

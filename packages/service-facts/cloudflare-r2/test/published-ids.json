@@ -1,0 +1,12 @@
+{
+  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "removed": [],
+  "ids": {
+    "cloudflare-r2": [
+      "cloudflare-r2.custom-domain-cache",
+      "cloudflare-r2.custom-domain-same-account",
+      "cloudflare-r2.default-cached-extensions",
+      "cloudflare-r2.free-tier"
+    ]
+  }
+}

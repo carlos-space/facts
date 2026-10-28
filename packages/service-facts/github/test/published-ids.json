@@ -1,0 +1,18 @@
+{
+  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "removed": [],
+  "ids": {
+    "github": [
+      "github.codeowners-enforcement",
+      "github.commit-keywords",
+      "github.issue-close-keywords",
+      "github.linear-history",
+      "github.pr-keywords",
+      "github.protected-branch-plan-limit",
+      "github.rest.repos-update",
+      "github.ruleset-plan-limit",
+      "github.squash-default-message",
+      "github.squash-merge-message"
+    ]
+  }
+}

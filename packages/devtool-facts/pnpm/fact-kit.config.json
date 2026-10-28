@@ -1,0 +1,10 @@
+{
+  "allowedDomains": [
+    "github.com",
+    "index.crates.io",
+    "json-schema.org",
+    "pnpm.io",
+    "registry.npmjs.org",
+    "www.schemastore.org"
+  ]
+}

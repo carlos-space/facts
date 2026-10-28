@@ -1,0 +1,18 @@
+claude-code-facts
+Copyright (c) 2026 carlos-space
+Licensed under the MIT License (see LICENSE).
+
+This package is unofficial. It is not affiliated with, endorsed by, or sponsored by
+Anthropic, OpenAI, GitHub, Apple, Cloudflare, or the Sparkle project. Product and
+company names are trademarks of their respective owners.
+
+The converted facts of claude-code are derived from the third-party
+sources below. Each source keeps its own license. Every converted fact records the
+upstream repository, the pinned commit, and the converter that produced it.
+----------------------------------------------------------------------------------
+Claude Agent SDK (@anthropic-ai/claude-agent-sdk)
+  Used for: claude-code
+  Only names, types and enum values were read from the SDK's type declarations.
+  The SDK's documentation text (JSDoc descriptions) is not included in this package.
+  The SDK is distributed under Anthropic's own terms and none of its text is
+  redistributed here.

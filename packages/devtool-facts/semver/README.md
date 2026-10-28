@@ -1,0 +1,7 @@
+# semver-facts
+
+Machine-readable facts about Semantic Versioning (semver). Each fact records where it came from and, for observed facts, how to check it again.
+
+This is a private workspace package and is not published. Its facts ship in `devtool-facts` under the sub-path `devtool-facts/semver`, for example `readFacts('devtool-facts/semver')`.
+
+This package is unofficial. It is not affiliated with, endorsed by, or sponsored by the owners of Semantic Versioning (semver). Product names are trademarks of their respective owners.

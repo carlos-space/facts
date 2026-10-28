@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
-  "$comment": "One component, platform-facts, released on a release train: a release/vX.Y branch carries the whole repository, cut-release.sh --units picks the packages that board it, and scoped to the train this config holds only those. separate-pull-requests is false so the train gets a single Release PR with one changelog per package. Nothing is released from main.",
+  "$comment": "Five components, the aggregate packages ai-agent-facts, os-facts, devtool-facts, distribution-facts and service-facts, released on a release train: a release/vX.Y branch carries the whole repository, cut-release.sh --units picks the packages that board it, and scoped to the train this config holds only those. separate-pull-requests is false so the train gets a single Release PR with one changelog per package. Nothing is released from main.",
   "include-component-in-tag": true,
   "include-v-in-tag": true,
   "tag-separator": "/",
@@ -15,8 +15,24 @@
     { "type": "revert", "section": "Changed" }
   ],
   "packages": {
-    "packages/platform-facts": {
-      "component": "platform-facts",
+    "packages/ai-agent-facts": {
+      "component": "ai-agent-facts",
+      "release-type": "node"
+    },
+    "packages/os-facts": {
+      "component": "os-facts",
+      "release-type": "node"
+    },
+    "packages/devtool-facts": {
+      "component": "devtool-facts",
+      "release-type": "node"
+    },
+    "packages/distribution-facts": {
+      "component": "distribution-facts",
+      "release-type": "node"
+    },
+    "packages/service-facts": {
+      "component": "service-facts",
       "release-type": "node"
     }
   }

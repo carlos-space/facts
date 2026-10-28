@@ -9,7 +9,11 @@ const config = readJson('release-please-config.json')
 const manifest = readJson('.release-please-manifest.json')
 
 const expected: Record<string, string> = {
-  'packages/platform-facts': 'platform-facts',
+  'packages/ai-agent-facts': 'ai-agent-facts',
+  'packages/os-facts': 'os-facts',
+  'packages/devtool-facts': 'devtool-facts',
+  'packages/distribution-facts': 'distribution-facts',
+  'packages/service-facts': 'service-facts',
 }
 
 // On main the config lists every package. A release branch scopes it to the units of its train

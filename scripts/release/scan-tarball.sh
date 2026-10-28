@@ -26,7 +26,7 @@ if grep -rEnI "$re" "$dir"; then
 fi
 
 while IFS= read -r idx; do
-  "$root/packages/platform-facts/node_modules/.bin/fact-kit" check --cwd "$(mktemp -d)" --index "$idx" ${allow[@]+"${allow[@]}"} || bad=1
+  "$pkg/node_modules/.bin/fact-kit" check --cwd "$(mktemp -d)" --index "$idx" ${allow[@]+"${allow[@]}"} || bad=1
 done < <(find "$dir" -name index.json -not -path '*/node_modules/*')
 
 exit "$bad"

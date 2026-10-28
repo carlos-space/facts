@@ -19,12 +19,12 @@ function fixture(version: string) {
   const dir = mkdtempSync(join(tmpdir(), 'publish-units-'))
   made.push(dir)
   mkdirSync(join(dir, 'scripts/release'), { recursive: true })
-  mkdirSync(join(dir, 'packages/platform-facts'), { recursive: true })
+  mkdirSync(join(dir, 'packages/ai-agent-facts'), { recursive: true })
   cpSync(script, join(dir, 'scripts/release/publish-units.sh'))
   const json = (file: string, value: unknown) => writeFileSync(join(dir, file), JSON.stringify(value, null, 2))
-  json('packages/platform-facts/package.json', { name: 'platform-facts', version })
-  json('.release-please-manifest.json', { 'packages/platform-facts': version })
-  json('release-please-config.json', { packages: { 'packages/platform-facts': { component: 'platform-facts' } } })
+  json('packages/ai-agent-facts/package.json', { name: 'ai-agent-facts', version })
+  json('.release-please-manifest.json', { 'packages/ai-agent-facts': version })
+  json('release-please-config.json', { packages: { 'packages/ai-agent-facts': { component: 'ai-agent-facts' } } })
   const git = (...args: string[]) => execFileSync('git', args, { cwd: dir, stdio: 'ignore' })
   git('init', '-q')
   git('add', '-A')
@@ -44,35 +44,35 @@ function run(dir: string, ...args: string[]) {
 describe('publish-units.sh stage and dist-tag checks', () => {
   test('a prerelease version with stage ga is refused', () => {
     const { dir } = fixture('0.4.1-alpha.1')
-    const r = run(dir, 'ga', 'packages/platform-facts')
+    const r = run(dir, 'ga', 'packages/ai-agent-facts')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/belongs to stage alpha, but this release's stage is ga/)
   })
 
   test('a prerelease version with stage latest is refused', () => {
     const { dir } = fixture('0.4.1-alpha.1')
-    const r = run(dir, 'latest', 'packages/platform-facts')
+    const r = run(dir, 'latest', 'packages/ai-agent-facts')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/stage "latest" is not alpha, beta, rc or ga/)
   })
 
   test('a stable version with stage alpha is refused', () => {
     const { dir } = fixture('0.4.1')
-    const r = run(dir, 'alpha', 'packages/platform-facts')
+    const r = run(dir, 'alpha', 'packages/ai-agent-facts')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/belongs to stage ga, but this release's stage is alpha/)
   })
 
   test('a prerelease version with a different prerelease stage is refused', () => {
     const { dir } = fixture('0.4.1-beta.2')
-    const r = run(dir, 'rc', 'packages/platform-facts')
+    const r = run(dir, 'rc', 'packages/ai-agent-facts')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/belongs to stage beta, but this release's stage is rc/)
   })
 
   test('a version that is not X.Y.Z or X.Y.Z-<stage>.N is refused', () => {
     const { dir } = fixture('0.4.1-staging.1')
-    const r = run(dir, 'alpha', 'packages/platform-facts')
+    const r = run(dir, 'alpha', 'packages/ai-agent-facts')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/release stage is unknown/)
   })
@@ -84,14 +84,14 @@ describe('publish-units.sh stage and dist-tag checks', () => {
     ['0.4.1', 'ga', 'latest'],
   ])('version %s with stage %s passes the checks and would publish under dist-tag %s', (version, stage, tag) => {
     const { dir } = fixture(version)
-    const r = run(dir, stage, 'packages/platform-facts')
-    expect(r.out).toContain(`check only: platform-facts@${version} passed (stage ${stage}, dist-tag ${tag})`)
+    const r = run(dir, stage, 'packages/ai-agent-facts')
+    expect(r.out).toContain(`check only: ai-agent-facts@${version} passed (stage ${stage}, dist-tag ${tag})`)
     expect(r.status).toBe(0)
   })
 
   test('the stage is required', () => {
     const { dir } = fixture('0.4.1-alpha.1')
-    const r = run(dir, 'packages/platform-facts')
+    const r = run(dir, 'packages/ai-agent-facts')
     expect(r.status).not.toBe(0)
     expect(r.out).toMatch(/usage: publish-units\.sh <alpha\|beta\|rc\|ga>/)
   })
@@ -100,18 +100,18 @@ describe('publish-units.sh stage and dist-tag checks', () => {
 describe('publish-units.sh same-content check against the tag', () => {
   test('the package equal to its tag passes', () => {
     const { dir, git } = fixture('0.4.1-alpha.1')
-    git('tag', 'platform-facts/v0.4.1-alpha.1')
-    expect(run(dir, 'alpha', 'packages/platform-facts').status).toBe(0)
+    git('tag', 'ai-agent-facts/v0.4.1-alpha.1')
+    expect(run(dir, 'alpha', 'packages/ai-agent-facts').status).toBe(0)
   })
 
   test('the package changed since its tag is refused', () => {
     const { dir, git } = fixture('0.4.1-alpha.1')
-    git('tag', 'platform-facts/v0.4.1-alpha.1')
-    writeFileSync(join(dir, 'packages/platform-facts/index.js'), 'export {}\n')
+    git('tag', 'ai-agent-facts/v0.4.1-alpha.1')
+    writeFileSync(join(dir, 'packages/ai-agent-facts/index.js'), 'export {}\n')
     git('add', '-A')
     git(...identity, 'commit', '-q', '-m', 'change after the tag')
-    const r = run(dir, 'alpha', 'packages/platform-facts')
+    const r = run(dir, 'alpha', 'packages/ai-agent-facts')
     expect(r.status).not.toBe(0)
-    expect(r.out).toMatch(/內容和 tag platform-facts\/v0\.4\.1-alpha\.1 不同/)
+    expect(r.out).toMatch(/內容和 tag ai-agent-facts\/v0\.4\.1-alpha\.1 不同/)
   })
 })

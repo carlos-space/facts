@@ -1,0 +1,55 @@
+{
+  "name": "devtool-facts",
+  "version": "0.0.0",
+  "description": "Unofficial machine-readable facts about developer tools: gfm, gh, git, pnpm, release-please, semver, TypeScript and wrangler. Not affiliated with GitHub, Cloudflare, Microsoft or the maintainers of these tools.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlos-space/facts",
+    "directory": "packages/devtool-facts"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "LICENSE-APACHE-2.0",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "fact-kit build"
+  },
+  "devDependencies": {
+    "fact-kit": "^0.8.0",
+    "gfm-facts": "workspace:*",
+    "gh-facts": "workspace:*",
+    "git-facts": "workspace:*",
+    "pnpm-facts": "workspace:*",
+    "release-please-facts": "workspace:*",
+    "semver-facts": "workspace:*",
+    "typescript-facts": "workspace:*",
+    "wrangler-facts": "workspace:*"
+  },
+  "exports": {
+    "./gfm/index.json": "./dist/gfm/index.json",
+    "./gfm/schemas/*": "./dist/gfm/schemas/*",
+    "./gh/index.json": "./dist/gh/index.json",
+    "./gh/schemas/*": "./dist/gh/schemas/*",
+    "./git/index.json": "./dist/git/index.json",
+    "./git/schemas/*": "./dist/git/schemas/*",
+    "./pnpm/index.json": "./dist/pnpm/index.json",
+    "./pnpm/schemas/*": "./dist/pnpm/schemas/*",
+    "./release-please/index.json": "./dist/release-please/index.json",
+    "./release-please/schemas/*": "./dist/release-please/schemas/*",
+    "./semver/index.json": "./dist/semver/index.json",
+    "./semver/schemas/*": "./dist/semver/schemas/*",
+    "./typescript/index.json": "./dist/typescript/index.json",
+    "./typescript/schemas/*": "./dist/typescript/schemas/*",
+    "./wrangler/index.json": "./dist/wrangler/index.json",
+    "./wrangler/schemas/*": "./dist/wrangler/schemas/*"
+  }
+}

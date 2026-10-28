@@ -1,0 +1,14 @@
+{
+  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "removed": [],
+  "ids": {
+    "apple-notarization": [
+      "apple-notarization.accepted-containers",
+      "apple-notarization.notarytool-api-key",
+      "apple-notarization.requirements",
+      "apple-notarization.secure-timestamp",
+      "apple-notarization.spctl-assess-type",
+      "apple-notarization.staple-targets"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "ai-agent-facts",
+  "version": "0.0.0",
+  "description": "Unofficial machine-readable facts about AI agent products: Claude Code, Claude Desktop and Codex. Not affiliated with Anthropic or OpenAI.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlos-space/facts",
+    "directory": "packages/ai-agent-facts"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "LICENSE-APACHE-2.0",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "fact-kit build"
+  },
+  "devDependencies": {
+    "claude-code-facts": "workspace:*",
+    "claude-desktop-facts": "workspace:*",
+    "codex-facts": "workspace:*",
+    "fact-kit": "^0.8.0"
+  },
+  "exports": {
+    "./claude-code/index.json": "./dist/claude-code/index.json",
+    "./claude-code/schemas/*": "./dist/claude-code/schemas/*",
+    "./claude-desktop/index.json": "./dist/claude-desktop/index.json",
+    "./claude-desktop/schemas/*": "./dist/claude-desktop/schemas/*",
+    "./codex/index.json": "./dist/codex/index.json",
+    "./codex/schemas/*": "./dist/codex/schemas/*"
+  }
+}

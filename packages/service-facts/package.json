@@ -1,0 +1,40 @@
+{
+  "name": "service-facts",
+  "version": "0.0.0",
+  "description": "Unofficial machine-readable facts about services: Cloudflare R2, GitHub and GitHub Actions. Not affiliated with Cloudflare or GitHub.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlos-space/facts",
+    "directory": "packages/service-facts"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "LICENSE-APACHE-2.0",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "fact-kit build"
+  },
+  "devDependencies": {
+    "cloudflare-r2-facts": "workspace:*",
+    "fact-kit": "^0.8.0",
+    "github-actions-facts": "workspace:*",
+    "github-facts": "workspace:*"
+  },
+  "exports": {
+    "./cloudflare-r2/index.json": "./dist/cloudflare-r2/index.json",
+    "./cloudflare-r2/schemas/*": "./dist/cloudflare-r2/schemas/*",
+    "./github/index.json": "./dist/github/index.json",
+    "./github/schemas/*": "./dist/github/schemas/*",
+    "./github-actions/index.json": "./dist/github-actions/index.json",
+    "./github-actions/schemas/*": "./dist/github-actions/schemas/*"
+  }
+}

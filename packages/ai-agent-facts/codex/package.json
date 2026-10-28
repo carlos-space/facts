@@ -1,0 +1,22 @@
+{
+  "name": "codex-facts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Facts about Codex. Private workspace package, published through ai-agent-facts.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "fact-kit build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "convert": "node scripts/convert-codex.ts"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "fact-kit": "^0.8.0",
+    "oxc-parser": "^0.155.0",
+    "typescript": "7.1.0-beta"
+  },
+  "exports": {
+    "./codex/index.json": "./dist/codex/index.json"
+  }
+}

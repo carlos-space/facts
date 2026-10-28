@@ -1,0 +1,12 @@
+{
+  "allowedDomains": [
+    "crontab.guru",
+    "docs.docker.com",
+    "en.wikipedia.org",
+    "github.blog",
+    "github.com",
+    "hub.docker.com",
+    "json-schema.org",
+    "pubs.opengroup.org"
+  ]
+}

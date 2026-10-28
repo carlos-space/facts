@@ -1,6 +1,11 @@
 {
   "product": { "name": "facts", "members": [] },
+  "access": "public",
   "units": {
-    "platform-facts": { "kind": "package", "stages": ["ga"] }
+    "ai-agent-facts": { "kind": "package", "stages": ["ga"] },
+    "os-facts": { "kind": "package", "stages": ["ga"] },
+    "devtool-facts": { "kind": "package", "stages": ["ga"] },
+    "distribution-facts": { "kind": "package", "stages": ["ga"] },
+    "service-facts": { "kind": "package", "stages": ["ga"] }
   }
 }

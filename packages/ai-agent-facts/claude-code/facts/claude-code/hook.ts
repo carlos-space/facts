@@ -1,8 +1,8 @@
-import { factsOf, observedDoc, observedSpike } from 'fact-kit'
+import { factsOf, observedDoc, observedSpike, statementFrom, subsetOf } from 'fact-kit'
 import type { Fact } from 'fact-kit'
 import converted from './converted.json' with { type: 'json' }
 
-// The list of hook events comes from the conversion of the SDK. The statement about blocking events lists derives from it.
+// The list of hook events comes from the conversion of the SDK. The blocking events must stay inside it.
 const hookEvents = (converted.facts as Fact[]).find((f) => f.id === 'claude-code.hook-events') as Fact
 
 const mf = factsOf({
@@ -11,34 +11,44 @@ const mf = factsOf({
   source: observedDoc({ url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-02' }),
 })
 
-// Every name here must be in `claude-code.hook-events`; test/hook-blocking-events.test.ts checks it.
-export const blocking = [
-  'PreToolUse',
-  'UserPromptSubmit',
-  'UserPromptExpansion',
-  'Stop',
-  'SubagentStop',
-  'TeammateIdle',
-  'TaskCreated',
-  'TaskCompleted',
-  'ConfigChange',
-  'PostToolBatch',
-  'PreCompact',
-  'PreModelSwitch',
-  'Elicitation',
-  'ElicitationResult',
-  'WorktreeCreate',
-  'WorktreeRemove',
-]
+const blockingNames = mf.value(
+  'hook-blocking-event-names',
+  subsetOf(hookEvents, [
+    'PreToolUse',
+    'UserPromptSubmit',
+    'UserPromptExpansion',
+    'Stop',
+    'SubagentStop',
+    'TeammateIdle',
+    'TaskCreated',
+    'TaskCompleted',
+    'ConfigChange',
+    'PostToolBatch',
+    'PreCompact',
+    'PreModelSwitch',
+    'Elicitation',
+    'ElicitationResult',
+    'WorktreeCreate',
+    'WorktreeRemove',
+  ]),
+  {
+    topics: ['blocking'],
+    description:
+      '可阻擋的 hook 事件名稱清單，必須都在 claude-code.hook-events 內；hook-blocking-events 的內文由它產生。',
+  },
+)
 
 export const hookFacts = [
+  blockingNames,
   mf.statement(
     'hook-blocking-events',
-    () =>
-      `現行可阻擋的 hook 事件有 ${blocking.length} 個：${blocking.join('、')}。PostToolUse 等事後類事件在動作已執行後才觸發，不能阻擋。matcher 對工具事件用正則，或以管道符號、逗號分隔的工具名比對。`,
+    statementFrom(
+      blockingNames,
+      (names) =>
+        `現行可阻擋的 hook 事件有 ${names.length} 個：${names.join('、')}。PostToolUse 等事後類事件在動作已執行後才觸發，不能阻擋。matcher 對工具事件用正則，或以管道符號、逗號分隔的工具名比對。`,
+    ),
     {
       topics: ['blocking'],
-      relates: [hookEvents],
       verify: {
         probe: {
           kind: 'hash',

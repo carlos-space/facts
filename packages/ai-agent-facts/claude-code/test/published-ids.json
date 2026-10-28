@@ -1,5 +1,5 @@
 {
-  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "baseline": "ai-agent-facts@0.1.0",
   "removed": [],
   "ids": {
     "claude-code": [
@@ -37,6 +37,7 @@
       "claude-code.detailed-tracing-reroutes-export",
       "claude-code.edit-missing-file-skips-pretooluse",
       "claude-code.exit-reasons",
+      "claude-code.hook-blocking-event-names",
       "claude-code.hook-blocking-events",
       "claude-code.hook-command-shell",
       "claude-code.hook-env-session-trace",

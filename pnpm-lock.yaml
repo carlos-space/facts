@@ -113,8 +113,8 @@ importers:
         specifier: ^24.13.4
         version: 24.19.2
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       prettier:
         specifier: ^3.6.2
         version: 3.9.10
@@ -140,8 +140,8 @@ importers:
         specifier: workspace:*
         version: link:codex
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
 
   packages/ai-agent-facts/claude-code:
     devDependencies:
@@ -152,8 +152,8 @@ importers:
         specifier: ^8.20.0
         version: 8.20.0
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.1.0-beta)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.1.0-beta)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -164,8 +164,8 @@ importers:
   packages/ai-agent-facts/claude-desktop:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -176,8 +176,8 @@ importers:
         specifier: ^8.20.0
         version: 8.20.0
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.1.0-beta)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.1.0-beta)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -188,8 +188,8 @@ importers:
   packages/devtool-facts:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       gfm-facts:
         specifier: workspace:*
         version: link:gfm
@@ -218,8 +218,8 @@ importers:
   packages/devtool-facts/gfm:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -227,8 +227,8 @@ importers:
   packages/devtool-facts/gh:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -236,8 +236,8 @@ importers:
   packages/devtool-facts/git:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -245,8 +245,8 @@ importers:
   packages/devtool-facts/pnpm:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.1.0-beta)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.1.0-beta)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -257,8 +257,8 @@ importers:
   packages/devtool-facts/release-please:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -266,8 +266,8 @@ importers:
   packages/devtool-facts/semver:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -275,8 +275,8 @@ importers:
   packages/devtool-facts/typescript:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -284,8 +284,8 @@ importers:
   packages/devtool-facts/wrangler:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -302,8 +302,8 @@ importers:
         specifier: workspace:*
         version: link:crates-io
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       google-play-facts:
         specifier: workspace:*
         version: link:google-play
@@ -320,8 +320,8 @@ importers:
   packages/distribution-facts/app-store:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -329,8 +329,8 @@ importers:
   packages/distribution-facts/apple-notarization:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -338,8 +338,8 @@ importers:
   packages/distribution-facts/crates-io:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -347,8 +347,8 @@ importers:
   packages/distribution-facts/google-play:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -356,8 +356,8 @@ importers:
   packages/distribution-facts/npm:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -365,8 +365,8 @@ importers:
   packages/distribution-facts/pypi:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -374,8 +374,8 @@ importers:
   packages/distribution-facts/sparkle:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -383,8 +383,8 @@ importers:
   packages/os-facts:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
 
   packages/service-facts:
     devDependencies:
@@ -392,8 +392,8 @@ importers:
         specifier: workspace:*
         version: link:cloudflare-r2
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       github-actions-facts:
         specifier: workspace:*
         version: link:github-actions
@@ -404,8 +404,8 @@ importers:
   packages/service-facts/cloudflare-r2:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.0.2)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -413,8 +413,8 @@ importers:
   packages/service-facts/github:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.1.0-beta)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.1.0-beta)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -425,8 +425,8 @@ importers:
   packages/service-facts/github-actions:
     devDependencies:
       fact-kit:
-        specifier: ^0.8.0
-        version: 0.8.0(oxc-parser@0.155.0)(typescript@7.1.0-beta)
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.1.0-beta)
       oxc-parser:
         specifier: ^0.155.0
         version: 0.155.0
@@ -1186,15 +1186,18 @@ packages:
     resolution: {integrity: sha512-qCqy1xSoaugxOD4IVHb1ZWdkvCF2W3aE2okKouWj8VwJ+ztskSiXoBnCSJqfKT+cVPJhuJqe9YLbY425+Zh00g==}
     engines: {node: '>= 18'}
 
-  fact-kit@0.8.0:
-    resolution: {integrity: sha512-kUEbAxDsEkSzdkmMtapPjyN+4+S9+TkvHiLbOzoON1BMvU91AYiNxeiEmABVzogl9eBiPC5LKXHpQaD90DKE+w==}
+  fact-kit@0.10.0:
+    resolution: {integrity: sha512-XtuEolyJ8lc/Uy1VX+AosQjG4T9+aP3vnKjUwuuLqcPbM5VEv1VS/RX5TgwE2VRyZvHmSavO/tHucu2or1Z8Ng==}
     engines: {node: '>=24.0.0'}
     hasBin: true
     peerDependencies:
       oxc-parser: ^0.155.0
+      prettier: '>=3.0.0'
       typescript: '>=7.1.0-beta'
     peerDependenciesMeta:
       oxc-parser:
+        optional: true
+      prettier:
         optional: true
       typescript:
         optional: true
@@ -2231,18 +2234,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  fact-kit@0.8.0(oxc-parser@0.155.0)(typescript@7.0.2):
+  fact-kit@0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2):
     dependencies:
       ajv: 8.20.0
     optionalDependencies:
       oxc-parser: 0.155.0
+      prettier: 3.9.10
       typescript: 7.0.2
 
-  fact-kit@0.8.0(oxc-parser@0.155.0)(typescript@7.1.0-beta):
+  fact-kit@0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.1.0-beta):
     dependencies:
       ajv: 8.20.0
     optionalDependencies:
       oxc-parser: 0.155.0
+      prettier: 3.9.10
       typescript: 7.1.0-beta
 
   fast-deep-equal@3.1.3: {}

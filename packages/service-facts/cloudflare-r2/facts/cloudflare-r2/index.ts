@@ -1,6 +1,11 @@
 import type { FactsModule } from 'fact-kit'
-import { observed } from './observed.ts'
+import { customDomainFacts } from './custom-domain.ts'
+import { cacheFacts } from './cache.ts'
+import { pricingFacts } from './pricing.ts'
 
-const entry: FactsModule = { describes: {}, facts: observed }
+const entry: FactsModule = {
+  describes: {},
+  facts: [...customDomainFacts, ...cacheFacts, ...pricingFacts],
+}
 
 export default entry

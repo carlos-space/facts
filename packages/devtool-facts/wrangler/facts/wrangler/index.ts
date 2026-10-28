@@ -1,6 +1,9 @@
 import type { FactsModule } from 'fact-kit'
-import { observed } from './observed.ts'
+import { wranglerFacts } from './wrangler.ts'
 
-const entry: FactsModule = { describes: {}, facts: observed }
+const entry: FactsModule = {
+  describes: {},
+  facts: [...wranglerFacts],
+}
 
 export default entry

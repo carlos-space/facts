@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "cloudflare-r2-facts": "workspace:*",
-    "fact-kit": "^0.8.0",
+    "fact-kit": "^0.10.0",
     "github-actions-facts": "workspace:*",
     "github-facts": "workspace:*"
   },

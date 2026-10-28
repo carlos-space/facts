@@ -3,13 +3,11 @@
 // Usage: node scripts/convert-github.ts
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { Fact } from 'fact-kit'
-import { stableJson, writeFormatted } from '../../../../scripts/lib/format.ts'
-import { normalizeSchema } from '../../../../scripts/lib/schema.ts'
-import { readPinned, sourceUrl } from '../../../../scripts/lib/sources.ts'
-import type { PinnedSource } from '../../../../scripts/lib/sources.ts'
+import { normalizeSchema, readPinned, sourceUrl, stableJson, writeFormatted } from 'fact-kit'
+import type { Fact, PinnedSource } from 'fact-kit'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
+const cacheDir = join(root, '..', '..', '..', 'tmp', 'sources')
 const CONVERTER = 'packages/service-facts/github/scripts/convert-github.ts'
 
 export const GITHUB_REST: PinnedSource = {
@@ -55,7 +53,7 @@ const notes = new Map<string, number>()
 const OPENAPI_ONLY = ['example', 'xml', 'externalDocs', 'discriminator']
 
 async function endpointFacts(): Promise<Fact[]> {
-  const doc = JSON.parse(await readPinned(GITHUB_REST)) as Obj
+  const doc = JSON.parse(await readPinned(GITHUB_REST, { cacheDir })) as Obj
   const paths = doc.paths as Record<string, Record<string, Obj>>
   const facts: Fact[] = []
   for (const { operationId, usedBy } of ENDPOINTS) {

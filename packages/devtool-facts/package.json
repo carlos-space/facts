@@ -24,7 +24,7 @@
     "build": "fact-kit build"
   },
   "devDependencies": {
-    "fact-kit": "^0.8.0",
+    "fact-kit": "^0.10.0",
     "gfm-facts": "workspace:*",
     "gh-facts": "workspace:*",
     "git-facts": "workspace:*",

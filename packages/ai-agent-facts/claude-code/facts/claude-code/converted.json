@@ -5542,6 +5542,11 @@
                       "type": "string"
                     },
                     "minItems": 1,
+                    "prefixItems": [
+                      {
+                        "type": "string"
+                      }
+                    ],
                     "type": "array"
                   },
                   "serverName": {
@@ -6095,6 +6100,11 @@
                       "type": "string"
                     },
                     "minItems": 1,
+                    "prefixItems": [
+                      {
+                        "type": "string"
+                      }
+                    ],
                     "type": "array"
                   },
                   "serverName": {
@@ -8383,6 +8393,11 @@
               },
               "maxItems": 25,
               "minItems": 1,
+              "prefixItems": [
+                {
+                  "type": "string"
+                }
+              ],
               "type": "array"
             },
             "force": {
@@ -8472,195 +8487,197 @@
             "questions": {
               "anyOf": [
                 {
-                  "items": {
-                    "additionalProperties": false,
-                    "properties": {
-                      "header": {
-                        "type": "string"
-                      },
-                      "multiSelect": {
-                        "type": "boolean"
-                      },
-                      "options": {
-                        "anyOf": [
-                          {
-                            "maxItems": 2,
-                            "minItems": 2,
-                            "prefixItems": [
-                              {
-                                "additionalProperties": false,
-                                "properties": {
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "type": "string"
-                                  },
-                                  "preview": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["label", "description"],
-                                "type": "object"
-                              },
-                              {
-                                "additionalProperties": false,
-                                "properties": {
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "type": "string"
-                                  },
-                                  "preview": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["label", "description"],
-                                "type": "object"
-                              }
-                            ],
-                            "type": "array"
-                          },
-                          {
-                            "maxItems": 3,
-                            "minItems": 3,
-                            "prefixItems": [
-                              {
-                                "additionalProperties": false,
-                                "properties": {
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "type": "string"
-                                  },
-                                  "preview": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["label", "description"],
-                                "type": "object"
-                              },
-                              {
-                                "additionalProperties": false,
-                                "properties": {
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "type": "string"
-                                  },
-                                  "preview": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["label", "description"],
-                                "type": "object"
-                              },
-                              {
-                                "additionalProperties": false,
-                                "properties": {
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "type": "string"
-                                  },
-                                  "preview": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["label", "description"],
-                                "type": "object"
-                              }
-                            ],
-                            "type": "array"
-                          },
-                          {
-                            "maxItems": 4,
-                            "minItems": 4,
-                            "prefixItems": [
-                              {
-                                "additionalProperties": false,
-                                "properties": {
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "type": "string"
-                                  },
-                                  "preview": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["label", "description"],
-                                "type": "object"
-                              },
-                              {
-                                "additionalProperties": false,
-                                "properties": {
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "type": "string"
-                                  },
-                                  "preview": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["label", "description"],
-                                "type": "object"
-                              },
-                              {
-                                "additionalProperties": false,
-                                "properties": {
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "type": "string"
-                                  },
-                                  "preview": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["label", "description"],
-                                "type": "object"
-                              },
-                              {
-                                "additionalProperties": false,
-                                "properties": {
-                                  "description": {
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "type": "string"
-                                  },
-                                  "preview": {
-                                    "type": "string"
-                                  }
-                                },
-                                "required": ["label", "description"],
-                                "type": "object"
-                              }
-                            ],
-                            "type": "array"
-                          }
-                        ],
-                        "maxItems": 4,
-                        "minItems": 2
-                      },
-                      "question": {
-                        "type": "string"
-                      }
-                    },
-                    "required": ["question", "header", "options", "multiSelect"],
-                    "type": "object"
-                  },
                   "maxItems": 1,
                   "minItems": 1,
+                  "prefixItems": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "header": {
+                          "type": "string"
+                        },
+                        "multiSelect": {
+                          "type": "boolean"
+                        },
+                        "options": {
+                          "anyOf": [
+                            {
+                              "maxItems": 2,
+                              "minItems": 2,
+                              "prefixItems": [
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "preview": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["label", "description"],
+                                  "type": "object"
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "preview": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["label", "description"],
+                                  "type": "object"
+                                }
+                              ],
+                              "type": "array"
+                            },
+                            {
+                              "maxItems": 3,
+                              "minItems": 3,
+                              "prefixItems": [
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "preview": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["label", "description"],
+                                  "type": "object"
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "preview": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["label", "description"],
+                                  "type": "object"
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "preview": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["label", "description"],
+                                  "type": "object"
+                                }
+                              ],
+                              "type": "array"
+                            },
+                            {
+                              "maxItems": 4,
+                              "minItems": 4,
+                              "prefixItems": [
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "preview": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["label", "description"],
+                                  "type": "object"
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "preview": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["label", "description"],
+                                  "type": "object"
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "preview": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["label", "description"],
+                                  "type": "object"
+                                },
+                                {
+                                  "additionalProperties": false,
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "preview": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": ["label", "description"],
+                                  "type": "object"
+                                }
+                              ],
+                              "type": "array"
+                            }
+                          ],
+                          "maxItems": 4,
+                          "minItems": 2
+                        },
+                        "question": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["question", "header", "options", "multiSelect"],
+                      "type": "object"
+                    }
+                  ],
                   "type": "array"
                 },
                 {
@@ -11125,37 +11142,39 @@
             "proposals": {
               "anyOf": [
                 {
-                  "items": {
-                    "additionalProperties": false,
-                    "properties": {
-                      "description": {
-                        "type": "string"
-                      },
-                      "evidence": {
-                        "items": {
-                          "type": "string"
-                        },
-                        "type": "array"
-                      },
-                      "kind": {
-                        "enum": ["new", "improvement"],
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "skillMd": {
-                        "type": "string"
-                      },
-                      "target": {
-                        "type": "string"
-                      }
-                    },
-                    "required": ["name", "kind", "description", "skillMd"],
-                    "type": "object"
-                  },
                   "maxItems": 1,
                   "minItems": 1,
+                  "prefixItems": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "description": {
+                          "type": "string"
+                        },
+                        "evidence": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        },
+                        "kind": {
+                          "enum": ["new", "improvement"],
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "skillMd": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["name", "kind", "description", "skillMd"],
+                      "type": "object"
+                    }
+                  ],
                   "type": "array"
                 },
                 {

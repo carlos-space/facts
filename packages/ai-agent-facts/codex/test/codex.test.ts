@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import type { Fact } from 'fact-kit'
 import { stripDescriptions } from '../scripts/convert-codex.ts'
-import { observed } from '../facts/codex/observed.ts'
+import { agentsMdFacts } from '../facts/codex/agents-md.ts'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const converted = JSON.parse(await readFile(join(root, 'facts', 'codex', 'converted.json'), 'utf8')) as {
@@ -54,8 +54,9 @@ describe('codex conversion from rust-v0.164.0', () => {
   })
 
   it('has five AGENTS.md constants, each with a line-numbered source', () => {
-    expect(observed).toHaveLength(5)
-    for (const fact of observed) {
+    const constants = agentsMdFacts.filter((fact) => !fact.id.endsWith('-paths'))
+    expect(constants).toHaveLength(5)
+    for (const fact of constants) {
       expect((fact.source as { url: string }).url).toMatch(/\/codex-rs\/.+#L\d+$/)
     }
   })

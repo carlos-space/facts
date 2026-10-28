@@ -7,13 +7,11 @@
 // not copied into the output.
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { Fact, JsonSchema } from 'fact-kit'
-import { stableJson, writeFormatted } from '../../../../scripts/lib/format.ts'
-import { normalizeSchema } from '../../../../scripts/lib/schema.ts'
-import { readPinned, sourceUrl } from '../../../../scripts/lib/sources.ts'
-import type { PinnedSource } from '../../../../scripts/lib/sources.ts'
+import { normalizeSchema, readPinned, sourceUrl, stableJson, writeFormatted } from 'fact-kit'
+import type { Fact, JsonSchema, PinnedSource } from 'fact-kit'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
+const cacheDir = join(root, '..', '..', '..', 'tmp', 'sources')
 const CONVERTER = 'packages/ai-agent-facts/codex/scripts/convert-codex.ts'
 
 export const CODEX_VERSION = '0.164.0'
@@ -97,7 +95,7 @@ const source = (pinned: PinnedSource): Fact['source'] => ({
 const text = (en: string) => ({ en })
 
 async function main(): Promise<void> {
-  const config = JSON.parse(await readPinned(CONFIG_SCHEMA)) as {
+  const config = JSON.parse(await readPinned(CONFIG_SCHEMA, { cacheDir })) as {
     properties: Record<string, unknown>
     definitions: Record<string, { properties?: Record<string, { type?: string; items?: { $ref?: string } }> }>
   }
@@ -124,7 +122,7 @@ async function main(): Promise<void> {
     tool: 'codex',
     topics: ['config'],
     title: text('config.toml fields'),
-    content: { schema: toSchema(await readPinned(CONFIG_SCHEMA)) },
+    content: { schema: toSchema(await readPinned(CONFIG_SCHEMA, { cacheDir })) },
     source: source(CONFIG_SCHEMA),
   })
   for (const { name, direction, sha256 } of HOOK_SCHEMAS) {
@@ -134,7 +132,7 @@ async function main(): Promise<void> {
       tool: 'codex',
       topics: ['hook', name],
       title: text(`${name} hook ${direction}`),
-      content: { schema: toSchema(await readPinned(pinned)) },
+      content: { schema: toSchema(await readPinned(pinned, { cacheDir })) },
       source: source(pinned),
     })
   }

@@ -1,21 +1,25 @@
 // Converts the type declarations of @anthropic-ai/claude-agent-sdk into facts under facts/claude-code/converted.json.
-// Usage: node scripts/convert-claude-code.ts
+// Usage: node scripts/convert-claude-code.ts [--out <file>]
+// Without `--out` the result is written to facts/claude-code/converted.json.
 // The SDK is pinned in package.json, and its `claudeCodeVersion` is the Claude Code version the facts describe.
 // The SDK's license is Anthropic's proprietary terms, so the declaration files are only read here. The output
 // holds names, types and enum values only. `descriptions: false` removes the SDK's JSDoc text, which is its prose.
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { interfaceToJsonSchema, readStringTuplesFromFile } from 'fact-kit'
+import { BUILTIN_TOOL_NAMES, EXIT_REASONS, HOOK_EVENTS } from '@anthropic-ai/claude-agent-sdk'
+import { interfaceToJsonSchema, normalizeSchema, stableJson, writeFormatted } from 'fact-kit'
 import type { Fact, JsonSchema } from 'fact-kit'
-import { stableJson, writeFormatted } from '../../../../scripts/lib/format.ts'
-import { normalizeSchema } from '../../../../scripts/lib/schema.ts'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const repoRoot = join(root, '..', '..', '..')
 const sdkDir = join(root, 'node_modules', '@anthropic-ai', 'claude-agent-sdk')
 const SDK_NAME = '@anthropic-ai/claude-agent-sdk'
 const CONVERTER = 'packages/ai-agent-facts/claude-code/scripts/convert-claude-code.ts'
+
+const outIndex = process.argv.indexOf('--out')
+const outFile =
+  outIndex === -1 ? join(root, 'facts', 'claude-code', 'converted.json') : resolve(process.argv[outIndex + 1] ?? '')
 
 const kebab = (name: string): string => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
 
@@ -59,9 +63,9 @@ async function main(): Promise<void> {
   const scratch = join(repoRoot, 'tmp', 'convert-claude-code')
   await mkdir(scratch, { recursive: true })
 
-  const tuples = await readStringTuplesFromFile(join(sdkDir, 'sdk.d.ts'))
-  const events = tuples.HOOK_EVENTS
-  if (!events || events.length === 0) throw new Error('HOOK_EVENTS was not found in sdk.d.ts')
+  // The SDK exports these lists as values, so the converter reads them at run time instead of parsing sdk.d.ts.
+  const events: readonly string[] = HOOK_EVENTS
+  if (events.length === 0) throw new Error('HOOK_EVENTS of the SDK is empty')
   const declared = (re: RegExp, haystack: string) => new Set([...haystack.matchAll(re)].map((m) => m[1] as string))
   const specificOutputs = declared(/^export declare type (\w+)HookSpecificOutput\b/gm, sdkText)
   const toolInputs = [...declared(/^export interface (\w+)Input\b/gm, toolsText)].sort()
@@ -81,8 +85,8 @@ async function main(): Promise<void> {
     add({ id: `claude-code.${id}`, topics, title: text(title), content: { value: values }, file: 'sdk.d.ts' })
 
   list('hook-events', 'Hook event names', ['hook'], events)
-  if (tuples.EXIT_REASONS) list('exit-reasons', 'Session end reasons', ['hook', 'session'], tuples.EXIT_REASONS)
-  if (tuples.BUILTIN_TOOL_NAMES) list('builtin-tool-names', 'Built-in tool names', ['tool'], tuples.BUILTIN_TOOL_NAMES)
+  list('exit-reasons', 'Session end reasons', ['hook', 'session'], EXIT_REASONS)
+  list('builtin-tool-names', 'Built-in tool names', ['tool'], BUILTIN_TOOL_NAMES)
 
   const permissionMode = (await schemaOf({ file: 'sdk.d.ts', type: 'PermissionMode' }, scratch)) as {
     enum?: string[]
@@ -160,7 +164,7 @@ async function main(): Promise<void> {
     describes: { 'claude-code': pkg.claudeCodeVersion },
     facts,
   }
-  await writeFormatted(join(root, 'facts', 'claude-code', 'converted.json'), `${stableJson(output)}\n`)
+  await writeFormatted(outFile, `${stableJson(output)}\n`)
   console.log(
     `converted ${facts.length} facts from ${SDK_NAME}@${pkg.version} (Claude Code ${pkg.claudeCodeVersion}): ` +
       `${events.length} hook events, ${toolInputs.length} tool inputs`,

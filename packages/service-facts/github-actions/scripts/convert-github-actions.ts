@@ -3,13 +3,11 @@
 // Usage: node scripts/convert-github-actions.ts
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { Fact, JsonSchema } from 'fact-kit'
-import { stableJson, writeFormatted } from '../../../../scripts/lib/format.ts'
-import { normalizeSchema } from '../../../../scripts/lib/schema.ts'
-import { readPinned, sourceUrl } from '../../../../scripts/lib/sources.ts'
-import type { PinnedSource } from '../../../../scripts/lib/sources.ts'
+import { normalizeSchema, readPinned, sourceUrl, stableJson, writeFormatted } from 'fact-kit'
+import type { Fact, JsonSchema, PinnedSource } from 'fact-kit'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
+const cacheDir = join(root, '..', '..', '..', 'tmp', 'sources')
 const CONVERTER = 'packages/service-facts/github-actions/scripts/convert-github-actions.ts'
 
 export const GITHUB_WORKFLOW: PinnedSource = {
@@ -23,7 +21,7 @@ export const GITHUB_WORKFLOW: PinnedSource = {
 const notes = new Map<string, number>()
 
 async function workflowFact(): Promise<Fact> {
-  const schema = normalizeSchema(JSON.parse(await readPinned(GITHUB_WORKFLOW)) as JsonSchema, { notes })
+  const schema = normalizeSchema(JSON.parse(await readPinned(GITHUB_WORKFLOW, { cacheDir })) as JsonSchema, { notes })
   return {
     id: 'github-actions.workflow-syntax',
     tool: 'github-actions',

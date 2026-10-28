@@ -27,7 +27,7 @@
     "claude-code-facts": "workspace:*",
     "claude-desktop-facts": "workspace:*",
     "codex-facts": "workspace:*",
-    "fact-kit": "^0.8.0"
+    "fact-kit": "^0.10.0"
   },
   "exports": {
     "./claude-code/index.json": "./dist/claude-code/index.json",

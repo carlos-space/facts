@@ -10,7 +10,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "fact-kit": "^0.8.0",
+    "fact-kit": "^0.10.0",
     "oxc-parser": "^0.155.0"
   },
   "exports": {

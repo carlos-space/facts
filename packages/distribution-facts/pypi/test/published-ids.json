@@ -1,5 +1,7 @@
 {
-  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "baseline": "distribution-facts@0.1.0",
   "removed": [],
-  "ids": { "pypi": ["pypi.pep440-prerelease", "pypi.pypi-trusted-publishing-reusable"] }
+  "ids": {
+    "pypi": ["pypi.pep440-prerelease", "pypi.pypi-trusted-publishing-reusable"]
+  }
 }

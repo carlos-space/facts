@@ -66,11 +66,11 @@ export const hookFacts = [
     {
       topics: ['stdout'],
       verify: {
-        probe: { kind: 'hash', anchor: 'adds plain-text stdout as context', hash: 'sha256:ac134e5adef03537' },
-        verifiedOn: '2.1.285',
-        screenedThrough: '2.1.285',
+        probe: { kind: 'hash', anchor: 'adds plain-text stdout as context', hash: 'sha256:b4038abe11fa5f47' },
+        verifiedOn: '2.1.308',
+        screenedThrough: '2.1.308',
       },
-      source: observedDoc({ url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-19' }),
+      source: observedDoc({ url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-28' }),
     },
   ),
   mf.statement(
@@ -170,23 +170,25 @@ export const hookFacts = [
   ),
   mf.statement(
     'hook-event-cadence',
-    'hook 事件依觸發頻率分三類：每個 session 一次（SessionStart、SessionEnd）、每個回合一次（UserPromptSubmit、Stop、StopFailure）、每次工具呼叫一次（PreToolUse、PostToolUse）。',
+    'hook 事件依觸發頻率分三類：每個 session 一次（SessionStart、SessionEnd）、每個回合一次（UserPromptSubmit、Stop、StopFailure）、每次工具呼叫一次（PreToolUse、PostToolUse）。呼叫 EndConversation 工具時，PreToolUse 與 PostToolUse 都不觸發。',
     {
       topics: ['cadence'],
       verify: {
-        probe: { kind: 'hash', anchor: 'Events fall into three cadences', hash: 'sha256:674f3ea1ae070324' },
-        verifiedOn: '2.1.285',
-        screenedThrough: '2.1.285',
+        probe: { kind: 'hash', anchor: 'Events fall into three cadences', hash: 'sha256:4126e21f6b8d03de' },
+        verifiedOn: '2.1.308',
+        screenedThrough: '2.1.308',
       },
+      source: observedDoc({ url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-28' }),
     },
   ),
   mf.statement('hook-matcher-omitted', 'hook 的 matcher 省略或寫 `*` 時比對全部，事件每次發生都觸發。', {
     topics: ['filter'],
     verify: {
-      probe: { kind: 'hash', anchor: 'If you omit the matcher or use', hash: 'sha256:02bb049dffd7760b' },
-      verifiedOn: '2.1.285',
-      screenedThrough: '2.1.285',
+      probe: { kind: 'hash', anchor: 'If you omit the matcher or use', hash: 'sha256:a6690e75f87f84c4' },
+      verifiedOn: '2.1.308',
+      screenedThrough: '2.1.308',
     },
+    source: observedDoc({ url: 'https://code.claude.com/docs/en/hooks.md', fetched: '2026-10-28' }),
   }),
   mf.statement(
     'stop-block-second-reply',

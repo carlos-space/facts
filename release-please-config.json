@@ -8,32 +8,54 @@
   "bump-minor-pre-major": true,
   "initial-version": "0.1.0",
   "changelog-sections": [
-    { "type": "feat", "section": "Added" },
-    { "type": "fix", "section": "Fixed" },
-    { "type": "perf", "section": "Changed" },
-    { "type": "deps", "section": "Changed" },
-    { "type": "revert", "section": "Changed" }
+    {
+      "type": "feat",
+      "section": "Added"
+    },
+    {
+      "type": "fix",
+      "section": "Fixed"
+    },
+    {
+      "type": "perf",
+      "section": "Changed"
+    },
+    {
+      "type": "deps",
+      "section": "Changed"
+    },
+    {
+      "type": "revert",
+      "section": "Changed"
+    }
   ],
   "packages": {
     "packages/ai-agent-facts": {
       "component": "ai-agent-facts",
-      "release-type": "node"
+      "release-type": "node",
+      "initial-version": "0.1.0"
     },
     "packages/os-facts": {
       "component": "os-facts",
-      "release-type": "node"
+      "release-type": "node",
+      "initial-version": "0.1.0"
     },
     "packages/devtool-facts": {
       "component": "devtool-facts",
-      "release-type": "node"
+      "release-type": "node",
+      "initial-version": "0.1.0"
     },
     "packages/distribution-facts": {
       "component": "distribution-facts",
-      "release-type": "node"
+      "release-type": "node",
+      "initial-version": "0.1.0"
     },
     "packages/service-facts": {
       "component": "service-facts",
-      "release-type": "node"
+      "release-type": "node",
+      "initial-version": "0.1.0"
     }
-  }
+  },
+  "plugins": [],
+  "last-release-sha": "50b704bd463170764d39ae3b54fce4eedca5773c"
 }

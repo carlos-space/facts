@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/carlos-space/facts/compare/devtool-facts/v0.2.0...devtool-facts/v0.3.0) (2026-10-28)
+
+
+### Added
+
+* **devtool-facts:** 補 release-please 發版 PR 分支被強制覆寫的實測 fact ([#63](https://github.com/carlos-space/facts/issues/63)) ([d8f55b2](https://github.com/carlos-space/facts/commit/d8f55b2b8240c8b0b194ee5a8e86082fe6e43519))
+
 ## [0.2.0](https://github.com/carlos-space/facts/compare/devtool-facts/v0.1.0...devtool-facts/v0.2.0) (2026-10-28)
 
 

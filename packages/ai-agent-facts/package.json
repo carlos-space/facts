@@ -1,6 +1,6 @@
 {
   "name": "ai-agent-facts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Unofficial machine-readable facts about AI agent products: Claude Code, Claude Desktop and Codex. Not affiliated with Anthropic or OpenAI.",
   "license": "MIT",
   "type": "module",

@@ -36,6 +36,20 @@
 
 5 個都是新套件，沒有前一版可以相容。原本的 platform-facts 不再發新版，舊 id 改成的新 id 見 README 的「舊 id 對照表」。
 
+## v0.1.1（維護型）
+
+- 產品版號：`v0.1.1`，從 `v0.1.0` 重建 `release/v0.1`，以 `cut-release.sh --line 0.1 --units devtool-facts,service-facts,ai-agent-facts --from v0.1.0 --stage ga` 開線，修正用 `git cherry-pick -x` 帶入
+- 入版單元：ai-agent-facts、devtool-facts、service-facts，從 GA 起步，發到 npm 的 `latest`
+
+| PR  | 單元           | 單元版號 | 內容                                                          |
+| :-- | :------------- | :------- | :------------------------------------------------------------ |
+| #58 | ai-agent-facts | 0.1.1    | 重驗三筆 hook fact，event-cadence 補 EndConversation 例外     |
+| #59 | devtool-facts  | 0.2.0    | 補 release-please 觸發發版的 commit 類型                      |
+| #60 | service-facts  | 0.2.0    | 補 GitHub Packages npm 的套件名、可見度、發布權限與跨倉庫授權 |
+
+- 破壞性變更：無。devtool-facts、service-facts 只新增 fact，但 0.x 的 `feat` 升 minor，依賴 `^0.1.0` 的消費者要改依賴範圍才拿得到 0.2.0
+- 退法：同下方 Rollback，修補從 `v0.1.1` 重建
+
 ## Rollback
 
 - 可回退：npm 上已發布的版本原則上不撤回。有問題的版本用 `npm deprecate` 標記，修正走修補發布。
@@ -44,3 +58,4 @@
 ## 變更記錄
 
 - 0.1.0：從 GA 起步
+- 0.1.1：維護型，ai-agent-facts 0.1.1、devtool-facts 0.2.0、service-facts 0.2.0

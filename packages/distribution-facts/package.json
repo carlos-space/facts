@@ -1,6 +1,6 @@
 {
   "name": "distribution-facts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Unofficial machine-readable facts about distribution channels: App Store, Apple notarization, crates.io, Google Play, npm, PyPI and Sparkle. Not affiliated with Apple, Google, npm, PyPI, crates.io or the Sparkle project.",
   "license": "MIT",
   "type": "module",

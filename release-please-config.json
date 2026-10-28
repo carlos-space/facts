@@ -30,19 +30,11 @@
     }
   ],
   "packages": {
-    "packages/ai-agent-facts": {
-      "component": "ai-agent-facts",
-      "release-type": "node"
-    },
     "packages/devtool-facts": {
       "component": "devtool-facts",
-      "release-type": "node"
-    },
-    "packages/service-facts": {
-      "component": "service-facts",
       "release-type": "node"
     }
   },
   "plugins": [],
-  "last-release-sha": "bdbe190140ad731185454a8919800d83c2005603"
+  "last-release-sha": "b16d0afe4b5a30b8c7b6dede48ae8108b00070cb"
 }

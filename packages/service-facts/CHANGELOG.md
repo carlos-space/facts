@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/carlos-space/facts/compare/service-facts/v0.1.0...service-facts/v0.2.0) (2026-10-28)
+
+
+### Added
+
+* **service-facts:** 補 GitHub Packages npm 的套件名、可見度、發布權限與跨倉庫授權 ([#60](https://github.com/carlos-space/facts/issues/60)) ([9b27f0c](https://github.com/carlos-space/facts/commit/9b27f0c5bdb2579cde9c6fdb91b8933a3d57854b))
+
 ## 0.1.0 (2026-10-28)
 
 

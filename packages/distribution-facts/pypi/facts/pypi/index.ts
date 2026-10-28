@@ -1,6 +1,10 @@
 import type { FactsModule } from 'fact-kit'
-import { observed } from './observed.ts'
+import { authenticationFacts } from './authentication.ts'
+import { versionFacts } from './version.ts'
 
-const entry: FactsModule = { describes: {}, facts: observed }
+const entry: FactsModule = {
+  describes: {},
+  facts: [...authenticationFacts, ...versionFacts],
+}
 
 export default entry

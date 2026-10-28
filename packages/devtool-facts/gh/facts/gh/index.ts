@@ -1,6 +1,9 @@
 import type { FactsModule } from 'fact-kit'
-import { observed } from './observed.ts'
+import { ghCliFacts } from './gh-cli.ts'
 
-const entry: FactsModule = { describes: {}, facts: observed }
+const entry: FactsModule = {
+  describes: {},
+  facts: [...ghCliFacts],
+}
 
 export default entry

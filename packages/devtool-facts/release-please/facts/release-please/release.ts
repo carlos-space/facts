@@ -316,4 +316,23 @@ export const releaseFacts = [
       }),
     },
   ),
+  mf.statement(
+    'release-pr-force-push',
+    '重算後發版 PR 的內容有變時，release-please 把 PR 分支強制推成「目標分支最新的 commit 加一個 release commit」，人工推到 PR 分支的 commit 不保留。內容沒變時不動 PR 分支，人工 commit 留著。所以要留在發版 PR 裡的改動，提交到目標分支，不提交到 PR 分支',
+    {
+      title: '發版 PR 分支的強制覆寫',
+      topics: ['pull-request'],
+      verify: {
+        probe: {
+          kind: 'manual',
+          reason:
+            '在暫時目標分支推一個 `feat` commit，跑 `release-please release-pr --target-branch <分支>` 開出發版 PR。在 PR 分支推一個人工 commit，再到目標分支推一個 `fix` commit 後重跑。成立的條件是 PR 分支只剩新的 release commit，`git merge-base --is-ancestor <人工 commit> <PR 分支>` 回 1',
+        },
+        verifiedOn: '17.11.2',
+        screenedThrough: '17.11.2',
+      },
+      note: 'release-please 17.11.2 CLI，在 git-flow-template-example 的暫時分支實跑一輪。只推 `chore` commit 重跑時印 `remained the same`，人工 commit 還在。推 `fix` commit 重跑後 PR 分支被改寫，人工 commit 不再是祖先。原始碼 `src/github.ts` 建立或更新 PR 時帶 `force: true`，註解寫 This will force-push to that branch。release-please-action v5.0.0 依賴 `release-please ^17.6.0`，走同一段程式',
+      source: { kind: 'observed', basis: 'measured', fetched: '2026-10-29' },
+    },
+  ),
 ]

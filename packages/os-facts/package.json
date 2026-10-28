@@ -1,6 +1,6 @@
 {
   "name": "os-facts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Unofficial machine-readable facts about operating systems and their shells. No platform is covered yet. Not affiliated with any operating system vendor.",
   "license": "MIT",
   "type": "module",

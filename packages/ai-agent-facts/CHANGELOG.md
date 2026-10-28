@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/carlos-space/facts/compare/ai-agent-facts/v0.1.0...ai-agent-facts/v0.1.1) (2026-10-28)
+
+
+### Fixed
+
+* **ai-agent-facts:** 重驗三筆 hook fact，event-cadence 補 EndConversation 例外 ([#58](https://github.com/carlos-space/facts/issues/58)) ([23a4e4a](https://github.com/carlos-space/facts/commit/23a4e4acac752a7a97420f49f7d9331f832ee8ad))
+
 ## 0.1.0 (2026-10-28)
 
 

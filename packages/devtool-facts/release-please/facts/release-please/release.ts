@@ -295,4 +295,25 @@ export const releaseFacts = [
       }),
     },
   ),
+  mf.statement(
+    'releasable-commit-types',
+    '只有 `feat`、`fix`、`deps` 開頭的 commit 算可發版的單元，會讓 release-please 開發版 PR。`chore`、`build` 開頭的 commit 不算，只有這類 commit 時不開發版 PR。部分語言另有自己的可發版類型，例如 Java 與 Python 的 `docs`',
+    {
+      title: '觸發發版的 commit 類型',
+      topics: ['commit', 'version'],
+      verify: {
+        probe: {
+          kind: 'hash',
+          anchor: 'A "chore" or "build" commit is not a releasable unit',
+          hash: 'sha256:036cf7b0bc52b2ca',
+        },
+        verifiedOn: '2026-10-29',
+        screenedThrough: '2026-10-29',
+      },
+      source: observedDoc({
+        url: 'https://github.com/googleapis/release-please/blob/main/README.md',
+        fetched: '2026-10-29',
+      }),
+    },
+  ),
 ]

@@ -22,6 +22,6 @@
     "build": "fact-kit build"
   },
   "devDependencies": {
-    "fact-kit": "^0.8.0"
+    "fact-kit": "^0.10.0"
   }
 }

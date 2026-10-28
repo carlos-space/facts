@@ -11,7 +11,7 @@
     "convert": "node scripts/convert-pnpm.ts"
   },
   "devDependencies": {
-    "fact-kit": "^0.8.0",
+    "fact-kit": "^0.10.0",
     "oxc-parser": "^0.155.0",
     "typescript": "7.1.0-beta"
   },

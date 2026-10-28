@@ -1,10 +1,11 @@
 import { execFile } from 'node:child_process'
-import { readFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, readFile, rm } from 'node:fs/promises'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { promisify } from 'node:util'
+import { HOOK_EVENTS } from '@anthropic-ai/claude-agent-sdk'
 import { describe, expect, it } from 'vitest'
-import { readStringTuplesFromFile, validateSchemaDocument } from 'fact-kit'
+import { validateSchemaDocument } from 'fact-kit'
 import type { Fact } from 'fact-kit'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
@@ -26,7 +27,7 @@ describe('claude-code conversion from the SDK', async () => {
     claudeCodeVersion: string
   }
   const byId = new Map(converted.facts.map((f) => [f.id, f]))
-  const events = (await readStringTuplesFromFile(join(sdkDir, 'sdk.d.ts'))).HOOK_EVENTS as string[]
+  const events: readonly string[] = HOOK_EVENTS
 
   it('pins SDK 0.3.308 and describes Claude Code 2.1.308', () => {
     expect(sdkPackage.version).toBe('0.3.308')
@@ -95,13 +96,19 @@ describe('claude-code conversion from the SDK', async () => {
     expect(ids).toEqual([...ids].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0)))
   })
 
-  // Skipped in m152/t002: rerunning with fact-kit 0.8.0 and typescript 7.1.0-beta adds `prefixItems` to 4 facts,
-  // and converted.json is not regenerated in t002. m152/t004 regenerates it when it upgrades fact-kit, and changes
-  // this test to write to a temporary directory and compare there.
-  it.skip('gives the same file when run again', { timeout: 120_000 }, async () => {
-    const file = join(root, 'facts', 'claude-code', 'converted.json')
-    const before = await readFile(file, 'utf8')
-    await promisify(execFile)(process.execPath, [join(root, 'scripts', 'convert-claude-code.ts')])
-    expect(await readFile(file, 'utf8')).toBe(before)
+  // The converter writes to a directory under the repository's tmp/ (so prettier finds the repository's settings),
+  // and the test compares that file with the committed one. `converted.json` itself is never rewritten.
+  it('gives the same file when run again', { timeout: 120_000 }, async () => {
+    const scratchRoot = join(root, '..', '..', '..', 'tmp')
+    await mkdir(scratchRoot, { recursive: true })
+    const dir = await mkdtemp(join(scratchRoot, 'converted-rerun-'))
+    try {
+      const out = join(dir, 'converted.json')
+      await promisify(execFile)(process.execPath, [join(root, 'scripts', 'convert-claude-code.ts'), '--out', out])
+      const committed = await readFile(join(root, 'facts', 'claude-code', 'converted.json'), 'utf8')
+      expect(await readFile(out, 'utf8')).toBe(committed)
+    } finally {
+      await rm(dir, { recursive: true, force: true })
+    }
   })
 })

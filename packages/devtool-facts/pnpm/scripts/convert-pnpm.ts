@@ -2,13 +2,11 @@
 // Usage: node scripts/convert-pnpm.ts
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { Fact, JsonSchema } from 'fact-kit'
-import { stableJson, writeFormatted } from '../../../../scripts/lib/format.ts'
-import { normalizeSchema } from '../../../../scripts/lib/schema.ts'
-import { readPinned, sourceUrl } from '../../../../scripts/lib/sources.ts'
-import type { PinnedSource } from '../../../../scripts/lib/sources.ts'
+import { normalizeSchema, readPinned, sourceUrl, stableJson, writeFormatted } from 'fact-kit'
+import type { Fact, JsonSchema, PinnedSource } from 'fact-kit'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
+const cacheDir = join(root, '..', '..', '..', 'tmp', 'sources')
 
 export const PNPM_WORKSPACE: PinnedSource = {
   repo: 'SchemaStore/schemastore',
@@ -19,7 +17,7 @@ export const PNPM_WORKSPACE: PinnedSource = {
 }
 
 const notes = new Map<string, number>()
-const schema = normalizeSchema(JSON.parse(await readPinned(PNPM_WORKSPACE)) as JsonSchema, { notes })
+const schema = normalizeSchema(JSON.parse(await readPinned(PNPM_WORKSPACE, { cacheDir })) as JsonSchema, { notes })
 
 const fact: Fact = {
   id: 'pnpm.workspace-yaml',

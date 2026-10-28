@@ -3,36 +3,44 @@
 - 狀態：draft
 - 產品版號：`v0.1.0`（本 plan 是版號的唯一指派點）
 - Milestone：無
-- train 分支：`release/v0.1`；入版單元：fact-kit、platform-facts
-- 階段路徑：從 alpha 起步，依序推進 beta、rc 後 GA（`cut-release.sh --stage alpha`、`advance-release.sh --to`）。發布目的地是 npm，階段名就是 dist-tag，GA 進 `latest`
+- train 分支：`release/v0.1`
+- 入版單元：ai-agent-facts、os-facts、devtool-facts、distribution-facts、service-facts
+- 階段路徑：直接從 GA 起步（`cut-release.sh --stage ga`），不經 alpha、beta、rc。5 個單元在 `release-policy.json` 的 `stages` 都只有 `ga`。發布目的地是 npm，GA 進 `latest`
 
 ## Feature Inventory
 
-這一版沒有功能改動，也沒有對應的 Issue。舊的套件 tag 刪除後，用 train 重新發出兩個套件的下一個 patch，版號以 `Release-As` 指定。
+5 個匯總套件的第一次發布。每個 component 是匯總套件底下的子目錄，以 `<套件>/<component>/index.json` 子路徑匯出。各 component 所在的匯總套件見 README 的「Component 對照表」。
 
-| Issue | 單元                     | 狀態   | 批次 |
-| :---- | :----------------------- | :----- | :--- |
-| 無    | fact-kit、platform-facts | 規劃中 | 1    |
+| Issue | 單元               | 狀態 | 批次 |
+| :---- | :----------------- | :--- | :--- |
+| 無    | ai-agent-facts     | 完成 | 1    |
+| 無    | os-facts           | 完成 | 1    |
+| 無    | devtool-facts      | 完成 | 1    |
+| 無    | distribution-facts | 完成 | 1    |
+| 無    | service-facts      | 完成 | 1    |
 
 ## Snapshot 對照（GA 當下由 `pnpm snapshot --check-tags` 產出後貼入）
 
-目前是計畫值，GA 前以腳本輸出為準。
+目前是計畫值，GA 前以腳本輸出為準。5 個單元都沒發布過，release-please 以 `initial-version` 0.1.0 起算。
 
-| 單元           | 路徑                    | 實作版號 | tag                   |
-| :------------- | :---------------------- | :------- | :-------------------- |
-| product        | package.json            | 0.1.0    | v0.1.0                |
-| fact-kit       | packages/fact-kit       | 0.4.2    | fact-kit/v0.4.2       |
-| platform-facts | packages/platform-facts | 0.6.1    | platform-facts/v0.6.1 |
+| 單元               | 路徑                        | 實作版號 | tag                       |
+| :----------------- | :-------------------------- | :------- | :------------------------ |
+| product            | package.json                | 0.1.0    | v0.1.0                    |
+| ai-agent-facts     | packages/ai-agent-facts     | 0.1.0    | ai-agent-facts/v0.1.0     |
+| os-facts           | packages/os-facts           | 0.1.0    | os-facts/v0.1.0           |
+| devtool-facts      | packages/devtool-facts      | 0.1.0    | devtool-facts/v0.1.0      |
+| distribution-facts | packages/distribution-facts | 0.1.0    | distribution-facts/v0.1.0 |
+| service-facts      | packages/service-facts      | 0.1.0    | service-facts/v0.1.0      |
 
 ## Breaking Changes
 
-無。自起算點 `83a70c3` 之後，main 上動到 `packages/` 的只有兩個合回 commit（#11、#15），內容是已發布的 fact-kit 0.4.1 與 platform-facts 0.6.0。
+5 個都是新套件，沒有前一版可以相容。原本的 platform-facts 不再發新版，舊 id 改成的新 id 見 README 的「舊 id 對照表」。
 
 ## Rollback
 
-- 可回退：npm 上已發布的版本原則上不撤回（72 小時內可以 unpublish，但撤掉的版號不能再用）。把 `latest` 指回前一版用 `npm dist-tag add <套件>@<前一版> latest`，並對有問題的版本執行 `npm deprecate`。
-- 不可回退：已推送的 tag 與已發布的 npm 版本；補救走修補發布（`release/v0.1` 從 `v0.1.0` 重建，`cut-release.sh --line 0.1 --from v0.1.0`）。
+- 可回退：npm 上已發布的版本原則上不撤回。有問題的版本用 `npm deprecate` 標記，修正走修補發布。
+- 不可回退：已推送的 tag 與已發布的 npm 版本。補救走修補發布，`release/v0.1` 從 `v0.1.0` 重建，指令是 `cut-release.sh --line 0.1 --units <單元> --from v0.1.0`。
 
 ## 變更記錄
 
-- 0.1.0-alpha：切 train
+- 0.1.0：從 GA 起步

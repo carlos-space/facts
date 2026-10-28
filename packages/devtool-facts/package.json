@@ -1,6 +1,6 @@
 {
   "name": "devtool-facts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Unofficial machine-readable facts about developer tools: gfm, gh, git, pnpm, release-please, semver, TypeScript and wrangler. Not affiliated with GitHub, Cloudflare, Microsoft or the maintainers of these tools.",
   "license": "MIT",
   "type": "module",

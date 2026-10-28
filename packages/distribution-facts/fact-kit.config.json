@@ -1,0 +1,11 @@
+{
+  "aggregate": {
+    "app-store": "app-store-facts",
+    "apple-notarization": "apple-notarization-facts",
+    "crates-io": "crates-io-facts",
+    "google-play": "google-play-facts",
+    "npm": "npm-facts",
+    "pypi": "pypi-facts",
+    "sparkle": "sparkle-facts"
+  }
+}

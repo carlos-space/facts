@@ -1,0 +1,7 @@
+{
+  "aggregate": {
+    "cloudflare-r2": "cloudflare-r2-facts",
+    "github": "github-facts",
+    "github-actions": "github-actions-facts"
+  }
+}

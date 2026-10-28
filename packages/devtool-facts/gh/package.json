@@ -1,0 +1,19 @@
+{
+  "name": "gh-facts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Facts about the GitHub CLI (gh). Private workspace package, published through devtool-facts.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "fact-kit build",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "fact-kit": "^0.8.0",
+    "oxc-parser": "^0.155.0"
+  },
+  "exports": {
+    "./gh/index.json": "./dist/gh/index.json"
+  }
+}

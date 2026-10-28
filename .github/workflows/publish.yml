@@ -1,6 +1,6 @@
 name: publish
 
-# Publishes the packages a release created (platform-facts) to the public npm registry.
+# Publishes the packages a release created (the aggregate packages) to the public npm registry.
 # release-please.yml dispatches it (gh workflow run) after each release, on the release branch and with the
 # train's stage; it can also be run by hand. It is not a workflow_call target: npm trusts this workflow file as a Trusted Publisher, and a called workflow's
 # OIDC token names the caller, which would not match.
@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
     inputs:
       paths:
-        description: 'JSON array of package paths to publish, e.g. ["packages/platform-facts"]'
+        description: 'JSON array of package paths to publish, e.g. ["packages/ai-agent-facts"]'
         required: true
         type: string
       stage:

@@ -1,0 +1,50 @@
+{
+  "name": "distribution-facts",
+  "version": "0.0.0",
+  "description": "Unofficial machine-readable facts about distribution channels: App Store, Apple notarization, crates.io, Google Play, npm, PyPI and Sparkle. Not affiliated with Apple, Google, npm, PyPI, crates.io or the Sparkle project.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlos-space/facts",
+    "directory": "packages/distribution-facts"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "fact-kit build"
+  },
+  "devDependencies": {
+    "app-store-facts": "workspace:*",
+    "apple-notarization-facts": "workspace:*",
+    "crates-io-facts": "workspace:*",
+    "fact-kit": "^0.8.0",
+    "google-play-facts": "workspace:*",
+    "npm-facts": "workspace:*",
+    "pypi-facts": "workspace:*",
+    "sparkle-facts": "workspace:*"
+  },
+  "exports": {
+    "./app-store/index.json": "./dist/app-store/index.json",
+    "./app-store/schemas/*": "./dist/app-store/schemas/*",
+    "./apple-notarization/index.json": "./dist/apple-notarization/index.json",
+    "./apple-notarization/schemas/*": "./dist/apple-notarization/schemas/*",
+    "./crates-io/index.json": "./dist/crates-io/index.json",
+    "./crates-io/schemas/*": "./dist/crates-io/schemas/*",
+    "./google-play/index.json": "./dist/google-play/index.json",
+    "./google-play/schemas/*": "./dist/google-play/schemas/*",
+    "./npm/index.json": "./dist/npm/index.json",
+    "./npm/schemas/*": "./dist/npm/schemas/*",
+    "./pypi/index.json": "./dist/pypi/index.json",
+    "./pypi/schemas/*": "./dist/pypi/schemas/*",
+    "./sparkle/index.json": "./dist/sparkle/index.json",
+    "./sparkle/schemas/*": "./dist/sparkle/schemas/*"
+  }
+}

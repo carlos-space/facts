@@ -1,0 +1,21 @@
+{
+  "name": "github-actions-facts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Facts about GitHub Actions. Private workspace package, published through service-facts.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "fact-kit build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "convert": "node scripts/convert-github-actions.ts"
+  },
+  "devDependencies": {
+    "fact-kit": "^0.8.0",
+    "oxc-parser": "^0.155.0",
+    "typescript": "7.1.0-beta"
+  },
+  "exports": {
+    "./github-actions/index.json": "./dist/github-actions/index.json"
+  }
+}

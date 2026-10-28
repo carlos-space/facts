@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Publish packages to the public npm registry. publish.yml calls it with the package paths a release created.
-# usage: publish-units.sh <alpha|beta|rc|ga> <package path>...      e.g. alpha packages/platform-facts
+# usage: publish-units.sh <alpha|beta|rc|ga> <package path>...      e.g. alpha packages/ai-agent-facts
 #   <stage>          the release stage of the train, and so the npm dist-tag: alpha, beta and rc publish under
 #                    the tag of that name, ga under latest. `latest` must only ever point at a GA, so every
 #                    package version must belong to the stage (X.Y.Z-<stage>.N, or X.Y.Z for ga); a mismatch

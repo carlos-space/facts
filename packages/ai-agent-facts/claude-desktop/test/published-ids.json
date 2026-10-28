@@ -1,0 +1,36 @@
+{
+  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "removed": [],
+  "ids": {
+    "claude-desktop": [
+      "claude-desktop.desktop-bundled-claude",
+      "claude-desktop.desktop-chat-code-actions",
+      "claude-desktop.desktop-chat-rendered-formats",
+      "claude-desktop.desktop-chat-unrendered-formats",
+      "claude-desktop.desktop-cloud-session-no-report",
+      "claude-desktop.desktop-hook-display",
+      "claude-desktop.desktop-session-address-local-id",
+      "claude-desktop.desktop-session-opener-id",
+      "claude-desktop.desktop-session-report",
+      "claude-desktop.desktop-session-start-user-turn",
+      "claude-desktop.mod-catch-fail-closed",
+      "claude-desktop.mod-clock-timer",
+      "claude-desktop.mod-deny-rule-override",
+      "claude-desktop.mod-desktop-hidden-sites",
+      "claude-desktop.mod-desktop-shown-sites",
+      "claude-desktop.mod-desktop-status-line",
+      "claude-desktop.mod-desktop-unconfirmed-calls",
+      "claude-desktop.mod-hook-failure-skip",
+      "claude-desktop.mod-hook-time-limit",
+      "claude-desktop.mod-no-node-api",
+      "claude-desktop.mod-prompt-events",
+      "claude-desktop.mod-runtime-requirement",
+      "claude-desktop.mod-tool-call-results",
+      "claude-desktop.mod-tool-check-classifier-skip",
+      "claude-desktop.mod-tool-check-order",
+      "claude-desktop.mod-types-skill-copy",
+      "claude-desktop.mod-ui-render",
+      "claude-desktop.mod-worker-crash-unload"
+    ]
+  }
+}

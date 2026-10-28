@@ -1,0 +1,13 @@
+{
+  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "removed": [],
+  "ids": {
+    "pnpm": [
+      "pnpm.filter-by-change",
+      "pnpm.include-workspace-root",
+      "pnpm.pnpm-global-add-fresh-release",
+      "pnpm.pnpm-minimum-release-age",
+      "pnpm.workspace-yaml"
+    ]
+  }
+}

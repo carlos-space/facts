@@ -21,17 +21,19 @@ npm install --no-audit --no-fund --silent "$work"/packed/*.tgz
 
 for p in "${paths[@]}"; do
   case "$p" in
-    packages/platform-facts)
-      node --input-type=module -e "
+    packages/ai-agent-facts | packages/os-facts | packages/devtool-facts | packages/distribution-facts | packages/service-facts)
+      NAME="$(basename "$p")" node --input-type=module -e "
         import { readFileSync } from 'node:fs'
         import { createRequire } from 'node:module'
-        const exportsMap = JSON.parse(readFileSync('node_modules/platform-facts/package.json', 'utf8')).exports
+        const name = process.env.NAME
+        const exportsMap = JSON.parse(readFileSync('node_modules/' + name + '/package.json', 'utf8')).exports ?? {}
         const require = createRequire(import.meta.url)
-        for (const subpath of Object.keys(exportsMap)) {
-          const index = JSON.parse(readFileSync(require.resolve('platform-facts/' + subpath.slice(2)), 'utf8'))
+        const subpaths = Object.keys(exportsMap).filter((k) => k.endsWith('/index.json'))
+        for (const subpath of subpaths) {
+          const index = JSON.parse(readFileSync(require.resolve(name + '/' + subpath.slice(2)), 'utf8'))
           if (!index || typeof index !== 'object') throw new Error(subpath + ' is not a JSON object')
         }
-        console.log('platform-facts: ' + Object.keys(exportsMap).length + ' index files readable')" ;;
+        console.log(name + ': ' + subpaths.length + ' index files readable')" ;;
     *) printf '%s\n' "no smoke test for $p" >&2; exit 1 ;;
   esac
   printf '%s\n' "✓ $p"

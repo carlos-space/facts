@@ -1,0 +1,24 @@
+github-actions-facts
+Copyright (c) 2026 carlos-space
+Licensed under the MIT License (see LICENSE).
+
+This package is unofficial. It is not affiliated with, endorsed by, or sponsored by
+Anthropic, OpenAI, GitHub, Apple, Cloudflare, or the Sparkle project. Product and
+company names are trademarks of their respective owners.
+
+The converted facts of github-actions are derived from the third-party
+sources below. Each source keeps its own license. Every converted fact records the
+upstream repository, the pinned commit, and the converter that produced it.
+----------------------------------------------------------------------------------
+SchemaStore (JSON Schema Store)
+  https://github.com/SchemaStore/schemastore
+  Used for: github-actions (github-workflow.json)
+  Pinned commit: d227d9f54eaf1a805de6c00e94c939f526a3da2f
+  License: Apache License 2.0, full text in LICENSE-APACHE-2.0
+
+  Upstream NOTICE, reproduced:
+    JSON Schema Store
+    Copyright 2015-Current Mads Kristensen and Contributors
+
+  The schema text was converted (flattened, with fields and descriptions
+  re-organized into facts). It was modified from the original.

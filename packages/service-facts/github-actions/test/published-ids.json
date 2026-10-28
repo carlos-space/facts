@@ -1,0 +1,22 @@
+{
+  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "removed": [],
+  "ids": {
+    "github-actions": [
+      "github-actions.action-sha-pinning",
+      "github-actions.checkout-credentials-location",
+      "github-actions.checkout-persist-credentials",
+      "github-actions.concurrency-group",
+      "github-actions.default-token-events",
+      "github-actions.environment-plan-limit",
+      "github-actions.environment-secrets-free-private",
+      "github-actions.environment-tag-rule",
+      "github-actions.job-timeout-default",
+      "github-actions.oidc-workflow-ref",
+      "github-actions.tag-triggered-workflow",
+      "github-actions.token-permissions-default",
+      "github-actions.token-permissions-key",
+      "github-actions.workflow-syntax"
+    ]
+  }
+}

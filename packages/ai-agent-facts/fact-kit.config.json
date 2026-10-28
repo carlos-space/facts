@@ -1,0 +1,7 @@
+{
+  "aggregate": {
+    "claude-code": "claude-code-facts",
+    "claude-desktop": "claude-desktop-facts",
+    "codex": "codex-facts"
+  }
+}

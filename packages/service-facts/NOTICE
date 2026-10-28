@@ -1,0 +1,53 @@
+service-facts
+Copyright (c) 2026 carlos-space
+Licensed under the MIT License (see LICENSE).
+
+This package is unofficial. It is not affiliated with, endorsed by, or sponsored by
+Anthropic, OpenAI, GitHub, Apple, Cloudflare, or the Sparkle project. Product and
+company names are trademarks of their respective owners.
+
+The converted facts of github, github-actions are derived from the third-party
+sources below. Each source keeps its own license. Every converted fact records the
+upstream repository, the pinned commit, and the converter that produced it.
+----------------------------------------------------------------------------------
+SchemaStore (JSON Schema Store)
+  https://github.com/SchemaStore/schemastore
+  Used for: github-actions (github-workflow.json)
+  Pinned commit: d227d9f54eaf1a805de6c00e94c939f526a3da2f
+  License: Apache License 2.0, full text in LICENSE-APACHE-2.0
+
+  Upstream NOTICE, reproduced:
+    JSON Schema Store
+    Copyright 2015-Current Mads Kristensen and Contributors
+
+  The schema text was converted (flattened, with fields and descriptions
+  re-organized into facts). It was modified from the original.
+
+----------------------------------------------------------------------------------
+GitHub REST API description (github/rest-api-description)
+  https://github.com/github/rest-api-description
+  Used for: github (request shape and summaries of REST endpoints)
+  Pinned commit: 755ee33b4a81d51f6f07a902cce26cbec3b822f2
+  License: MIT License
+
+  MIT License
+
+  Copyright (c) 2020 GitHub
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.

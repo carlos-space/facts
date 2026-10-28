@@ -11,7 +11,7 @@
   },
   "scripts": {
     "check": "pnpm typecheck && pnpm format:check && pnpm facts:check",
-    "facts:check": "pnpm -C packages/platform-facts exec fact-kit check",
+    "facts:check": "pnpm -r exec fact-kit check",
     "typecheck": "pnpm -r typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.13.4",
+    "fact-kit": "^0.8.0",
     "prettier": "^3.6.2",
     "semver": "^7.8.5",
     "typescript": "^7.0.2",

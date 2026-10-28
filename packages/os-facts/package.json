@@ -1,0 +1,27 @@
+{
+  "name": "os-facts",
+  "version": "0.0.0",
+  "description": "Unofficial machine-readable facts about operating systems and their shells. No platform is covered yet. Not affiliated with any operating system vendor.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlos-space/facts",
+    "directory": "packages/os-facts"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "fact-kit build"
+  },
+  "devDependencies": {
+    "fact-kit": "^0.8.0"
+  }
+}

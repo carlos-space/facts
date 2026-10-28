@@ -1,0 +1,18 @@
+{
+  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "removed": [],
+  "ids": {
+    "sparkle": [
+      "sparkle.appcast-merge-existing",
+      "sparkle.bundle-version-compare",
+      "sparkle.channels",
+      "sparkle.generate-appcast-options",
+      "sparkle.generate-keys-options",
+      "sparkle.info-plist-keys",
+      "sparkle.manual-signing-order",
+      "sparkle.non-sandboxed-xpc-keys",
+      "sparkle.remove-xpc-services",
+      "sparkle.version-comparator"
+    ]
+  }
+}

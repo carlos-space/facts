@@ -1,0 +1,12 @@
+{
+  "baseline": "platform-facts@0.2.0（已套用 m152 id 對照表）",
+  "removed": [],
+  "ids": {
+    "npm": [
+      "npm.npm-prerelease-tag",
+      "npm.npm-trusted-publishing-caller",
+      "npm.npm-trusted-publishing-runner",
+      "npm.npm-trusted-publishing-workflow-filename"
+    ]
+  }
+}

@@ -30,11 +30,11 @@
     }
   ],
   "packages": {
-    "packages/devtool-facts": {
-      "component": "devtool-facts",
+    "packages/service-facts": {
+      "component": "service-facts",
       "release-type": "node"
     }
   },
   "plugins": [],
-  "last-release-sha": "075981f123d015a6a01723c4d91af5c4efb6a911"
+  "last-release-sha": "d4e770023eb377c0a90a81277cf904bea5bcfbd4"
 }

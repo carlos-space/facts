@@ -1,6 +1,6 @@
 {
   "name": "service-facts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Unofficial machine-readable facts about services: Cloudflare R2, GitHub and GitHub Actions. Not affiliated with Cloudflare or GitHub.",
   "license": "MIT",
   "type": "module",

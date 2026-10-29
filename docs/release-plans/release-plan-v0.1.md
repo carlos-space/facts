@@ -76,6 +76,18 @@
 - 破壞性變更：無。只新增 go 與 tart 兩個子路徑，但 0.x 的 `feat` 升 minor，依賴 `^0.3.0` 的消費者要改依賴範圍才拿得到 0.4.0
 - 退法：同下方 Rollback，修補從 `v0.1.3` 重建
 
+## v0.1.4（維護型）
+
+- 產品版號：`v0.1.4`，從 `v0.1.3` 重建 `release/v0.1`，以 `cut-release.sh --line 0.1 --units service-facts --from v0.1.3 --stage ga` 開線，修正用 `git cherry-pick -x` 帶入
+- 入版單元：service-facts，從 GA 起步，發到 npm 的 `latest`
+
+| PR  | 單元          | 單元版號 | 內容                                                         |
+| :-- | :------------ | :------- | :----------------------------------------------------------- |
+| #74 | service-facts | 0.3.0    | 補 public 倉庫託管 runner、runner group 與 artifact 保留天數 |
+
+- 破壞性變更：無。只新增 github-actions 的 3 筆 fact，但 0.x 的 `feat` 升 minor，依賴 `^0.2.0` 的消費者要改依賴範圍才拿得到 0.3.0
+- 退法：同下方 Rollback，修補從 `v0.1.4` 重建
+
 ## Rollback
 
 - 可回退：npm 上已發布的版本原則上不撤回。有問題的版本用 `npm deprecate` 標記，修正走修補發布。
@@ -87,3 +99,4 @@
 - 0.1.1：維護型，ai-agent-facts 0.1.1、devtool-facts 0.2.0、service-facts 0.2.0
 - 0.1.2：維護型，devtool-facts 0.3.0
 - 0.1.3：維護型，devtool-facts 0.4.0
+- 0.1.4：維護型，service-facts 0.3.0

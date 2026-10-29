@@ -1,0 +1,18 @@
+{
+  "baseline": "devtool-facts@next",
+  "removed": [],
+  "ids": {
+    "go": [
+      "go.build-constraint-filename",
+      "go.build-constraint-line",
+      "go.build-tags-flag",
+      "go.embed-patterns",
+      "go.go-directive-minimum",
+      "go.gofmt-list",
+      "go.ldflags-arg-list",
+      "go.ldflags-x",
+      "go.workspace-detection",
+      "go.workspace-use"
+    ]
+  }
+}

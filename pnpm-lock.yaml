@@ -199,6 +199,9 @@ importers:
       git-facts:
         specifier: workspace:*
         version: link:git
+      go-facts:
+        specifier: workspace:*
+        version: link:go
       pnpm-facts:
         specifier: workspace:*
         version: link:pnpm
@@ -208,6 +211,9 @@ importers:
       semver-facts:
         specifier: workspace:*
         version: link:semver
+      tart-facts:
+        specifier: workspace:*
+        version: link:tart
       typescript-facts:
         specifier: workspace:*
         version: link:typescript
@@ -242,6 +248,15 @@ importers:
         specifier: ^0.155.0
         version: 0.155.0
 
+  packages/devtool-facts/go:
+    devDependencies:
+      fact-kit:
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
+      oxc-parser:
+        specifier: ^0.155.0
+        version: 0.155.0
+
   packages/devtool-facts/pnpm:
     devDependencies:
       fact-kit:
@@ -264,6 +279,15 @@ importers:
         version: 0.155.0
 
   packages/devtool-facts/semver:
+    devDependencies:
+      fact-kit:
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
+      oxc-parser:
+        specifier: ^0.155.0
+        version: 0.155.0
+
+  packages/devtool-facts/tart:
     devDependencies:
       fact-kit:
         specifier: ^0.10.0

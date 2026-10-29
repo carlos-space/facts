@@ -241,4 +241,64 @@ export const actionsFacts = [
       source: observedDoc({ url: 'https://docs.github.com/en/actions/reference/security/oidc', fetched: '2026-10-02' }),
     },
   ),
+  mf.statement(
+    'public-repo-hosted-runner-free',
+    'public 倉庫使用標準的 GitHub 託管 runner 不計費，也不扣方案內含的分鐘數。larger runner 在 public 倉庫照樣計費',
+    {
+      title: 'public 倉庫的託管 runner 用量',
+      topics: ['runner', 'billing'],
+      verify: {
+        probe: {
+          kind: 'hash',
+          anchor: 'Standard GitHub-hosted runners in public repositories',
+          hash: 'sha256:0b48e74e56a25382',
+        },
+        verifiedOn: '2026-10-29',
+        screenedThrough: '2026-10-29',
+      },
+      source: observedDoc({
+        url: 'https://docs.github.com/en/billing/concepts/product-billing/github-actions',
+        fetched: '2026-10-29',
+      }),
+    },
+  ),
+  mf.statement(
+    'runner-group-public-repos',
+    'runner group 的 `allows_public_repositories` 預設是 false，這時 public 倉庫的 job 不會派到這個 group 的 self-hosted runner。組織自帶的 Default group 也是 false',
+    {
+      title: 'runner group 與 public 倉庫',
+      topics: ['runner'],
+      verify: {
+        probe: {
+          kind: 'hash',
+          anchor: 'Whether the runner group can be used by public repositories',
+          hash: 'sha256:b67c9a4e1ac774aa',
+        },
+        verifiedOn: '2026-10-29',
+        screenedThrough: '2026-10-29',
+      },
+      note: 'Default group 的值由 `gh api orgs/carlos-space/actions/runner-groups` 與 `gh api orgs/Promptex-AI/actions/runner-groups` 實測，兩個組織的 Default group 都回 `allows_public_repositories: false`（2026-10-29）',
+      source: observedDoc({
+        url: 'https://docs.github.com/en/rest/actions/self-hosted-runner-groups',
+        fetched: '2026-10-29',
+      }),
+    },
+  ),
+  mf.statement(
+    'artifact-retention-days',
+    '`actions/upload-artifact` 的 `retention-days` 設定 artifact 幾天後過期，最小 1 天。0 表示用倉庫的預設保留天數。上限是 90 天，倉庫設定可以改',
+    {
+      title: 'artifact 的保留天數',
+      topics: ['artifact'],
+      verify: {
+        probe: { kind: 'hash', anchor: 'Minimum 1 day', hash: 'sha256:6acf29ff44baa5de' },
+        verifiedOn: '2026-10-29',
+        screenedThrough: '2026-10-29',
+      },
+      source: observedDoc({
+        url: 'https://github.com/actions/upload-artifact/blob/main/action.yml',
+        fetched: '2026-10-29',
+      }),
+    },
+  ),
 ]

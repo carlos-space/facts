@@ -5,12 +5,17 @@
     "go": [
       "go.build-constraint-filename",
       "go.build-constraint-line",
+      "go.build-ignores-test-files",
       "go.build-tags-flag",
+      "go.chdir-flag",
       "go.embed-patterns",
       "go.go-directive-minimum",
       "go.gofmt-list",
       "go.ldflags-arg-list",
       "go.ldflags-x",
+      "go.list-deps",
+      "go.list-deps-excludes-tests",
+      "go.list-format-fields",
       "go.workspace-detection",
       "go.workspace-use"
     ]

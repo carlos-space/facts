@@ -1,0 +1,26 @@
+{
+  "baseline": "devtool-facts@0.4.0",
+  "removed": [],
+  "ids": {
+    "tart": [
+      "tart.clone-auto-prune",
+      "tart.clone-copy-on-write",
+      "tart.delete",
+      "tart.exec-guest-agent",
+      "tart.gc-tmp",
+      "tart.home-dir",
+      "tart.home-layout",
+      "tart.ip-wait",
+      "tart.not-running-error",
+      "tart.rename",
+      "tart.run-dir-share",
+      "tart.run-ends-with-guest",
+      "tart.run-headless-flags",
+      "tart.running-lock",
+      "tart.set-resources",
+      "tart.stop-no-guest-shutdown",
+      "tart.stop-signal",
+      "tart.vm-directory"
+    ]
+  }
+}

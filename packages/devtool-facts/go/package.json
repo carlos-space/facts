@@ -1,0 +1,19 @@
+{
+  "name": "go-facts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Facts about the Go toolchain (go). Private workspace package, published through devtool-facts.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "fact-kit build",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "fact-kit": "^0.10.0",
+    "oxc-parser": "^0.155.0"
+  },
+  "exports": {
+    "./go/index.json": "./dist/go/index.json"
+  }
+}

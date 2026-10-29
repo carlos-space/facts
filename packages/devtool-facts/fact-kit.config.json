@@ -3,9 +3,11 @@
     "gfm": "gfm-facts",
     "gh": "gh-facts",
     "git": "git-facts",
+    "go": "go-facts",
     "pnpm": "pnpm-facts",
     "release-please": "release-please-facts",
     "semver": "semver-facts",
+    "tart": "tart-facts",
     "typescript": "typescript-facts",
     "wrangler": "wrangler-facts"
   }

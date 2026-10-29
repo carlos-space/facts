@@ -8,7 +8,7 @@
 | :------------------- | :-------------------------------------------------------------------------------------------------- | :---------- |
 | `ai-agent-facts`     | AI agent 產品的 facts（claude-code、claude-desktop、codex）                                         | npm（公開） |
 | `os-facts`           | 作業系統的 facts（目前還沒有 component）                                                            | npm（公開） |
-| `devtool-facts`      | 開發工具的 facts（gfm、gh、git、pnpm、release-please、semver、typescript、wrangler）                | npm（公開） |
+| `devtool-facts`      | 開發工具的 facts（gfm、gh、git、go、pnpm、release-please、semver、tart、typescript、wrangler）      | npm（公開） |
 | `distribution-facts` | 發行與上架管道的 facts（app-store、apple-notarization、crates-io、google-play、npm、pypi、sparkle） | npm（公開） |
 | `service-facts`      | 雲端服務的 facts（cloudflare-r2、github、github-actions）                                           | npm（公開） |
 
@@ -32,6 +32,7 @@
 | `git`                | `devtool-facts`      | `devtool-facts/git`                     | git                            |
 | `github`             | `service-facts`      | `service-facts/github`                  | github                         |
 | `github-actions`     | `service-facts`      | `service-facts/github-actions`          | github                         |
+| `go`                 | `devtool-facts`      | `devtool-facts/go`                      | （新增，拆分前不存在）         |
 | `google-play`        | `distribution-facts` | `distribution-facts/google-play`        | google-play                    |
 | `npm`                | `distribution-facts` | `distribution-facts/npm`                | npm                            |
 | `pnpm`               | `devtool-facts`      | `devtool-facts/pnpm`                    | pnpm                           |
@@ -39,6 +40,7 @@
 | `release-please`     | `devtool-facts`      | `devtool-facts/release-please`          | release-please                 |
 | `semver`             | `devtool-facts`      | `devtool-facts/semver`                  | npm、pnpm                      |
 | `sparkle`            | `distribution-facts` | `distribution-facts/sparkle`            | sparkle                        |
+| `tart`               | `devtool-facts`      | `devtool-facts/tart`                    | （新增，拆分前不存在）         |
 | `typescript`         | `devtool-facts`      | `devtool-facts/typescript`              | typescript                     |
 | `wrangler`           | `devtool-facts`      | `devtool-facts/wrangler`                | cloudflare-r2                  |
 

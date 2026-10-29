@@ -1,5 +1,5 @@
 {
-  "baseline": "devtool-facts@next",
+  "baseline": "devtool-facts@0.4.0",
   "removed": [],
   "ids": {
     "go": [

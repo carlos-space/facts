@@ -178,4 +178,29 @@ export const buildFacts = [
       },
     },
   ),
+  mf.statement(
+    'chdir-flag',
+    '`go -C <dir> <子指令>` 先切到 `<dir>` 再執行子指令，命令列上的套件與檔案路徑都相對切換後的目錄解析。`-C` 屬於共用的 build flags，必須是命令列上的第一個旗標，可以寫在子指令前（`go -C dir run ./cmd`）或緊接子指令後（`go run -C dir ./cmd`）；前面有別的旗標時，go 印出 `-C flag must be first flag on command line` 並以結束碼 2 結束',
+    {
+      title: 'go -C 切換目錄',
+      topics: ['build'],
+      verify: {
+        probe: {
+          kind: 'hash',
+          anchor: 'If used, this flag must be the first one in the command line',
+          hash: 'sha256:db6d42cf6a83cf77',
+          url: 'https://pkg.go.dev/cmd/go',
+        },
+        verifiedOn: '1.26.6',
+        screenedThrough: '1.26.6',
+      },
+      source: {
+        kind: 'observed',
+        basis: 'measured',
+        url: 'https://pkg.go.dev/cmd/go',
+        fetched: '2026-10-29',
+        note: 'go1.26.6 darwin/arm64。`go -C sub run ./cmd/hi` 與 `go run -C sub ./cmd/hi` 都印出 hi、結束碼 0；`go run -a -C sub ./cmd/hi` 印出 `invalid value "sub" for flag -C: -C flag must be first flag on command line`，結束碼 2。旗標說明讀 pkg.go.dev/cmd/go 的 build flags',
+      },
+    },
+  ),
 ]

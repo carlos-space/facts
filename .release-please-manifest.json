@@ -3,5 +3,5 @@
   "packages/os-facts": "0.1.0",
   "packages/devtool-facts": "0.4.0",
   "packages/distribution-facts": "0.1.0",
-  "packages/service-facts": "0.2.0"
+  "packages/service-facts": "0.3.0"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/carlos-space/facts/compare/service-facts/v0.3.0...service-facts/v0.4.0) (2026-10-30)
+
+
+### Added
+
+* **service-facts:** 補 GitHub Packages npm registry 的安裝設定、PAT 認證與 scope 的 github fact ([#77](https://github.com/carlos-space/facts/issues/77)) ([09f5c8c](https://github.com/carlos-space/facts/commit/09f5c8c7d4633b9835990413042f46019ed616cf))
+
 ## [0.3.0](https://github.com/carlos-space/facts/compare/service-facts/v0.2.0...service-facts/v0.3.0) (2026-10-29)
 
 

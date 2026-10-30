@@ -4,8 +4,7 @@ const npmRegistryDoc =
   'https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry'
 const accessDoc =
   'https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility'
-const permissionsDoc =
-  'https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages'
+const permissionsDoc = 'https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages'
 const actionsDoc =
   'https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions'
 

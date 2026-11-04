@@ -28,7 +28,7 @@ export const releaseFacts = [
   }),
   mf.statement(
     'initial-version',
-    'manifest 填入套件目前的版號，或以 `initial-version` 指定第一次發布的版號。都沒有時由工具的預設起算',
+    'manifest 填入套件目前的版號，或以 `initial-version` 指定第一次發布的版號。都沒有時由工具的預設起算。python 與 rust 的 release-type 例外，不讀 `initial-version`（見 `initial-version-python-rust`）',
     {
       title: '起始版號',
       topics: ['version'],
@@ -43,6 +43,29 @@ export const releaseFacts = [
         screenedThrough: '2026-09-29',
       },
       note: 'https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md、https://github.com/googleapis/release-please/blob/main/schemas/config.json',
+    },
+  ),
+  mf.statement(
+    'initial-version-python-rust',
+    'release-type 是 python 或 rust 的單元，第一次發版（沒有前一版 tag、也沒有 `Release-As`）一律是 `0.1.0`，不讀 `initial-version`，所以 prerelease 設定也不加後綴。`Release-As` 的優先序在它之前，其他 release-type 才讀 `initial-version`',
+    {
+      title: 'python 與 rust 的起始版號',
+      topics: ['version'],
+      verify: {
+        probe: {
+          kind: 'hash',
+          url: 'https://github.com/googleapis/release-please/blob/main/src/strategies/python.ts',
+          anchor: "return Version.parse('0.1.0');",
+          hash: 'sha256:015dc72801256cba',
+        },
+        verifiedOn: '2026-11-05',
+        screenedThrough: '2026-11-05',
+      },
+      source: observedDoc({
+        url: 'https://github.com/googleapis/release-please/blob/main/src/strategies/python.ts',
+        fetched: '2026-11-05',
+      }),
+      note: 'python.ts:200-202 與 rust.ts:133-134 的 `initialReleaseVersion()` 寫死回 `0.1.0`。base.ts:756-761 的基底版才讀 `initialVersion`。base.ts:543-573 的 `buildNewVersion` 先看 `Release-As`，再看前一版，最後才呼叫 `initialReleaseVersion()`。2026-11-05 讀 main（ea20bc2）。rust.ts 與 base.ts 只靠讀原文，探針只比對 python.ts',
     },
   ),
   mf.statement('commit-to-package', 'manifest 模式依 `packages` 設定的路徑，把 commit 改到的檔案歸給各單元', {

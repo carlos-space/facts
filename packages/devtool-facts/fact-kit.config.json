@@ -4,6 +4,7 @@
     "gh": "gh-facts",
     "git": "git-facts",
     "go": "go-facts",
+    "octokit-auth-app": "octokit-auth-app-facts",
     "pnpm": "pnpm-facts",
     "release-please": "release-please-facts",
     "semver": "semver-facts",

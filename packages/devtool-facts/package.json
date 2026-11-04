@@ -1,7 +1,7 @@
 {
   "name": "devtool-facts",
   "version": "0.4.0",
-  "description": "Unofficial machine-readable facts about developer tools: gfm, gh, git, go, pnpm, release-please, semver, Tart, TypeScript and wrangler. Not affiliated with GitHub, Google, Cirrus Labs, Cloudflare, Microsoft or the maintainers of these tools.",
+  "description": "Unofficial machine-readable facts about developer tools: gfm, gh, git, go, @octokit/auth-app, pnpm, release-please, semver, Tart, TypeScript and wrangler. Not affiliated with GitHub, Google, Cirrus Labs, Cloudflare, Microsoft or the maintainers of these tools.",
   "license": "MIT",
   "type": "module",
   "repository": {
@@ -29,6 +29,7 @@
     "gh-facts": "workspace:*",
     "git-facts": "workspace:*",
     "go-facts": "workspace:*",
+    "octokit-auth-app-facts": "workspace:*",
     "pnpm-facts": "workspace:*",
     "release-please-facts": "workspace:*",
     "semver-facts": "workspace:*",
@@ -45,6 +46,8 @@
     "./git/schemas/*": "./dist/git/schemas/*",
     "./go/index.json": "./dist/go/index.json",
     "./go/schemas/*": "./dist/go/schemas/*",
+    "./octokit-auth-app/index.json": "./dist/octokit-auth-app/index.json",
+    "./octokit-auth-app/schemas/*": "./dist/octokit-auth-app/schemas/*",
     "./pnpm/index.json": "./dist/pnpm/index.json",
     "./pnpm/schemas/*": "./dist/pnpm/schemas/*",
     "./release-please/index.json": "./dist/release-please/index.json",

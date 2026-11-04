@@ -1,6 +1,6 @@
 # devtool-facts
 
-Machine-readable facts about developer tools: gfm, gh, git, go, pnpm, release-please, semver, Tart, TypeScript and wrangler. Each fact records where it came from and, for observed facts, how to check it again.
+Machine-readable facts about developer tools: gfm, gh, git, go, @octokit/auth-app, pnpm, release-please, semver, Tart, TypeScript and wrangler. Each fact records where it came from and, for observed facts, how to check it again.
 
 This package is unofficial. It is not affiliated with, endorsed by, or sponsored by GitHub, Google, Cirrus Labs, Cloudflare, Microsoft or the maintainers of these tools. Product names are trademarks of their respective owners.
 
@@ -8,18 +8,19 @@ This package is unofficial. It is not affiliated with, endorsed by, or sponsored
 
 Every entry is a built `index.json` under a sub-path.
 
-| Subpath                                   | Describes                      |
-| :---------------------------------------- | :----------------------------- |
-| `devtool-facts/gfm/index.json`            | GitHub Flavored Markdown       |
-| `devtool-facts/gh/index.json`             | the GitHub CLI (gh)            |
-| `devtool-facts/git/index.json`            | git                            |
-| `devtool-facts/go/index.json`             | the Go toolchain (go)          |
-| `devtool-facts/pnpm/index.json`           | pnpm                           |
-| `devtool-facts/release-please/index.json` | release-please                 |
-| `devtool-facts/semver/index.json`         | Semantic Versioning (semver)   |
-| `devtool-facts/tart/index.json`           | Tart (tart)                    |
-| `devtool-facts/typescript/index.json`     | TypeScript                     |
-| `devtool-facts/wrangler/index.json`       | Cloudflare Wrangler (wrangler) |
+| Subpath                                     | Describes                            |
+| :------------------------------------------ | :----------------------------------- |
+| `devtool-facts/gfm/index.json`              | GitHub Flavored Markdown             |
+| `devtool-facts/gh/index.json`               | the GitHub CLI (gh)                  |
+| `devtool-facts/git/index.json`              | git                                  |
+| `devtool-facts/go/index.json`               | the Go toolchain (go)                |
+| `devtool-facts/octokit-auth-app/index.json` | @octokit/auth-app (octokit-auth-app) |
+| `devtool-facts/pnpm/index.json`             | pnpm                                 |
+| `devtool-facts/release-please/index.json`   | release-please                       |
+| `devtool-facts/semver/index.json`           | Semantic Versioning (semver)         |
+| `devtool-facts/tart/index.json`             | Tart (tart)                          |
+| `devtool-facts/typescript/index.json`       | TypeScript                           |
+| `devtool-facts/wrangler/index.json`         | Cloudflare Wrangler (wrangler)       |
 
 ## Usage
 

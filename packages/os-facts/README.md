@@ -1,12 +1,16 @@
 # os-facts
 
-Machine-readable facts about operating systems and their shells. No platform is covered yet. Each fact records where it came from and, for observed facts, how to check it again.
+Machine-readable facts about operating systems and their service managers. Each fact records where it came from and, for observed facts, how to check it again.
 
-This package is unofficial. It is not affiliated with, endorsed by, or sponsored by any operating system vendor. Product names are trademarks of their respective owners.
+This package is unofficial. It is not affiliated with, endorsed by, or sponsored by Apple or any operating system vendor. Product names are trademarks of their respective owners.
 
 ## Entries
 
-This package has no platform yet. It is published so the name is reserved. Operating systems and shells are added here when facts for them exist, and each one will be read at `os-facts/<platform>`.
+Every entry is a built `index.json` under a sub-path.
+
+| Subpath                       | Describes                          |
+| :---------------------------- | :--------------------------------- |
+| `os-facts/launchd/index.json` | launchd, the macOS service manager |
 
 ## Usage
 

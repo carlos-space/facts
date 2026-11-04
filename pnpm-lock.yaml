@@ -421,6 +421,15 @@ importers:
       fact-kit:
         specifier: ^0.10.0
         version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
+      launchd-facts:
+        specifier: workspace:*
+        version: link:launchd
+
+  packages/os-facts/launchd:
+    devDependencies:
+      fact-kit:
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
 
   packages/service-facts:
     devDependencies:

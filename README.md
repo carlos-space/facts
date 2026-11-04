@@ -6,13 +6,13 @@ facts 是產品定義與規格的單一來源，記錄每個版本是什麼、�
 
 ## 套件
 
-| 套件                 | 內容                                                                                                | 發布到哪    |
-| :------------------- | :-------------------------------------------------------------------------------------------------- | :---------- |
-| `ai-agent-facts`     | AI agent 產品的 facts（claude-code、claude-desktop、codex）                                         | npm（公開） |
-| `os-facts`           | 作業系統的 facts（目前還沒有 component）                                                            | npm（公開） |
-| `devtool-facts`      | 開發工具的 facts（gfm、gh、git、go、pnpm、release-please、semver、tart、typescript、wrangler）      | npm（公開） |
-| `distribution-facts` | 發行與上架管道的 facts（app-store、apple-notarization、crates-io、google-play、npm、pypi、sparkle） | npm（公開） |
-| `service-facts`      | 雲端服務的 facts（cloudflare-r2、github、github-actions）                                           | npm（公開） |
+| 套件                 | 內容                                                                                                             | 發布到哪    |
+| :------------------- | :--------------------------------------------------------------------------------------------------------------- | :---------- |
+| `ai-agent-facts`     | AI agent 產品的 facts（claude-code、claude-desktop、codex）                                                      | npm（公開） |
+| `os-facts`           | 作業系統的 facts（目前還沒有 component）                                                                         | npm（公開） |
+| `devtool-facts`      | 開發工具的 facts（gfm、gh、git、go、octokit-auth-app、pnpm、release-please、semver、tart、typescript、wrangler） | npm（公開） |
+| `distribution-facts` | 發行與上架管道的 facts（app-store、apple-notarization、crates-io、google-play、npm、pypi、sparkle）              | npm（公開） |
+| `service-facts`      | 雲端服務的 facts（cloudflare-r2、github、github-actions）                                                        | npm（公開） |
 
 本倉庫發布這 5 個匯總套件。每個匯總套件把所屬 component 的 facts 放在子路徑 `<匯總套件>/<component>`，例如 `readFacts('ai-agent-facts/claude-code')`。component 套件放在 `packages/<匯總套件>/<component>/`，名稱是 `<component>-facts`，是 `private: true` 的工作區套件，不發布，只用來撰寫與建置。撰寫、檢查、建置、讀取與比對 facts 的工具由 npm 的 `fact-kit` 套件提供（原始碼在倉庫 carlos-space/fact-kit），各套件以它建置。fact-kit 自己的 facts 由 npm 的 `fact-kit-facts` 提供。
 
@@ -37,6 +37,7 @@ facts 是產品定義與規格的單一來源，記錄每個版本是什麼、�
 | `go`                 | `devtool-facts`      | `devtool-facts/go`                      | （新增，拆分前不存在）         |
 | `google-play`        | `distribution-facts` | `distribution-facts/google-play`        | google-play                    |
 | `npm`                | `distribution-facts` | `distribution-facts/npm`                | npm                            |
+| `octokit-auth-app`   | `devtool-facts`      | `devtool-facts/octokit-auth-app`        | （新增，拆分前不存在）         |
 | `pnpm`               | `devtool-facts`      | `devtool-facts/pnpm`                    | pnpm                           |
 | `pypi`               | `distribution-facts` | `distribution-facts/pypi`               | pypi                           |
 | `release-please`     | `devtool-facts`      | `devtool-facts/release-please`          | release-please                 |

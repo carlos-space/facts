@@ -202,6 +202,9 @@ importers:
       go-facts:
         specifier: workspace:*
         version: link:go
+      octokit-auth-app-facts:
+        specifier: workspace:*
+        version: link:octokit-auth-app
       pnpm-facts:
         specifier: workspace:*
         version: link:pnpm
@@ -249,6 +252,15 @@ importers:
         version: 0.155.0
 
   packages/devtool-facts/go:
+    devDependencies:
+      fact-kit:
+        specifier: ^0.10.0
+        version: 0.10.0(oxc-parser@0.155.0)(prettier@3.9.10)(typescript@7.0.2)
+      oxc-parser:
+        specifier: ^0.155.0
+        version: 0.155.0
+
+  packages/devtool-facts/octokit-auth-app:
     devDependencies:
       fact-kit:
         specifier: ^0.10.0

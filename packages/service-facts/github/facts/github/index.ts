@@ -7,6 +7,7 @@ import { rulesetFacts } from './ruleset.ts'
 import { branchProtectionFacts } from './branch-protection.ts'
 import { squashFacts } from './squash.ts'
 import { packagesFacts } from './packages.ts'
+import { githubAppFacts } from './github-app.ts'
 
 // `converted.json` is written by scripts/convert-github.ts from pinned upstream files.
 const entry: FactsModule = {
@@ -19,6 +20,7 @@ const entry: FactsModule = {
     ...branchProtectionFacts,
     ...squashFacts,
     ...packagesFacts,
+    ...githubAppFacts,
     ...(converted.facts as Fact[]),
   ],
 }

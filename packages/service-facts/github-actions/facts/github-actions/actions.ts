@@ -154,6 +154,25 @@ export const actionsFacts = [
     },
   ),
   mf.statement(
+    'pnpm-action-setup-v6-1-0',
+    '`pnpm/action-setup` v6.1.0 的 commit 是 `ea17c68df8912ef543352723c149a84f56e3d413`。目標是 pnpm 12 時，它用原生 bootstrap 12.3.4，目標也是 12.3.4 就不 self-update，只裝一次。舊 pin `0977fd99…` 是 v6.0.10，一律先裝 pnpm 11.19.0 再 self-update',
+    {
+      title: 'pnpm/action-setup v6.1.0 的 commit 與 bootstrap 版本',
+      topics: ['pnpm'],
+      verify: {
+        probe: {
+          kind: 'manual',
+          reason:
+            '執行 `gh api repos/pnpm/action-setup/commits/v6.1.0 --jq .sha`，輸出要是 ea17c68df8912ef543352723c149a84f56e3d413。再用 `gh api repos/pnpm/action-setup/tarball/v6.1.0` 取源碼，讀 `src/install-pnpm/bootstrap/native-lock.json` 的 `node_modules/pnpm` 版本，要是 12.3.4',
+        },
+        verifiedOn: '2026-11-05',
+        screenedThrough: '2026-11-05',
+      },
+      note: 'v6.1.0 是 annotated tag（tag 物件 d9184bf108216479bc5a137cc391f4d7b14c870b）。bootstrap 版本出自 tag 源碼 `src/install-pnpm/bootstrap/native-lock.json:127-128`，`src/install-pnpm/run.ts:106-108` 在目標等於 bootstrap 版本時直接返回，不 self-update。sandbox 連跑 3 輪共用同一個 store，v6.1.0 只裝 1 次且 store 完好，v6.0.10 的第 2、3 輪報 `ERR_PNPM_BROKEN_PNPM_INSTALL`（pnpm/pnpm#17582）',
+      source: observedDoc({ url: 'https://github.com/pnpm/action-setup/releases/tag/v6.1.0', fetched: '2026-11-05' }),
+    },
+  ),
+  mf.statement(
     'checkout-persist-credentials',
     '`actions/checkout` 的 `persist-credentials` 預設為 true，會把 token 或 SSH key 設進本機的 git 設定，後續步驟的 git 指令就帶著憑證',
     {

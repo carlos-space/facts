@@ -9,6 +9,7 @@ import { squashFacts } from './squash.ts'
 import { packagesFacts } from './packages.ts'
 import { githubAppFacts } from './github-app.ts'
 import { ghCliFacts } from './gh-cli.ts'
+import { githubActionsRunFacts } from './github-actions-run.ts'
 
 // `converted.json` is written by scripts/convert-github.ts from pinned upstream files.
 const entry: FactsModule = {
@@ -23,6 +24,7 @@ const entry: FactsModule = {
     ...packagesFacts,
     ...githubAppFacts,
     ...ghCliFacts,
+    ...githubActionsRunFacts,
     ...(converted.facts as Fact[]),
   ],
 }

@@ -91,7 +91,7 @@ export const githubAppFacts = [
   ),
   mf.statement(
     'app-permissions-pr-checks',
-    'GitHub App 的 installation token 用 `gh pr checks`（GraphQL `statusCheckRollup`）讀 PR 的檢查狀態時，App 需要 Checks 與 Commit statuses 的唯讀權限。缺時回 `GraphQL: Resource not accessible by integration (statusCheckRollup)`',
+    'GitHub App 的 installation token 用 `gh pr checks`（GraphQL `statusCheckRollup`）讀 PR 的檢查狀態時，App 需要 Checks 與 Commit statuses 的唯讀權限。缺時回 `GraphQL: Resource not accessible by integration (node.statusCheckRollup.nodes.0.commit.statusCheckRollup)`',
     {
       title: 'gh pr checks 讀檢查狀態需要 Checks 與 Commit statuses 唯讀',
       topics: ['permissions', 'checks'],
@@ -99,12 +99,12 @@ export const githubAppFacts = [
         probe: {
           kind: 'manual',
           reason:
-            '需要一個缺 Checks 與 Commit statuses 唯讀權限的 GitHub App，用它的 installation token 執行 `gh pr checks <PR 編號> --repo <owner/repo>`，成立的條件是回 `GraphQL: Resource not accessible by integration (statusCheckRollup)`',
+            '需要一個缺 Checks 與 Commit statuses 唯讀權限的 GitHub App，用它的 installation token 執行 `gh pr checks <PR 編號> --repo <owner/repo>`，成立的條件是回 `GraphQL: Resource not accessible by integration (node.statusCheckRollup.nodes.0.commit.statusCheckRollup)`',
         },
         verifiedOn: '2026-11-05',
         screenedThrough: '2026-11-05',
       },
-      note: '出處是 GitHub Actions run 41980569502 的實跑錯誤（示範倉同步用 App token 跑 `gh pr checks`），補上兩項唯讀權限後的結果沒有在這裡重測。REST 文件 https://docs.github.com/en/rest/commits/statuses 與 https://docs.github.com/en/rest/checks/runs 沒有逐端點寫出對應的 fine-grained 權限名稱，「需要這兩項」是由實跑錯誤與 statusCheckRollup 彙整 check runs 與 commit statuses 推得',
+      note: '出處是 carlos-space/blueprint 的 GitHub Actions run 41980569502 的實跑錯誤（示範倉同步用 App token 跑 `gh pr checks`）。實測時該 App 已有 Actions、Contents、Issues、Pull requests、Workflows 權限，所以量到的是缺 Checks 與 Commit statuses 時的失敗，沒有單獨量其中一項，補上兩項唯讀權限後的結果也沒有重測。權限文件 https://docs.github.com/en/rest/authentication/permissions-required-for-github-apps（讀取日 2026-11-05）逐端點寫出 `GET /repos/{owner}/{repo}/commits/{ref}/check-runs` 需要 Checks read，`GET /repos/{owner}/{repo}/commits/{ref}/status` 需要 Commit statuses read',
       source: { kind: 'observed', basis: 'measured', fetched: '2026-11-05' },
     },
   ),
